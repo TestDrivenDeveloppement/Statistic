@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/dao/DAOconnexion.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/dao/DAOrequester.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/dao/DAOverification.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/menuPrincipal/Menu.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/menuPrincipal/Salaire.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/DAOconnexion.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/DAOrequester.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/DAOverification.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/menuPrincipal/Menu.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/menuPrincipal/Salaire.java" charset="windows-1252" />
   </component>
 </project>
