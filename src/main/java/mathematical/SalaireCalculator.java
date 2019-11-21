@@ -16,7 +16,7 @@ public class SalaireCalculator {
 
 
 	/**
-	 * Permet de calculer les primes en fonction du nombre d'heures travaillées et du statut
+	 * Permet de calculer les primes en fonction du nombre d'heures travaillÃ©es et du statut
 	 * @author Vick
 	 * Ecriture de la fonction
 	 * 
@@ -34,7 +34,7 @@ public class SalaireCalculator {
 			double prime = 0;
 
 
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sÃ©lectionnÃ©e
 			String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
@@ -84,7 +84,7 @@ public class SalaireCalculator {
 					System.out.println("Erreur");
 					break;
 				}
-				System.out.println(liste.get(i) + "Prime: " + prime + "€/mois\n");
+				System.out.println(liste.get(i) + "Prime: " + prime + "â‚¬/mois\n");
 
 			}
 
@@ -98,7 +98,7 @@ public class SalaireCalculator {
 
 
 	/**
-	 * Permet d'afficher les employés présents dans la BDD
+	 * Permet d'afficher les employÃ©s prÃ©sents dans la BDD
 	 * 
 	 * @author Vick
 	 * Ecriture de la fonction
@@ -120,7 +120,7 @@ public class SalaireCalculator {
 			double sal = 0;
 
 
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sÃ©lectionnÃ©e
 			String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
@@ -162,7 +162,7 @@ public class SalaireCalculator {
 					System.out.println("Erreur");
 					break;
 				} 
-				System.out.println(liste.get(i) + sal + "€/mois\n");
+				System.out.println(liste.get(i) + sal + "â‚¬/mois\n");
 
 			}
 
@@ -175,7 +175,7 @@ public class SalaireCalculator {
 
 
 	/**
-	 * Permet d'afficher le salaire d'un employé dans la BDD
+	 * Permet d'afficher le salaire d'un employÃ© dans la BDD
 	 * 
 	 * @author Vick
 	 * Ecriture de la fonction
@@ -197,7 +197,7 @@ public class SalaireCalculator {
 
 
 
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sÃ©lectionnÃ©e
 			String requeteSelectionnee = "select nb_heure from " + nomTable + " where id_emp="+id+";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
@@ -271,7 +271,7 @@ public class SalaireCalculator {
 
 			double n = 0;            
 
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sÃ©lectionnÃ©e
 			String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind="+id+";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
@@ -325,7 +325,7 @@ public class SalaireCalculator {
 	 *@author Vick
 	 *Ecriture de la fonction
 	 *@author Loic
-	 *Ré-ecriture
+	 *RÃ©-ecriture
 	 */
 	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
 
@@ -389,7 +389,7 @@ public class SalaireCalculator {
 	}
 
 	/**
-	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans les autres entreprises que celle sélectionée
+	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans les autres entreprises que celle sÃ©lectionÃ©e
 	 * 
 	 *@author Loic
 	 *Ecriture

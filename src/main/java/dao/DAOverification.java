@@ -11,7 +11,7 @@ public class DAOverification extends DAOconnexion {
 	}
 	
 	 /**
-     * Methode qui verifie l'integrité de l'id en entrée pour la table donnée
+     * Methode qui verifie l'integritÃ© de l'id en entrÃ©e pour la table donnÃ©e
      * @return 
      * @throws java.sql.SQLException
      * @author Loic
@@ -22,7 +22,7 @@ public class DAOverification extends DAOconnexion {
     	try {
     	innitConn();
     	stmt = conn.createStatement();
-        // récupération de l'ordre de la requete
+        // rÃ©cupÃ©ration de l'ordre de la requete
     	switch(table) {
     	
     	case "industrie":
@@ -39,7 +39,7 @@ public class DAOverification extends DAOconnexion {
         
         
     	}
-        // récupération du résultat de l'ordre
+        // rÃ©cupÃ©ration du rÃ©sultat de l'ordre
         rsetMeta = rset.getMetaData();
 
 
@@ -63,7 +63,7 @@ public class DAOverification extends DAOconnexion {
     	}
 	
 	/**
-     * Methode qui verifie l'integrité de l'id en entrée pour la table donnée
+     * Methode qui verifie l'integritÃ© de l'id en entrÃ©e pour la table donnÃ©e
      * @return 
      * @throws java.sql.SQLException
      * @author Loic
@@ -71,7 +71,7 @@ public class DAOverification extends DAOconnexion {
     public boolean verifDataInDB(int id, String table) throws SQLException {
 
     	boolean validity=false;
-        // récupération de l'ordre de la requete
+        // rÃ©cupÃ©ration de l'ordre de la requete
     	try {
     	innitConn();
     	switch(table) {
@@ -92,7 +92,7 @@ public class DAOverification extends DAOconnexion {
         
         
     	}
-        // récupération du résultat de l'ordre
+        // rÃ©cupÃ©ration du rÃ©sultat de l'ordre
         rsetMeta = rset.getMetaData();
 
 

@@ -45,42 +45,42 @@ public class Menu {
 
 
 			System.out.println("\n \t Menu"
-					+ "\n 1. Voir les données des employés d'une entreprise."
-					+ "\n 2. Voir les données des employés pour un projet."
+					+ "\n 1. Voir les donnÃ©es des employÃ©s d'une entreprise."
+					+ "\n 2. Voir les donnÃ©es des employÃ©s pour un projet."
 					+ "\n 3. Voir les informations sur le salaire"
-					+ "\n 4. Comparer les entreprises selon des caractères précis."
-					+" \n 5. Obtenir des statistiques avancés sur votre entreprise ou projet\n");
+					+ "\n 4. Comparer les entreprises selon des caractÃ¨res prÃ©cis."
+					+" \n 5. Obtenir des statistiques avancÃ©s sur votre entreprise ou projet\n");
 			System.out.print("Votre choix: ");
 			i=scan.nextInt();
 			switch(i) {
 			case 1: 
-				System.out.println("Sélectionnez l'entreprise souhaitée (entrez l'id):\n");
+				System.out.println("SÃ©lectionnez l'entreprise souhaitÃ©e (entrez l'id):\n");
 				afficherLignes("Industrie");
 				userChoice=scan.nextInt();
-				//On vérifie que l'ID est bien présent dans la table
+				//On vÃ©rifie que l'ID est bien prÃ©sent dans la table
 				if(verif.verifValiditeID(userChoice, "industrie")) {
-					//On vérifie que des données sont bien présentes dans la table
+					//On vÃ©rifie que des donnÃ©es sont bien prÃ©sentes dans la table
 					if(verif.verifDataInDB(userChoice, "industrie")) {
-						System.out.println("\n Moyenne d'heure des employés pour l'entreprise :"+msc.getMoyenneHeureEmployeEntreprise(userChoice));
-						System.out.println("\n Somme d'heure des employés pour l'entreprise : "+msc.getSommeHeureEmployeEntreprise(userChoice));
-						System.out.println("\n Variance d'heure des employés pour l'entreprise :"+msc.getVarianceHeureEmployeEntreprise(userChoice));
-						System.out.println("\n Ecart-Type d'heure des employés pour l'entreprise : "+msc.getEcartTypeHeureEmployeEntreprise(userChoice));
+						System.out.println("\n Moyenne d'heure des employÃ©s pour l'entreprise :"+msc.getMoyenneHeureEmployeEntreprise(userChoice));
+						System.out.println("\n Somme d'heure des employÃ©s pour l'entreprise : "+msc.getSommeHeureEmployeEntreprise(userChoice));
+						System.out.println("\n Variance d'heure des employÃ©s pour l'entreprise :"+msc.getVarianceHeureEmployeEntreprise(userChoice));
+						System.out.println("\n Ecart-Type d'heure des employÃ©s pour l'entreprise : "+msc.getEcartTypeHeureEmployeEntreprise(userChoice));
 					}}
 				break;
 
 			case 2: 
-				System.out.println("Séléctionnez le projet souhaité (entrez l'id) ");
+				System.out.println("SÃ©lÃ©ctionnez le projet souhaitÃ© (entrez l'id) ");
 				afficherLignes("Projet");
 				userChoice=scan.nextInt();
-				//On vérifie que l'ID est bien présent dans la table
+				//On vÃ©rifie que l'ID est bien prÃ©sent dans la table
 				if(verif.verifValiditeID(userChoice, "projet")) {
-					//On vérifie que des données sont bien présentes dans la table
+					//On vÃ©rifie que des donnÃ©es sont bien prÃ©sentes dans la table
 					if(verif.verifDataInDB(userChoice, "projet")) {
 						System.out.println(verif.verifDataInDB(userChoice, "projet"));
-						System.out.println("\n Moyenne d'heure des employés pour le projet :"+msc.getMoyenneHeureEmployeProjet(userChoice));
-						System.out.println("\n Somme d'heure des employés pour le projet : "+msc.getSommeHeureEmployeProjet(userChoice));
-						System.out.println("\n Variance d'heure des employés pour le projet :"+msc.getVarianceHeureEmployeProjet(userChoice));
-						System.out.println("\n Ecart-Type d'heure des employés pour le projet : "+msc.getEcartTypeHeureEmployeProjet(userChoice));
+						System.out.println("\n Moyenne d'heure des employÃ©s pour le projet :"+msc.getMoyenneHeureEmployeProjet(userChoice));
+						System.out.println("\n Somme d'heure des employÃ©s pour le projet : "+msc.getSommeHeureEmployeProjet(userChoice));
+						System.out.println("\n Variance d'heure des employÃ©s pour le projet :"+msc.getVarianceHeureEmployeProjet(userChoice));
+						System.out.println("\n Ecart-Type d'heure des employÃ©s pour le projet : "+msc.getEcartTypeHeureEmployeProjet(userChoice));
 					}
 				}
 
@@ -93,16 +93,16 @@ public class Menu {
 			case 4 :
 				int userChoice2;
 				do {
-					System.out.println("\n Comparer les différences de salaire selon :"
+					System.out.println("\n Comparer les diffÃ©rences de salaire selon :"
 							+ "\n 1. Le statut dans l'entreprise."
-							+ "\n 2. Le genre des employés.");
+							+ "\n 2. Le genre des employÃ©s.");
 					userChoice2 = new Scanner(System.in).nextInt();
 					ArrayList<Integer> listOfId = dr.listeIdTable("industrie");
 					SalaireCalculator sal = new SalaireCalculator();
 					switch (userChoice2){
 
 					case 1 :
-						System.out.println("Veuillez entrer le numéro du statut dont vous souhaitez faire la comparaison :"
+						System.out.println("Veuillez entrer le numÃ©ro du statut dont vous souhaitez faire la comparaison :"
 								+ "\n 1. Stagiaire"
 								+ "\n 2. Employe"
 								+ "\n 3. Cadre");
@@ -143,7 +143,7 @@ public class Menu {
 						break;
 
 					case 2 :
-						System.out.println("Sélectionnez le genre dont vous souhaitez comparer les salaires entre entreprises :"
+						System.out.println("SÃ©lectionnez le genre dont vous souhaitez comparer les salaires entre entreprises :"
 								+ "\n 1. Hommes"
 								+ "\n 2. Femmes");
 						switch(new Scanner(System.in).nextInt()) {
@@ -179,14 +179,14 @@ public class Menu {
 				break;
 
 			case 5 :
-				System.out.println("Voulez-vous des statistiques avancées sur votre entreprise ou votre projet ?"
+				System.out.println("Voulez-vous des statistiques avancÃ©es sur votre entreprise ou votre projet ?"
 						+ "\n1. Entreprise."
 						+ "\n2. Projet.");
 				switch(new Scanner(System.in).nextInt()) {
 
 				case 1: 
 					ArrayList<Integer> listOfId = dr.listeIdTable("industrie");
-					System.out.println("Veuillez sélectionnez votre entreprise :");
+					System.out.println("Veuillez sÃ©lectionnez votre entreprise :");
 					for(int j=0; j<listOfId.size();j++) {
 						System.out.println(listOfId.get(j)+". "+dr.nameInTable(listOfId.get(j), "industrie"));
 					}
@@ -209,14 +209,14 @@ public class Menu {
 				break;
 
 			default :
-				System.out.println("Fin de l'exécution.");
+				System.out.println("Fin de l'exÃ©cution.");
 				break;
 			}
 		}while(i<6 && i>0);
 	}
 
 	/**
-	 * Afficher les lignes de la table sélectionnée
+	 * Afficher les lignes de la table sÃ©lectionnÃ©e
 	 * @throws ClassNotFoundException 
 	 */
 	public static void afficherLignes(String nomTable) throws ClassNotFoundException {
@@ -224,7 +224,7 @@ public class Menu {
 		try {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 			ArrayList<String> liste;
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sÃ©lectionnÃ©e
 			String requeteSelectionnee = "select * from " + nomTable + ";";
 			liste = dr.remplirChampsRequete(requeteSelectionnee);
 

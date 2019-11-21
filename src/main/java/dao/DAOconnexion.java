@@ -7,7 +7,7 @@ package dao;
 
 /*
  * 
- * Librairies import�es
+ * Librairies importées
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * Connexion a votre BDD locale ou à distance sur le serveur de l'ECE via le tunnel SSH
+ * Connexion a votre BDD locale ou Ã  distance sur le serveur de l'ECE via le tunnel SSH
  * 
  * @author segado
  */
@@ -39,16 +39,16 @@ public abstract class DAOconnexion {
 	 */
 	public ArrayList<String> tables = new ArrayList<>();
 	/**
-	 * ArrayList public pour les requêtes de s�lection
+	 * ArrayList public pour les requÃªtes de sélection
 	 */
 	public ArrayList<String> requetes = new ArrayList<>();
 	/**
-	 * ArrayList public pour les requêtes de MAJ
+	 * ArrayList public pour les requÃªtes de MAJ
 	 */
 	public ArrayList<String> requetesMaj = new ArrayList<>();
 
 	/**
-	 * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
+	 * Constructeur avec 3 paramÃ¨tres : nom, login et password de la BDD locale
 	 *
 	 * @param nameDatabase
 	 * @param loginDatabase
@@ -79,10 +79,10 @@ public abstract class DAOconnexion {
 	 * @throws SQLException
 	 */
 	public void innitConn() throws SQLException {
-		//cr�ation d'une connexion JDBC à la base 
+		//création d'une connexion JDBC Ã  la base 
 		conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
 
-		// cr�ation d'un ordre SQL (statement)
+		// création d'un ordre SQL (statement)
 		stmt = conn.createStatement();
 	}
 

@@ -12,7 +12,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Méthode qui ajoute la table en parametre dans son ArrayList
+	 * MÃ©thode qui ajoute la table en parametre dans son ArrayList
 	 *
 	 * @param table
 	 */
@@ -21,7 +21,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Méthode qui ajoute la requete de selection en parametre dans son
+	 * MÃ©thode qui ajoute la requete de selection en parametre dans son
 	 * ArrayList
 	 *
 	 * @param requete
@@ -31,7 +31,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Méthode qui ajoute la requete de MAJ en parametre dans son
+	 * MÃ©thode qui ajoute la requete de MAJ en parametre dans son
 	 * ArrayList
 	 *
 	 * @param requete
@@ -41,7 +41,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Méthode qui retourne l'ArrayList des champs de la table en parametre
+	 * MÃ©thode qui retourne l'ArrayList des champs de la table en parametre
 	 *
 	 * @param table
 	 * @return
@@ -50,10 +50,10 @@ public class DAOrequester extends DAOconnexion {
 	public ArrayList remplirChampsTable(String table) throws SQLException {
 		try {
 			innitConn();
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			rset = stmt.executeQuery("select * from " + table);
 
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			// calcul du nombre de colonnes du resultat
@@ -68,7 +68,7 @@ public class DAOrequester extends DAOconnexion {
 				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
 			}
 
-			// ajouter un "\n" Ã  la ligne des champs
+			// ajouter un "\n" ÃƒÂ  la ligne des champs
 			champs = champs + "\n";
 
 			// ajouter les champs de la ligne dans l'ArrayList
@@ -86,10 +86,10 @@ public class DAOrequester extends DAOconnexion {
 	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException {
 		try {
 			innitConn();
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			rset = stmt.executeQuery("select * from " + table + "where" + nom + "= 'MAAF'");
 
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			// calcul du nombre de colonnes du resultat
@@ -104,7 +104,7 @@ public class DAOrequester extends DAOconnexion {
 				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
 			}
 
-			// ajouter un "\n" Ã  la ligne des champs
+			// ajouter un "\n" ÃƒÂ  la ligne des champs
 			champs = champs + "\n";
 
 			// ajouter les champs de la ligne dans l'ArrayList
@@ -131,10 +131,10 @@ public class DAOrequester extends DAOconnexion {
 	public ArrayList remplirChampsRequete(String requete) throws SQLException {
 		try {
 			innitConn();
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
 
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			// calcul du nombre de colonnes du resultat
@@ -154,7 +154,7 @@ public class DAOrequester extends DAOconnexion {
 					champs = champs + "," + rset.getString(i + 1);
 				}
 
-				// ajouter un "\n" Ã  la ligne des champs
+				// ajouter un "\n" ÃƒÂ  la ligne des champs
 				champs = champs + "\n";
 
 				// ajouter les champs de la ligne dans l'ArrayList
@@ -169,7 +169,7 @@ public class DAOrequester extends DAOconnexion {
 			}
 	}
 
-	/** Retourne le résultat de la requÃªte unique
+	/** Retourne le rÃ©sultat de la requÃƒÂªte unique
 	 * 
 	 * @author Loic
 	 * @param requete
@@ -179,12 +179,12 @@ public class DAOrequester extends DAOconnexion {
 	public String recupResultatRequete(String requete) throws SQLException {
 		try {
 			innitConn();
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
 
 			String resultStatement=null;
 
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
@@ -201,7 +201,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Methode qui compte le nombre d'élèments dans une table de la BDD
+	 * Methode qui compte le nombre d'Ã©lÃ¨ments dans une table de la BDD
 	 * @return 
 	 * @throws java.sql.SQLException
 	 * @author Loic
@@ -210,7 +210,7 @@ public class DAOrequester extends DAOconnexion {
 		try {
 			innitConn();
 			int number=0;
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			switch(table) {
 
 			case "industrie":
@@ -232,7 +232,7 @@ public class DAOrequester extends DAOconnexion {
 				break;
 
 			}
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
@@ -250,7 +250,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Methode qui compte le nombre d'élèments dans une table de la BDD
+	 * Methode qui compte le nombre d'Ã©lÃ¨ments dans une table de la BDD
 	 * @return 
 	 * @throws java.sql.SQLException
 	 * @author Loic
@@ -259,7 +259,7 @@ public class DAOrequester extends DAOconnexion {
 		try {
 			innitConn();
 			int number=0;
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			switch(table) {
 
 			case "industrie":
@@ -281,7 +281,7 @@ public class DAOrequester extends DAOconnexion {
 				break;
 
 			}
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
@@ -308,7 +308,7 @@ public class DAOrequester extends DAOconnexion {
 		try {
 			innitConn();
 			ArrayList<Integer> listeID = new ArrayList<Integer>();
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			switch(table) {
 
 			case "industrie":
@@ -327,7 +327,7 @@ public class DAOrequester extends DAOconnexion {
 				break;
 
 			}
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			while(rset.next()) {
@@ -354,7 +354,7 @@ public class DAOrequester extends DAOconnexion {
 		try {
 			innitConn();
 			String nameOfElement;
-			// récupération de l'ordre de la requete
+			// rÃ©cupÃ©ration de l'ordre de la requete
 			switch(table) {
 
 			case "industrie":
@@ -373,7 +373,7 @@ public class DAOrequester extends DAOconnexion {
 				break;
 
 			}
-			// récupération du résultat de l'ordre
+			// rÃ©cupÃ©ration du rÃ©sultat de l'ordre
 			rsetMeta = rset.getMetaData();
 			rset.next();
 			nameOfElement=rset.getString(1);
@@ -386,7 +386,7 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 	/**
-	 * Méthode qui execute une requete de MAJ en parametre
+	 * MÃ©thode qui execute une requete de MAJ en parametre
 	 * @param requeteMaj
 	 * @throws java.sql.SQLException
 	 */

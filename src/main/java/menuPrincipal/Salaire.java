@@ -21,7 +21,7 @@ import mathematical.SalaireCalculator;
  */
 public class Salaire {
 
-	//Paramètres
+	//ParamÃ¨tres
 	private static Menu func = new Menu();
 	private static DAOconnexion con = null;
 	private static DAOverification verif = null;
@@ -36,11 +36,11 @@ public class Salaire {
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
 		System.out.println("1. Retour au menu principal");
-		System.out.println("2. Calcul des primes par employé");
+		System.out.println("2. Calcul des primes par employÃ©");
 		System.out.println("3. Salaire mensuel moyen par entreprise");
 		System.out.println("4. Salaire mensuel moyen par sexe");
 		System.out.println("5. Salaire mensuel moyen par statut");
-		System.out.println("6. Salaire par employé\n");
+		System.out.println("6. Salaire par employÃ©\n");
 		System.out.print("Votre choix: ");
 
 		Scanner scan = new Scanner(System.in);
@@ -70,7 +70,7 @@ public class Salaire {
 			int id = scan1.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_moy = sc.salaire_entreprise("employe", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise est de: " + df.format(result_moy) + "€\n");
+				System.out.println("Le salaire mensuel moyen de l'entreprise est de: " + df.format(result_moy) + "â‚¬\n");
 			}
 			break;
 		case 4:
@@ -98,7 +98,7 @@ public class Salaire {
 		String reque = "select * from industrie;";
 
 		System.out.println("1. Masculin");
-		System.out.println("2. Féminin\n");
+		System.out.println("2. FÃ©minin\n");
 		System.out.print("Votre choix: ");
 		Scanner scan = new Scanner(System.in);
 		choix = scan.nextInt();
@@ -118,7 +118,7 @@ public class Salaire {
 			id = scan2.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_masculin = sc.salaire_cond("employe","sexe", "M", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " + df.format(result_masculin) + "€\n");}
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " + df.format(result_masculin) + "â‚¬\n");}
 			break;
 		case 2:
 			affiche = dr.remplirChampsRequete(reque);
@@ -134,12 +134,12 @@ public class Salaire {
 			id = scan2.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_feminin = sc.salaire_cond("employe","sexe","F", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: " + df.format(result_feminin) + "€\n");}
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: " + df.format(result_feminin) + "â‚¬\n");}
 
 			break;
 
 		default :
-			System.out.println("Erreur, retour au menu précèdent.");
+			System.out.println("Erreur, retour au menu prÃ©cÃ¨dent.");
 			break;
 		}
 
@@ -149,7 +149,7 @@ public class Salaire {
 
 
 	/**
-	 *Menu permettant de choisir le salaire pour un employe ou tous les employés
+	 *Menu permettant de choisir le salaire pour un employe ou tous les employÃ©s
 	 */
 	public void salaire_employe() throws SQLException, ClassNotFoundException {
 
@@ -157,8 +157,8 @@ public class Salaire {
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
 		System.out.println("1. Retour au menu Salaire");
-		System.out.println("2. Salaire de tous les employés");
-		System.out.println("3. Salaire d'un seul employé\n");
+		System.out.println("2. Salaire de tous les employÃ©s");
+		System.out.println("3. Salaire d'un seul employÃ©\n");
 		System.out.print("Votre choix: ");
 
 		Scanner scan = new Scanner(System.in);
@@ -176,19 +176,19 @@ public class Salaire {
 			String reqListe = "select id_emp, nom, prenom from employe;";
 			affiche = dr.remplirChampsRequete(reqListe);
 
-			//Afficher les lignes de la requête sélectionnée
+			//Afficher les lignes de la requÃªte sÃ©lectionnÃ©e
 			for(int i = 0; i < affiche.size(); i++)
 			{
 				System.out.print(affiche.get(i)); 
 			}
 			System.out.println();
 
-			System.out.print("Saisissez l'id de l'employé: ");
+			System.out.print("Saisissez l'id de l'employÃ©: ");
 			Scanner scan2 = new Scanner(System.in);
 			int id = scan2.nextInt();
 			if(verif.verifValiditeID(id, "employe")&&verif.verifDataInDB(id, "employe")) {
 				double result = sc.sal_employe("employe", id);
-				System.out.println("Salaire: " + df.format(result) + " €/mois");}
+				System.out.println("Salaire: " + df.format(result) + " â‚¬/mois");}
 			break;
 		}
 	}
@@ -227,7 +227,7 @@ public class Salaire {
 			id = scan1.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_cadre = sc.salaire_cond("employe","statut", "Cadre", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: " + df.format(result_cadre) + "€\n");}
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: " + df.format(result_cadre) + "â‚¬\n");}
 			break;
 		case 2:
 			affiche = dr.remplirChampsRequete(reque);
@@ -243,7 +243,7 @@ public class Salaire {
 			id = scan1.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_emp = sc.salaire_cond("employe","statut", "Employe", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un employé est de: " + df.format(result_emp) + "€\n");}
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un employÃ© est de: " + df.format(result_emp) + "â‚¬\n");}
 			break;
 		case 3:
 			affiche = dr.remplirChampsRequete(reque);
@@ -259,7 +259,7 @@ public class Salaire {
 			id = scan1.nextInt();
 			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
 				double result_stagiaire = sc.salaire_cond("employe","statut", "Stagiaire", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " + df.format(result_stagiaire) + "€\n");}
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " + df.format(result_stagiaire) + "â‚¬\n");}
 			break;
 		}
 
