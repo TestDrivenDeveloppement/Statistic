@@ -40,7 +40,6 @@ public class MathematicalStatsCalculator {
 	/**Retourne le nombre d'heures passés par tous les employés sur un mÃªme projet
 	 * 
 	 * @author Loic
-	 * @param idEntreprise
 	 * @return
 	 * @throws ClassNotFoundException 
 	 */
@@ -96,7 +95,6 @@ public class MathematicalStatsCalculator {
 	/**Retourne la moyenne d'heures passés par tous les employés sur un mÃªme projet
 	 * 
 	 * @author Loic
-	 * @param idEntreprise
 	 * @return
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
@@ -162,7 +160,6 @@ public class MathematicalStatsCalculator {
 	/**Retourne la variance d'heures travaillées par l'ensemble des employés sur un projet
 	 * 
 	 * @author Loic
-	 * @param idEntreprise
 	 * @return
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
@@ -215,7 +212,6 @@ public class MathematicalStatsCalculator {
 	/**Retourne l'écart type d'heures travaillées par l'ensemble des employés sur un projet
 	 * 
 	 * @author Loic
-	 * @param idEntreprise
 	 * @return
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
