@@ -9,7 +9,7 @@ import dao.DAOverification;
 
 public class MathematicalStatsCalculator {
 
-	/**Retourne la somme d'heures travaillée par l'ensemble des employés dans une industrei
+	/**Retourne la somme d'heures travaille par l'ensemble des employs dans une industrei
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -21,7 +21,7 @@ public class MathematicalStatsCalculator {
 		String resultStatement = null;
 		try {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM employe INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
@@ -37,7 +37,7 @@ public class MathematicalStatsCalculator {
 	}
 
 
-	/**Retourne le nombre d'heures passés par tous les employés sur un mÃªme projet
+	/**Retourne le nombre d'heures passes par tous les employes sur un mÃªme projet
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -50,7 +50,7 @@ public class MathematicalStatsCalculator {
 		try {
 
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM projet INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
@@ -65,7 +65,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la moyenne d'heures travaillée par l'ensemble des employés dans une industrei
+	/**Retourne la moyenne d'heures travaillï¿½e par l'ensemble des employï¿½s dans une industrei
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -78,7 +78,7 @@ public class MathematicalStatsCalculator {
 		try {
 
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM employe INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
@@ -93,7 +93,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la moyenne d'heures passés par tous les employés sur un mÃªme projet
+	/**Retourne la moyenne d'heures passï¿½s par tous les employï¿½s sur un mÃªme projet
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -107,7 +107,7 @@ public class MathematicalStatsCalculator {
 		String resultStatement = null;
 		try {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM projet INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
@@ -122,7 +122,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaillées par l'ensemble des employés dans une industrie
+	/**Retourne la variance d'heures travaillï¿½es par l'ensemble des employï¿½s dans une industrie
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -137,7 +137,7 @@ public class MathematicalStatsCalculator {
 
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 			ArrayList<String> listeHeure;
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT nb_heure FROM employe INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
 
 			listeHeure = dr.remplirChampsRequete(requeteSelectionnee);
@@ -159,7 +159,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaillées par l'ensemble des employés sur un projet
+	/**Retourne la variance d'heures travaillï¿½es par l'ensemble des employï¿½s sur un projet
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -175,7 +175,7 @@ public class MathematicalStatsCalculator {
 		try {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 			ArrayList<String> listeHeure;
-			// recuperer la liste de la table sélectionnée
+			// recuperer la liste de la table sï¿½lectionnï¿½e
 			String requeteSelectionnee = "SELECT nb_heure FROM projet INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
 
 			listeHeure = dr.remplirChampsRequete(requeteSelectionnee);
@@ -197,7 +197,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne l'écart type d'heures travaillées par l'ensemble des employés dans une industrie
+	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -212,7 +212,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne l'écart type d'heures travaillées par l'ensemble des employés sur un projet
+	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -228,7 +228,7 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Affiche les statistiques avancées pour une entreprise
+	/**Affiche les statistiques avancees pour une entreprise
 	 * 
 	 * @param idInd
 	 * @throws ClassNotFoundException
@@ -244,8 +244,8 @@ public class MathematicalStatsCalculator {
 		int nbreEmployeM=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE (sexe='M') AND id_ind="+idInd));
 		int nbreEmployeF=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE (sexe='F')AND id_ind="+idInd));
 
-		System.out.println("Votre entreprise compte : "+nbreEmploye+" employés");
-		System.out.println("Parmis ces employés, vous comptez "+nbreEmployeM+" hommes ("+df.format((((float)nbreEmployeM/(float)nbreEmploye)*100))+"%) et "+nbreEmployeF+" femmes ("+df.format((((float)nbreEmployeF/(float)nbreEmploye)*100))+"%)");
+		System.out.println("Votre entreprise compte : "+nbreEmploye+" employes");
+		System.out.println("Parmis ces employes, vous comptez "+nbreEmployeM+" hommes ("+df.format((((float)nbreEmployeM/(float)nbreEmploye)*100))+"%) et "+nbreEmployeF+" femmes ("+df.format((((float)nbreEmployeF/(float)nbreEmploye)*100))+"%)");
 
 		System.out.println("\t ........................... \t");
 		System.out.println("Salaire moyen au sein de l'entreprise :"+df.format(sal.salaire_entreprise("employe", idInd)));
@@ -259,10 +259,10 @@ public class MathematicalStatsCalculator {
 
 		System.out.println("\t ........................... \t");	
 		System.out.println("Un homme touche en moyenne "+df.format(sal.salaire_cond("employe", "sexe", "M", idInd))+" euros au sein de votre entreprise"
-				+" \n \t => Une différence de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "M", idInd))*100)+"% que dans une autre entreprise"
+				+" \n \t => Une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "M", idInd))*100)+"% que dans une autre entreprise"
 				+"\nUne femme touche en moyenne "+df.format(sal.salaire_cond("employe", "sexe", "F", idInd))+"  euros au sein de votre entreprise"
-				+" \n \t => Une différence de "+df.format(((float)sal.salaire_cond("employe", "sexe", "F", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "F", idInd))*100)+"% que dans une autre entreprise"
-				+"\nIl ya une différence de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.salaire_cond("employe", "sexe", "F", idInd))*100)+"% entre le salaire d'un homme et d'une femme dans votre entreprise");
+				+" \n \t => Une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "F", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "F", idInd))*100)+"% que dans une autre entreprise"
+				+"\nIl ya une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.salaire_cond("employe", "sexe", "F", idInd))*100)+"% entre le salaire d'un homme et d'une femme dans votre entreprise");
 	}
 
 }
