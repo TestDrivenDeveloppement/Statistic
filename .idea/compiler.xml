@@ -10,8 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="idStatistic" target="1.5" />
-      <module name="tddG5" target="1.5" />
+      <module name="tddG5" target="7" />
     </bytecodeTargetLevel>
   </component>
 </project>

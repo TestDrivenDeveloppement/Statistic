@@ -39,7 +39,7 @@ public abstract class DAOconnexion {
 	 */
 	public ArrayList<String> tables = new ArrayList<>();
 	/**
-	 * ArrayList public pour les requÃªtes de sélection
+	 * ArrayList public pour les requètes de sélection
 	 */
 	public ArrayList<String> requetes = new ArrayList<>();
 	/**
