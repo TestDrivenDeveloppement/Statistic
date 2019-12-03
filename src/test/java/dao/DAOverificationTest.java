@@ -21,8 +21,8 @@ import static org.junit.Assert.*;
  */
 public class DAOverificationTest {
     private DAOverification verif;
-    public DAOverificationTest() throws SQLException, ClassNotFoundException {
-        verif = new DAOverification("db_tdd", "root", "");
+    public DAOverificationTest(){
+        verif = new DAOverification();
     }
     
     @BeforeClass
@@ -45,7 +45,7 @@ public class DAOverificationTest {
      * Test of verifValiditeID method, of class DAOverification.
      */
     @Test
-    public void testVerifValiditeID() throws Exception {
+    public void testVerifValiditeID(){
         System.out.println("verifValiditeID");
         int id = 2;
         String table = "industrie";
@@ -57,7 +57,7 @@ public class DAOverificationTest {
      * Test of verifDataInDB method, of class DAOverification.
      */
     @Test
-    public void testVerifDataInDB() throws Exception {
+    public void testVerifDataInDB(){
         System.out.println("verifDataInDB");
         int id = 2;
         String table = "industrie";

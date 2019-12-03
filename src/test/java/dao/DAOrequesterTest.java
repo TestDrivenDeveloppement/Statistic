@@ -5,7 +5,6 @@
  */
 package dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,8 +19,8 @@ import static org.junit.Assert.*;
  */
 public class DAOrequesterTest {
     private static DAOrequester dr;
-    public DAOrequesterTest() throws SQLException, ClassNotFoundException {
-        dr = new DAOrequester("db_tdd", "root", "");
+    public DAOrequesterTest(){
+        dr = new DAOrequester();
     }
     
     @BeforeClass
@@ -93,7 +92,7 @@ public class DAOrequesterTest {
         System.out.println("remplirChampsTable");
         String table = "industrie";
 
-        ArrayList expResult = new ArrayList();
+        ArrayList<String> expResult = new ArrayList<>();
 
         /*expResult.add("id_ind");
         expResult.add("nom_ind"); should be this"*/
@@ -115,7 +114,7 @@ public class DAOrequesterTest {
         System.out.println("remplirChampsTable1");
         String table = "industrie";
 
-        ArrayList expResult = new ArrayList();
+        ArrayList<String> expResult = new ArrayList<String>();
 
         /*expResult.add("id_ind");
         expResult.add("nom_ind"); should be this */
@@ -137,7 +136,7 @@ public class DAOrequesterTest {
         System.out.println("remplirChampsRequete");
         String requete = "select * from industrie";
 
-        ArrayList expResult = new ArrayList();
+        ArrayList<String> expResult = new ArrayList<String>();
         //expResult.add(" id_ind nom_ind\n");
         //expResult.add("nom_ind");
 
@@ -201,7 +200,7 @@ public class DAOrequesterTest {
         System.out.println("remplirChampsRequete");
         String table = "industrie";
 
-        ArrayList expResult = new ArrayList();
+        ArrayList<Integer> expResult = new ArrayList<>();
         //expResult.add(" id_ind nom_ind\n");
         //expResult.add("nom_ind");
 
@@ -210,7 +209,7 @@ public class DAOrequesterTest {
         expResult.add(3);
         expResult.add(4);
 
-        ArrayList result = dr.listeIdTable(table);
+        ArrayList<Integer> result = dr.listeIdTable(table);
 
         for (int i = 0; i < result.size(); i++) { // attribut test
             assertEquals(expResult.get(i), result.get(i));

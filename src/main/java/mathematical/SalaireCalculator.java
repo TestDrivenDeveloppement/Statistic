@@ -19,11 +19,11 @@ public class SalaireCalculator {
 	 * Permet de calculer les primes en fonction du nombre d'heures travaillées et du statut
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modification
 	 */
-	public void calcul_prime(String nomTable) throws SQLException, ClassNotFoundException {
+	/*public void calcul_prime(String nomTable) throws SQLException, ClassNotFoundException {
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -80,7 +80,7 @@ public class SalaireCalculator {
 					}
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 				}
@@ -98,16 +98,16 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher les employés présents dans la BDD
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modifications
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static ArrayList sal_employes(String nomTable) throws ClassNotFoundException, SQLException {
+	/*public static ArrayList sal_employes(String nomTable) throws ClassNotFoundException, SQLException {
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 		ArrayList<Double> liste_sal;
@@ -157,10 +157,10 @@ public class SalaireCalculator {
 					liste_sal.add(sal);
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
-				} 
+				}
 				System.out.println(liste.get(i) + sal + "€/mois\n");
 
 			}
@@ -175,16 +175,16 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire d'un employé dans la BDD
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modification
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static double sal_employe(String nomTable, int id) throws ClassNotFoundException, SQLException {
+	/*public static double sal_employe(String nomTable, int id) throws ClassNotFoundException, SQLException {
 		double sal = 0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -230,7 +230,7 @@ public class SalaireCalculator {
 					sal = Double.parseDouble(heure.get(i))*9.13;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 				}
@@ -250,14 +250,14 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen dans une entreprise
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaire_entreprise(String nomTable, int id) throws SQLException, ClassNotFoundException {
+	/*public double salaire_entreprise(String nomTable, int id) throws SQLException, ClassNotFoundException {
 
 		double sal = 0, sal_moy = 0;
 
@@ -268,7 +268,7 @@ public class SalaireCalculator {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
 
-			double n = 0;            
+			double n = 0;
 
 			// recuperer la liste de la table sélectionnée
 			String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind="+id+";";
@@ -303,7 +303,7 @@ public class SalaireCalculator {
 					n+=1;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 
@@ -320,13 +320,13 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans une entreprise
-	 * 
+	 *
 	 *@author Vick
 	 *Ecriture de la fonction
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	/*public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
 
 		double sal=0, sal_moyen=0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
@@ -370,11 +370,11 @@ public class SalaireCalculator {
 					n+=1;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 
-				}    
+				}
 
 			}
 			sal_moyen = (sal/n);
@@ -389,11 +389,11 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans les autres entreprises que celle sélectionée
-	 * 
+	 *
 	 *@author Loic
 	 *Ecriture
 	 */
-	public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	/*public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
 
 		double sal=0, sal_moyen=0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
@@ -438,11 +438,11 @@ public class SalaireCalculator {
 					n+=1;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 
-				}    
+				}
 
 			}
 			sal_moyen = (sal/n);
@@ -453,7 +453,7 @@ public class SalaireCalculator {
 
 		}
 		return(sal_moyen);
-	}
+	}*/
 
 
 }

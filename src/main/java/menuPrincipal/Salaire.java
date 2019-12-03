@@ -15,12 +15,12 @@ import dao.DAOrequester;
 import dao.DAOverification;
 import mathematical.SalaireCalculator; 
 
-/**
+/*
  *
  * @author Vick
  */
 public class Salaire {
-
+/**
 	//Paramètres
 	private static Menu func = new Menu();
 	private static DAOconnexion con = null;
@@ -61,7 +61,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -109,7 +109,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -125,7 +125,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -143,7 +143,7 @@ public class Salaire {
 			break;
 		}
 
-	}
+	}*/
 
 
 
@@ -151,7 +151,7 @@ public class Salaire {
 	/**
 	 *Menu permettant de choisir le salaire pour un employe ou tous les employés
 	 */
-	public void salaire_employe() throws SQLException, ClassNotFoundException {
+	/*public void salaire_employe() throws SQLException, ClassNotFoundException {
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -179,7 +179,7 @@ public class Salaire {
 			//Afficher les lignes de la requête sélectionnée
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -191,13 +191,13 @@ public class Salaire {
 				System.out.println("Salaire: " + df.format(result) + " €/mois");}
 			break;
 		}
-	}
+	}*/
 
 	/**@author Vick
-	 * 
+	 *
 	 * Menu permettant de choisir le salaire en fonction du statut
 	 */
-	public void salaire_statut() throws SQLException, ClassNotFoundException {
+	/*public void salaire_statut() throws SQLException, ClassNotFoundException {
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -218,7 +218,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -234,7 +234,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -250,7 +250,7 @@ public class Salaire {
 
 			for(int i = 0; i < affiche.size(); i++)
 			{
-				System.out.print(affiche.get(i)); 
+				System.out.print(affiche.get(i));
 			}
 			System.out.println();
 
@@ -263,7 +263,7 @@ public class Salaire {
 			break;
 		}
 
-	}
+	}*/
 
 
 

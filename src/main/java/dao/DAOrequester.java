@@ -1,14 +1,40 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DAOrequester extends DAOconnexion {
+public class DAOrequester{
 
-	public DAOrequester(String nameDatabase, String loginDatabase, String passwordDatabase)
-			throws SQLException, ClassNotFoundException {
-		super(nameDatabase, loginDatabase, passwordDatabase);
-		// TODO Auto-generated constructor stub
+	/**
+	 * ArrayList public pour les tables
+	 */
+	public ArrayList<String> tables = new ArrayList<>();
+	/**
+	 * ArrayList public pour les requètes de sélection
+	 */
+	public ArrayList<String> requetes = new ArrayList<>();
+	/**
+	 * ArrayList public pour les requÃªtes de MAJ
+	 */
+	public ArrayList<String> requetesMaj = new ArrayList<>();
+
+	/**
+	 * Attributs prives : connexion JDBC, statement, ordre requete et resultat
+	 * requete
+	 */
+	private Statement stmt;
+	private ResultSet rset;
+	private ResultSetMetaData rsetMeta;
+
+	public DAOrequester(){
+		try {
+			stmt = DAOconnexion.getInstance().createStatement();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -45,11 +71,13 @@ public class DAOrequester extends DAOconnexion {
 	 *
 	 * @param table
 	 * @return
-	 * @throws java.sql.SQLException
 	 */
-	public ArrayList remplirChampsTable(String table) throws SQLException {
+	public ArrayList remplirChampsTable(String table){
+		// creation d'une ArrayList de String
+		ArrayList<String> liste;
+		liste = new ArrayList<>();
+
 		try {
-			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery("select * from " + table);
 
@@ -59,9 +87,7 @@ public class DAOrequester extends DAOconnexion {
 			// calcul du nombre de colonnes du resultat
 			int nbColonne = rsetMeta.getColumnCount();
 
-			// creation d'une ArrayList de String
-			ArrayList<String> liste;
-			liste = new ArrayList<>();
+
 			String champs = "";
 			// Ajouter tous les champs du resultat dans l'ArrayList
 			for (int i = 0; i < nbColonne; i++) {
@@ -74,63 +100,27 @@ public class DAOrequester extends DAOconnexion {
 			// ajouter les champs de la ligne dans l'ArrayList
 			liste.add(champs);
 
-			// Retourner l'ArrayList
-			return liste;
-		} finally{ closeConn();
+			rset.close();
 
-
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		// Retourner l'ArrayList
+		return liste;
 	}
-
-
-	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException {
-		try {
-			innitConn();
-			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * from " + table + "where" + nom + "= 'MAAF'");
-
-			// récupération du résultat de l'ordre
-			rsetMeta = rset.getMetaData();
-
-			// calcul du nombre de colonnes du resultat
-			int nbColonne = rsetMeta.getColumnCount();
-
-			// creation d'une ArrayList de String
-			ArrayList<String> liste;
-			liste = new ArrayList<>();
-			String champs = "";
-			// Ajouter tous les champs du resultat dans l'ArrayList
-			for (int i = 0; i < nbColonne; i++) {
-				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
-			}
-
-			// ajouter un "\n" Ã  la ligne des champs
-			champs = champs + "\n";
-
-			// ajouter les champs de la ligne dans l'ArrayList
-			liste.add(champs);
-
-			// Retourner l'ArrayList
-			return liste;
-		} finally{ closeConn();
-
-
-		}
-	}
-
-
-
-
 
 	/**
 	 * Methode qui retourne l'ArrayList des champs de la requete en parametre
 	 * @param requete
-	 * @return 
-	 * @throws java.sql.SQLException
+	 * @return
 	 */
-	public ArrayList remplirChampsRequete(String requete) throws SQLException {
+	public ArrayList remplirChampsRequete(String requete){
+		// creation d'une ArrayList de String
+		ArrayList<String> liste;
+		liste = new ArrayList<String>();
+
 		try {
-			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
 
@@ -139,10 +129,6 @@ public class DAOrequester extends DAOconnexion {
 
 			// calcul du nombre de colonnes du resultat
 			int nbColonne = rsetMeta.getColumnCount();
-
-			// creation d'une ArrayList de String
-			ArrayList<String> liste;
-			liste = new ArrayList<String>();
 
 			// tant qu'il reste une ligne 
 			while (rset.next()) {
@@ -161,12 +147,13 @@ public class DAOrequester extends DAOconnexion {
 				liste.add(champs);
 			}
 
-			// Retourner l'ArrayList
-			return liste;}
-		finally{ //closeConn();
+			rset.close();
 
-
-			}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		// Retourner l'ArrayList
+		return liste;
 	}
 
 	/** Retourne le résultat de la requÃªte unique
@@ -176,13 +163,14 @@ public class DAOrequester extends DAOconnexion {
 	 * @return
 	 * @throws SQLException
 	 */
-	public String recupResultatRequete(String requete) throws SQLException {
+	public String recupResultatRequete(String requete){
+		String resultStatement=null;
+
 		try {
-			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
 
-			String resultStatement=null;
+
 
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -190,14 +178,15 @@ public class DAOrequester extends DAOconnexion {
 			rset.next();
 			resultStatement=rset.getString(1);
 
-			// tant qu'il reste une ligne 
+			rset.close();
 
-
-			// Retourner l'ArrayList
-			return resultStatement;
-		} finally{ closeConn();
-
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		// Retourner l'ArrayList
+		return resultStatement;
+
 	}
 
 	/**
@@ -206,31 +195,29 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDB(String table) throws SQLException {
+	public int countElementInDB(String table){
+		int number=0;
+
 		try {
-			innitConn();
-			int number=0;
 			// récupération de l'ordre de la requete
 			switch(table) {
+				case "industrie":
+					rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
+					System.out.println("OK");
+					break;
 
-			case "industrie":
-				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
-				System.out.println("OK");
-				break;
+				case "projet":
+					rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
+					System.out.println("OK");
+					break;
 
-			case "projet":
-				rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
-				System.out.println("OK");
-				break;
+				case "employe":
+					rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
+					System.out.println("OK");
+					break;
 
-			case "employe":
-				rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
-				System.out.println("OK");
-				break;
-
-			default:
-				break;
-
+				default:
+					break;
 			}
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -238,15 +225,14 @@ public class DAOrequester extends DAOconnexion {
 			rset.next();
 			number= rset.getInt(1);
 
-			// tant qu'il reste une ligne 
+			rset.close();
 
-
-			// Retourner l'ArrayList
-			return number;
-		} finally{ closeConn();
-
-
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		// Retourner l'ArrayList
+		return number;
 	}
 
 	/**
@@ -255,31 +241,32 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond(String table) throws SQLException {
+	public int countElementInDBWithCond(String table){
+		int number=0;
+
 		try {
-			innitConn();
-			int number=0;
+
+
 			// récupération de l'ordre de la requete
 			switch(table) {
 
-			case "industrie":
-				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
-				System.out.println("OK");
-				break;
+				case "industrie":
+					rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
+					System.out.println("OK");
+					break;
 
-			case "projet":
-				rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
-				System.out.println("OK");
-				break;
+				case "projet":
+					rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
+					System.out.println("OK");
+					break;
 
-			case "employe":
-				rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
-				System.out.println("OK");
-				break;
+				case "employe":
+					rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
+					System.out.println("OK");
+					break;
 
-			default:
-				break;
-
+				default:
+					break;
 			}
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -287,15 +274,14 @@ public class DAOrequester extends DAOconnexion {
 			rset.next();
 			number= rset.getInt(1);
 
-			// tant qu'il reste une ligne 
+			rset.close();
 
-
-			// Retourner l'ArrayList
-			return number;
-		} finally{ closeConn();
-
-
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		// Retourner l'ArrayList
+		return number;
 	}
 
 	/**
@@ -305,27 +291,26 @@ public class DAOrequester extends DAOconnexion {
 	 * @author Loic
 	 */
 	public ArrayList<Integer> listeIdTable(String table) throws SQLException {
+		ArrayList<Integer> listeID = new ArrayList<Integer>();
+
 		try {
-			innitConn();
-			ArrayList<Integer> listeID = new ArrayList<Integer>();
+
 			// récupération de l'ordre de la requete
 			switch(table) {
+				case "industrie":
+					rset = stmt.executeQuery("SELECT id_ind FROM industrie");
+					break;
 
-			case "industrie":
-				rset = stmt.executeQuery("SELECT id_ind FROM industrie");
-				break;
+				case "projet":
+					rset = stmt.executeQuery("SELECT id_projet FROM (projet)");
+					break;
 
-			case "projet":
-				rset = stmt.executeQuery("SELECT id_projet FROM (projet)");
-				break;
+				case "employe":
+					rset = stmt.executeQuery("SELECT id_emp FROM employe");
+					break;
 
-			case "employe":
-				rset = stmt.executeQuery("SELECT id_emp FROM employe");
-				break;
-
-			default:
-				break;
-
+				default:
+					break;
 			}
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -334,13 +319,14 @@ public class DAOrequester extends DAOconnexion {
 				listeID.add(rset.getInt(1));
 			}
 
-			// tant qu'il reste une ligne 
+			rset.close();
 
-
-			// Retourner l'ArrayList
-			return listeID;
-		}  finally{ closeConn();
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		// Retourner l'ArrayList
+		return listeID;
 	}
 
 	/**
@@ -350,39 +336,38 @@ public class DAOrequester extends DAOconnexion {
 	 * @author Loic
 	 */
 	public String nameInTable(int id, String table) throws SQLException {
+		String nameOfElement = null;
 
 		try {
-			innitConn();
-			String nameOfElement;
 			// récupération de l'ordre de la requete
 			switch(table) {
+				case "industrie":
+					rset = stmt.executeQuery("SELECT nom_ind FROM industrie WHERE id_ind="+id);
+					break;
 
-			case "industrie":
-				rset = stmt.executeQuery("SELECT nom_ind FROM industrie WHERE id_ind="+id);
-				break;
+				case "projet":
+					rset = stmt.executeQuery("SELECT nom_projet FROM (projet) WHERE id_projet="+id);
+					break;
 
-			case "projet":
-				rset = stmt.executeQuery("SELECT nom_projet FROM (projet) WHERE id_projet="+id);
-				break;
+				case "employe":
+					rset = stmt.executeQuery("SELECT nom FROM employe where id_emp="+id);
+					break;
 
-			case "employe":
-				rset = stmt.executeQuery("SELECT nom FROM employe where id_emp="+id);
-				break;
-
-			default:
-				break;
-
+				default:
+					break;
 			}
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
 			rset.next();
 			nameOfElement=rset.getString(1);
 
-			return nameOfElement;
-			//Close the current connection
-		} finally{ 
-			closeConn();		 
+			rset.close();
+
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
+
+		return nameOfElement;
 	}
 
 	/**
@@ -392,10 +377,6 @@ public class DAOrequester extends DAOconnexion {
 	 */
 	public void executeUpdate(String requeteMaj) throws SQLException {
 		stmt.executeUpdate(requeteMaj);
-	}
-
-	void close() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 }

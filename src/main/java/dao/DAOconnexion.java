@@ -23,75 +23,44 @@ import java.util.ArrayList;
  * 
  * @author segado
  */
-public abstract class DAOconnexion {
+public final class DAOconnexion {
+
+	//Objet Connection
+	private static Connection connect;
 
 	/**
-	 * Attributs prives : connexion JDBC, statement, ordre requete et resultat
-	 * requete
+	 * private constructor
 	 */
-	protected Connection conn;
-	protected Statement stmt;
-	protected ResultSet rset;
-	protected ResultSetMetaData rsetMeta;
-
-	/**
-	 * ArrayList public pour les tables
-	 */
-	public ArrayList<String> tables = new ArrayList<>();
-	/**
-	 * ArrayList public pour les requètes de sélection
-	 */
-	public ArrayList<String> requetes = new ArrayList<>();
-	/**
-	 * ArrayList public pour les requÃªtes de MAJ
-	 */
-	public ArrayList<String> requetesMaj = new ArrayList<>();
-
-	/**
-	 * Constructeur avec 3 paramÃ¨tres : nom, login et password de la BDD locale
-	 *
-	 * @param nameDatabase
-	 * @param loginDatabase
-	 * @param passwordDatabase
-	 * @throws java.sql.SQLException
-	 * @throws java.lang.ClassNotFoundException
-	 */
-
-	protected static String urlDatabase;
-	protected static String loginDatabase;
-	protected static String passwordDatabase;
-
-	public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
-		// chargement driver "com.mysql.jdbc.Driver"
-		Class.forName("com.mysql.jdbc.Driver");
-
-		// url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-		String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;
-
-		this.loginDatabase=loginDatabase;
-		this.passwordDatabase=passwordDatabase;
-		this.urlDatabase=urlDatabase;
-
+	private DAOconnexion(){
+		try {
+			String urlDatabase = "jdbc:mysql://localhost/db_tdd";
+			String loginDatabase = "root";
+			String passwordDatabase = "";
+			connect = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	/**Iniate the connection to the DB
-	 * 
-	 * @throws SQLException
+	// to get only one instance connexion
+	/**Initiate only one connection to the DB
+	 *
 	 */
-	public void innitConn() throws SQLException {
-		//création d'une connexion JDBC Ã  la base 
-		conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-
-		// création d'un ordre SQL (statement)
-		stmt = conn.createStatement();
+	public synchronized static Connection getInstance(){
+		if(connect == null){
+			new DAOconnexion();
+		}
+		return connect;
 	}
 
 	/**Close the connection to the DB
-	 * 
-	 * @throws SQLException
+	 *
 	 */
-	public void closeConn() throws SQLException {
-		conn.close();
-		stmt.close();
+	public static void closeConnection(){
+		try {
+			connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -25,20 +25,20 @@ public class Menu {
 	 */
 
 
-	private static Salaire sal = new Salaire();
+	/*private static Salaire sal = new Salaire();
 	private static MathematicalStatsCalculator msc = new MathematicalStatsCalculator();
 	private static DAOrequester dr = null;
-	private static DAOverification verif= null;
+	private static DAOverification verif= null;*/
 
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		DecimalFormat df = new DecimalFormat("########.00");
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		//DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		System.out.println(verif.verifValiditeID(1, "industrie"));
 
-
-		Scanner scan = new Scanner(System.in);
+		/*Scanner scan = new Scanner(System.in);
 		int i;
 		int userChoice;
 		do {
@@ -212,13 +212,13 @@ public class Menu {
 				System.out.println("Fin de l'exécution.");
 				break;
 			}
-		}while(i<6 && i>0);
+		}while(i<6 && i>0);*/
 	}
 
 	/**
 	 * Afficher les lignes de la table sélectionnée
-	 * @throws ClassNotFoundException 
-	 */
+	 * @throws //ClassNotFoundException
+	 *//*
 	public static void afficherLignes(String nomTable) throws ClassNotFoundException {
 
 		try {
@@ -243,5 +243,5 @@ public class Menu {
 			e.printStackTrace();
 
 		}
-	}
+	}*/
 }

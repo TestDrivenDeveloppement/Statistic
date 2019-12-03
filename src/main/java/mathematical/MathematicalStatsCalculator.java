@@ -10,13 +10,13 @@ import dao.DAOverification;
 public class MathematicalStatsCalculator {
 
 	/**Retourne la somme d'heures travaille par l'ensemble des employs dans une industrei
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws ClassNotFoundException 
+	 * @throws //ClassNotFoundException
 	 */
-	public static String getSommeHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException {
+	/*public static String getSommeHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException {
 
 		String resultStatement = null;
 		try {
@@ -38,13 +38,13 @@ public class MathematicalStatsCalculator {
 
 
 	/**Retourne le nombre d'heures passes par tous les employes sur un même projet
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
 	 */
-	public static String getSommeHeureEmployeProjet(int idProj) throws ClassNotFoundException {
+	/*public static String getSommeHeureEmployeProjet(int idProj) throws ClassNotFoundException {
 
 		String resultStatement = null;
 		try {
@@ -66,13 +66,13 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne la moyenne d'heures travaill�e par l'ensemble des employ�s dans une industrei
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
 	 */
-	public static String getMoyenneHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException {
+	/*public static String getMoyenneHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException {
 
 		String resultStatement = null;
 		try {
@@ -94,14 +94,14 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne la moyenne d'heures pass�s par tous les employ�s sur un même projet
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static String getMoyenneHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException {
+	/*public static String getMoyenneHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException {
 
 
 		String resultStatement = null;
@@ -123,14 +123,14 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws ClassNotFoundException 
-	 * @throws NumberFormatException 
+	 * @throws ClassNotFoundException
+	 * @throws NumberFormatException
 	 */
-	public static String getVarianceHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
+	/*public static String getVarianceHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
 
 		String resultStatement = null;
 		try {
@@ -160,14 +160,14 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s sur un projet
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static String getVarianceHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException {
+	/*public static String getVarianceHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException {
 
 		String resultStatement = null;
 
@@ -198,14 +198,14 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws ClassNotFoundException 
-	 * @throws NumberFormatException 
+	 * @throws ClassNotFoundException
+	 * @throws NumberFormatException
 	 */
-	public static String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
+	/*public static String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
 
 		String resultStatement = null;
 		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeEntreprise(idEntreprise))));
@@ -213,15 +213,15 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
-	 * 
+	 *
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws NumberFormatException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws NumberFormatException
 	 */
-	public static String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException, ClassNotFoundException, SQLException {
+	/*public static String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException, ClassNotFoundException, SQLException {
 
 		String resultStatement = null;
 		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeProjet(idProjet))));
@@ -229,13 +229,13 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Affiche les statistiques avancees pour une entreprise
-	 * 
+	 *
 	 * @param idInd
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 * @author Loic
 	 */
-	public static void superStatInd(int idInd) throws ClassNotFoundException, SQLException {
+	/*public static void superStatInd(int idInd) throws ClassNotFoundException, SQLException {
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 		DecimalFormat df = new DecimalFormat("########.00");
@@ -257,12 +257,12 @@ public class MathematicalStatsCalculator {
 				+" \n 3. Cadre : "+ df.format(sal.salaire_cond("employe", "statut", "cadre", idInd))+" euros"
 				+" \n \t => Un cadre touche en moyenne "+df.format(((float)+sal.salaire_cond("employe", "statut", "cadre", idInd)/(float)sal.autre_salaire_cond("employe", "statut", "cadre", idInd))*100)+"% que dans une autre entreprise");
 
-		System.out.println("\t ........................... \t");	
+		System.out.println("\t ........................... \t");
 		System.out.println("Un homme touche en moyenne "+df.format(sal.salaire_cond("employe", "sexe", "M", idInd))+" euros au sein de votre entreprise"
 				+" \n \t => Une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "M", idInd))*100)+"% que dans une autre entreprise"
 				+"\nUne femme touche en moyenne "+df.format(sal.salaire_cond("employe", "sexe", "F", idInd))+"  euros au sein de votre entreprise"
 				+" \n \t => Une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "F", idInd)/(float)sal.autre_salaire_cond("employe", "sexe", "F", idInd))*100)+"% que dans une autre entreprise"
 				+"\nIl ya une difference de "+df.format(((float)sal.salaire_cond("employe", "sexe", "M", idInd)/(float)sal.salaire_cond("employe", "sexe", "F", idInd))*100)+"% entre le salaire d'un homme et d'une femme dans votre entreprise");
-	}
+	}*/
 
 }
