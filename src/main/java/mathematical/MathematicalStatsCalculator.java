@@ -50,7 +50,7 @@ public class MathematicalStatsCalculator {
 		try {
 
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table s�lectionn�e
+			// recuperer la liste de la table selectionnee
 			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM projet INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
