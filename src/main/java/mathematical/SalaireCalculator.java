@@ -90,7 +90,6 @@ public class SalaireCalculator {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 		}
 	}
 

@@ -21,7 +21,7 @@ public class MathematicalStatsCalculator {
 		String resultStatement = null;
 		try {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table s�lectionn�e
+			// recuperer la liste de la table selectionnee
 			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM employe INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
 			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
 
