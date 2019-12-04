@@ -7,10 +7,12 @@ import java.util.Scanner;
 import dao.DAOrequester;
 import dao.DAOverification;
 
-public class SalaireCalculator {
+public class SalaireCalculator
+{
 
 
-	public SalaireCalculator() {
+	public SalaireCalculator()
+	{
 
 	}
 
@@ -23,7 +25,8 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public void calcul_prime(String nomTable) throws SQLException, ClassNotFoundException {
+	public void calcul_prime(String nomTable) throws SQLException, ClassNotFoundException
+	{
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -56,31 +59,32 @@ public class SalaireCalculator {
 					st.next();
 				}
 
-				switch (statut.get(i)) {
+				switch (statut.get(i))
+				{
 				case "Stagiaire\n" :
 					surplusHoraire = Double.parseDouble(heure.get(i)) - 175;
-					if(surplusHoraire<=0){ prime = 0;}
+					if(surplusHoraire <= 0){ prime = 0;}
 					else{
-						prime = surplusHoraire*(3.75*1.25);}
+						prime = surplusHoraire * (3.75 * 1.25);}
 					break;
 
 				case "Employe\n" :
 					surplusHoraire = Double.parseDouble(heure.get(i)) - 200;
-					if(surplusHoraire<=0){ prime = 0;}
+					if(surplusHoraire <=0){ prime = 0;}
 					else{
-						prime = surplusHoraire*(7.93*1.25);
+						prime = surplusHoraire * (7.93 * 1.25);
 					}
 					break;
 
 				case "Cadre\n" :
 					surplusHoraire = Double.parseDouble(heure.get(i)) - 225;
-					if(surplusHoraire<=0){ prime = 0;}
+					if(surplusHoraire <=0 ){ prime = 0;}
 					else{
-						prime = surplusHoraire*(9.13*1.25);
+						prime = surplusHoraire * (9.13 * 1.25);
 					}
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 				}
@@ -88,7 +92,8 @@ public class SalaireCalculator {
 
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -98,16 +103,17 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher les employés présents dans la BDD
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modifications
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static ArrayList sal_employes(String nomTable) throws ClassNotFoundException, SQLException {
+	public static ArrayList sal_employes(String nomTable) throws ClassNotFoundException, SQLException
+	{
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 		ArrayList<Double> liste_sal;
@@ -143,29 +149,30 @@ public class SalaireCalculator {
 
 				switch (statut.get(i)) {
 				case "Stagiaire\n" :
-					sal = Double.parseDouble(heure.get(i))*3.75;
+					sal = Double.parseDouble(heure.get(i)) * 3.75;
 					liste_sal.add(sal);
 					break;
 
 				case "Employe\n" :
-					sal = Double.parseDouble(heure.get(i))*7.93;
+					sal = Double.parseDouble(heure.get(i)) * 7.93;
 					liste_sal.add(sal);
 					break;
 
 				case "Cadre\n" :
-					sal = Double.parseDouble(heure.get(i))*9.13;
+					sal = Double.parseDouble(heure.get(i)) * 9.13;
 					liste_sal.add(sal);
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
-				} 
+				}
 				System.out.println(liste.get(i) + sal + "€/mois\n");
 
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 
 		}
@@ -175,16 +182,17 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire d'un employé dans la BDD
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modification
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public static double sal_employe(String nomTable, int id) throws ClassNotFoundException, SQLException {
+	public static double sal_employe(String nomTable, int id) throws ClassNotFoundException, SQLException
+	{
 		double sal = 0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -197,13 +205,13 @@ public class SalaireCalculator {
 
 
 			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " where id_emp="+id+";";
+			String requeteSelectionnee = "select nb_heure from " + nomTable + " where id_emp=" + id + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable + " where id_emp="+id+";";
+			String reqSelectionnee = "select statut from " + nomTable + " where id_emp=" + id + ";";
 			statut = dr.remplirChampsRequete(reqSelectionnee);
 
-			String req = "select nom, prenom, statut from " + nomTable + " where id_emp="+id+";";
+			String req = "select nom, prenom, statut from " + nomTable + " where id_emp=" + id + ";";
 			liste = dr.remplirChampsRequete(req);
 
 
@@ -217,20 +225,21 @@ public class SalaireCalculator {
 				}
 
 
-				switch (statut.get(i)) {
+				switch (statut.get(i))
+				{
 				case "Stagiaire\n" :
-					sal = Double.parseDouble(heure.get(i))*3.75;
+					sal = Double.parseDouble(heure.get(i)) * 3.75;
 					break;
 
 				case "Employe\n" :
-					sal = Double.parseDouble(heure.get(i))*7.93;
+					sal = Double.parseDouble(heure.get(i)) * 7.93;
 					break;
 
 				case "Cadre\n" :
-					sal = Double.parseDouble(heure.get(i))*9.13;
+					sal = Double.parseDouble(heure.get(i)) * 9.13;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 				}
@@ -238,7 +247,8 @@ public class SalaireCalculator {
 
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 
 		}
@@ -250,14 +260,15 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen dans une entreprise
-	 * 
+	 *
 	 * @author Vick
 	 * Ecriture de la fonction
-	 * 
+	 *
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaire_entreprise(String nomTable, int id) throws SQLException, ClassNotFoundException {
+	public double salaire_entreprise(String nomTable, int id) throws SQLException, ClassNotFoundException
+	{
 
 		double sal = 0, sal_moy = 0;
 
@@ -268,13 +279,13 @@ public class SalaireCalculator {
 			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
 
-			double n = 0;            
+			double n = 0;
 
 			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind="+id+";";
+			String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind=" + id + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable  + " where fk_id_ind="+id+";";
+			String reqSelectionnee = "select statut from " + nomTable  + " where fk_id_ind=" + id + ";";
 			statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
@@ -287,23 +298,24 @@ public class SalaireCalculator {
 					st.next();
 				}
 
-				switch (statut.get(i)) {
+				switch (statut.get(i))
+				{
 				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
+					sal += Double.parseDouble(heure.get(i)) * 3.75;
 					n+=1;
 					break;
 
 				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
+					sal += Double.parseDouble(heure.get(i)) * 7.93;
 					n+=1;
 					break;
 
 				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
+					sal += Double.parseDouble(heure.get(i)) * 9.13;
 					n+=1;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 
@@ -311,7 +323,8 @@ public class SalaireCalculator {
 			}
 			sal_moy = (sal/n);
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 
 		}
@@ -320,29 +333,30 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans une entreprise
-	 * 
+	 *
 	 *@author Vick
 	 *Ecriture de la fonction
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException
+	{
 
-		double sal=0, sal_moyen=0;
+		double sal=0, sal_moyen = 0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 		try {
 			ArrayList<String> heure;
 			ArrayList<String> statut;
 
-			int n=0;
+			int n = 0;
 
-			String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind ="+id;
+			String choice = "WHERE " + condColumnName + "='"+condColumnInput + "' AND fk_id_ind =" + id;
 
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
+			String requeteSelectionnee = "select nb_heure from " + nomTable + " " + choice + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
+			String reqSelectionnee = "select statut from " + nomTable+ " " + choice + ";";
 			statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
@@ -356,31 +370,32 @@ public class SalaireCalculator {
 				}
 				switch (statut.get(i)) {
 				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
+					sal += Double.parseDouble(heure.get(i)) * 3.75;
 					n+=1;
 					break;
 
 				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
+					sal += Double.parseDouble(heure.get(i)) * 7.93;
 					n+=1;
 					break;
 
 				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
+					sal += Double.parseDouble(heure.get(i)) * 9.13;
 					n+=1;
 					break;
 
-				default : 
+				default :
 					System.out.println("Erreur");
 					break;
 
-				}    
+				}
 
 			}
 			sal_moyen = (sal/n);
 
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 
 		}
@@ -389,7 +404,7 @@ public class SalaireCalculator {
 
 	/**
 	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans les autres entreprises que celle sélectionée
-	 * 
+	 *
 	 *@author Loic
 	 *Ecriture
 	 */
@@ -405,12 +420,12 @@ public class SalaireCalculator {
 
 			int n=0;
 
-			String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind !="+id;
+			String choice = "WHERE " + condColumnName + "='" + condColumnInput + "' AND fk_id_ind !=" + id;
 
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
+			String requeteSelectionnee = "select nb_heure from " + nomTable + " " + choice + ";";
 			heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
+			String reqSelectionnee = "select statut from " + nomTable +  " " + choice + ";";
 			statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
@@ -424,17 +439,17 @@ public class SalaireCalculator {
 				}
 				switch (statut.get(i)) {
 				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
+					sal += Double.parseDouble(heure.get(i)) * 3.75;
 					n+=1;
 					break;
 
 				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
+					sal += Double.parseDouble(heure.get(i)) * 7.93;
 					n+=1;
 					break;
 
 				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
+					sal += Double.parseDouble(heure.get(i)) * 9.13;
 					n+=1;
 					break;
 
@@ -448,7 +463,8 @@ public class SalaireCalculator {
 			sal_moyen = (sal/n);
 
 
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 
 		}

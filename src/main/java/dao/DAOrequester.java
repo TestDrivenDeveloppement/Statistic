@@ -3,8 +3,8 @@ package dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DAOrequester extends DAOconnexion {
-
+public class DAOrequester extends DAOconnexion
+{
 	public DAOrequester(String nameDatabase, String loginDatabase, String passwordDatabase)
 			throws SQLException, ClassNotFoundException {
 		super(nameDatabase, loginDatabase, passwordDatabase);
@@ -16,7 +16,8 @@ public class DAOrequester extends DAOconnexion {
 	 *
 	 * @param table
 	 */
-	public void ajouterTable(String table) {
+	public void ajouterTable(String table)
+	{
 		tables.add(table);
 	}
 
@@ -26,7 +27,8 @@ public class DAOrequester extends DAOconnexion {
 	 *
 	 * @param requete
 	 */
-	public void ajouterRequete(String requete) {
+	public void ajouterRequete(String requete)
+	{
 		requetes.add(requete);
 	}
 
@@ -36,7 +38,8 @@ public class DAOrequester extends DAOconnexion {
 	 *
 	 * @param requete
 	 */
-	public void ajouterRequeteMaj(String requete) {
+	public void ajouterRequeteMaj(String requete)
+	{
 		requetesMaj.add(requete);
 	}
 
@@ -47,7 +50,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @return
 	 * @throws java.sql.SQLException
 	 */
-	public ArrayList remplirChampsTable(String table) throws SQLException {
+	public ArrayList remplirChampsTable(String table) throws SQLException
+	{
 		try {
 			innitConn();
 			// récupération de l'ordre de la requete
@@ -83,7 +87,8 @@ public class DAOrequester extends DAOconnexion {
 	}
 
 
-	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException {
+	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException
+	{
 		try {
 			innitConn();
 			// récupération de l'ordre de la requete
@@ -128,7 +133,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @return 
 	 * @throws java.sql.SQLException
 	 */
-	public ArrayList remplirChampsRequete(String requete) throws SQLException {
+	public ArrayList remplirChampsRequete(String requete) throws SQLException
+	{
 		try {
 			innitConn();
 			// récupération de l'ordre de la requete
@@ -176,7 +182,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @return
 	 * @throws SQLException
 	 */
-	public String recupResultatRequete(String requete) throws SQLException {
+	public String recupResultatRequete(String requete) throws SQLException
+	{
 		try {
 			innitConn();
 			// récupération de l'ordre de la requete
@@ -206,7 +213,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDB(String table) throws SQLException {
+	public int countElementInDB(String table) throws SQLException
+	{
 		try {
 			innitConn();
 			int number=0;
@@ -255,7 +263,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond(String table) throws SQLException {
+	public int countElementInDBWithCond(String table) throws SQLException
+	{
 		try {
 			innitConn();
 			int number=0;
@@ -304,7 +313,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public ArrayList<Integer> listeIdTable(String table) throws SQLException {
+	public ArrayList<Integer> listeIdTable(String table) throws SQLException
+	{
 		try {
 			innitConn();
 			ArrayList<Integer> listeID = new ArrayList<Integer>();
@@ -349,7 +359,8 @@ public class DAOrequester extends DAOconnexion {
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public String nameInTable(int id, String table) throws SQLException {
+	public String nameInTable(int id, String table) throws SQLException
+	{
 
 		try {
 			innitConn();
@@ -390,12 +401,15 @@ public class DAOrequester extends DAOconnexion {
 	 * @param requeteMaj
 	 * @throws java.sql.SQLException
 	 */
-	public void executeUpdate(String requeteMaj) throws SQLException {
+	public void executeUpdate(String requeteMaj) throws SQLException
+	{
 		stmt.executeUpdate(requeteMaj);
 	}
 
-	void close() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	void close()
+	{
+		throw new UnsupportedOperationException("Not supported yet.");
+		//To change body of generated methods, choose Tools | Templates.
 	}
 
 }

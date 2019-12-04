@@ -2,10 +2,12 @@ package dao;
 
 import java.sql.SQLException;
 
-public class DAOverification extends DAOconnexion {
+public class DAOverification extends DAOconnexion
+{
 
 	public DAOverification(String nameDatabase, String loginDatabase, String passwordDatabase)
-			throws SQLException, ClassNotFoundException {
+			throws SQLException, ClassNotFoundException
+	{
 		super(nameDatabase, loginDatabase, passwordDatabase);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,10 +18,12 @@ public class DAOverification extends DAOconnexion {
      * @throws java.sql.SQLException
      * @author Loic
      */
-	public boolean verifValiditeID(int id, String table) throws SQLException {
+	public boolean verifValiditeID(int id, String table) throws SQLException
+	{
     	boolean validity=false;
     	
-    	try {
+    	try
+		{
     	innitConn();
     	stmt = conn.createStatement();
         // récupération de l'ordre de la requete
@@ -44,13 +48,17 @@ public class DAOverification extends DAOconnexion {
 
 
         // tant qu'il reste une ligne 
-        while (rset.next()) {
+        while (rset.next())
+
+        {
        
-            if(Integer.parseInt(rset.getString(1))==id) {
+            if(Integer.parseInt(rset.getString(1))==id)
+            {
             	validity=true;
             }
         }
-        if(!validity) {
+        if(!validity)
+        {
         	System.out.println("Erreur, veuillez entrer un id valide.");
         }
         
@@ -68,13 +76,16 @@ public class DAOverification extends DAOconnexion {
      * @throws java.sql.SQLException
      * @author Loic
      */
-    public boolean verifDataInDB(int id, String table) throws SQLException {
+    public boolean verifDataInDB(int id, String table) throws SQLException
+	{
 
     	boolean validity=false;
         // récupération de l'ordre de la requete
-    	try {
+    	try
+		{
     	innitConn();
-    	switch(table) {
+    	switch(table)
+		{
     	
     	case "industrie":
         rset = stmt.executeQuery("SELECT id_emp FROM (employe)"
@@ -97,10 +108,12 @@ public class DAOverification extends DAOconnexion {
 
 
         // tant qu'il reste une ligne 
-        if(rset.next()) {
+        if(rset.next())
+        {
 
         	return true;
-        } else {
+        } else
+        {
         	System.out.println("Erreur veuillez entrer des valeurs dans la BDD.");
         }
 
@@ -108,7 +121,8 @@ public class DAOverification extends DAOconnexion {
         return validity;
     	}
         
-        finally{ 
+        finally
+		{
         	closeConn();
     	}
     }
