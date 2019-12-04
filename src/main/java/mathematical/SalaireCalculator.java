@@ -23,74 +23,70 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	/*public void calcul_prime(String nomTable) throws SQLException, ClassNotFoundException {
+	public void calcul_prime(String nomTable){
 
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
-			ArrayList<String> liste;
-			double prime = 0;
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
+		ArrayList<String> heure;
+		ArrayList<String> statut;
+		ArrayList<String> liste;
+		double prime = 0;
 
 
-			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		// recuperer la liste de la table sélectionnée
+		String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable + ";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
+		String reqSelectionnee = "select statut from " + nomTable + ";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
 
-			String req = "select nom, prenom, statut from " + nomTable + ";";
-			liste = dr.remplirChampsRequete(req);
+		String req = "select nom, prenom, statut from " + nomTable + ";";
+		liste = dr.remplirChampsRequete(req);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+		// afficher les lignes de la requete selectionnee a partir de la liste
 
-			for(int i = 0; i < heure.size(); i++)
+		for(int i = 0; i < heure.size(); i++)
+		{
+			double surplusHoraire=0;
+
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
-				double surplusHoraire=0;
-
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					surplusHoraire = Double.parseDouble(heure.get(i)) - 175;
-					if(surplusHoraire<=0){ prime = 0;}
-					else{
-						prime = surplusHoraire*(3.75*1.25);}
-					break;
-
-				case "Employe\n" :
-					surplusHoraire = Double.parseDouble(heure.get(i)) - 200;
-					if(surplusHoraire<=0){ prime = 0;}
-					else{
-						prime = surplusHoraire*(7.93*1.25);
-					}
-					break;
-
-				case "Cadre\n" :
-					surplusHoraire = Double.parseDouble(heure.get(i)) - 225;
-					if(surplusHoraire<=0){ prime = 0;}
-					else{
-						prime = surplusHoraire*(9.13*1.25);
-					}
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-				}
-				System.out.println(liste.get(i) + "Prime: " + prime + "€/mois\n");
-
+				st.next();
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				surplusHoraire = Double.parseDouble(heure.get(i)) - 175;
+				if(surplusHoraire<=0){ prime = 0;}
+				else{
+					prime = surplusHoraire*(3.75*1.25);}
+				break;
+
+			case "Employe\n" :
+				surplusHoraire = Double.parseDouble(heure.get(i)) - 200;
+				if(surplusHoraire<=0){ prime = 0;}
+				else{
+					prime = surplusHoraire*(7.93*1.25);
+				}
+				break;
+
+			case "Cadre\n" :
+				surplusHoraire = Double.parseDouble(heure.get(i)) - 225;
+				if(surplusHoraire<=0){ prime = 0;}
+				else{
+					prime = surplusHoraire*(9.13*1.25);
+				}
+				break;
+
+			default :
+				System.out.println("Erreur");
+				break;
+			}
+			System.out.println(liste.get(i) + "Prime: " + prime + "€/mois\n");
+
 		}
+
 	}
 
 
@@ -107,68 +103,63 @@ public class SalaireCalculator {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	/*public static ArrayList sal_employes(String nomTable) throws ClassNotFoundException, SQLException {
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+	public static ArrayList sal_employes(String nomTable){
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 		ArrayList<Double> liste_sal;
 		liste_sal = new ArrayList<Double>();
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
-			ArrayList<String> liste;
-			double sal = 0;
+		ArrayList<String> heure;
+		ArrayList<String> statut;
+		ArrayList<String> liste;
+		double sal = 0;
 
 
-			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		// recuperer la liste de la table sélectionnée
+		String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable + ";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
+		String reqSelectionnee = "select statut from " + nomTable + ";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
 
-			String req = "select nom, prenom, statut from " + nomTable + ";";
-			liste = dr.remplirChampsRequete(req);
+		String req = "select nom, prenom, statut from " + nomTable + ";";
+		liste = dr.remplirChampsRequete(req);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+		// afficher les lignes de la requete selectionnee a partir de la liste
 
 
-			for(int i = 0; i < heure.size(); i++)
+		for(int i = 0; i < heure.size(); i++)
+		{
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-
-
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					sal = Double.parseDouble(heure.get(i))*3.75;
-					liste_sal.add(sal);
-					break;
-
-				case "Employe\n" :
-					sal = Double.parseDouble(heure.get(i))*7.93;
-					liste_sal.add(sal);
-					break;
-
-				case "Cadre\n" :
-					sal = Double.parseDouble(heure.get(i))*9.13;
-					liste_sal.add(sal);
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-				}
-				System.out.println(liste.get(i) + sal + "€/mois\n");
-
+				st.next();
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				sal = Double.parseDouble(heure.get(i))*3.75;
+				liste_sal.add(sal);
+				break;
+
+			case "Employe\n" :
+				sal = Double.parseDouble(heure.get(i))*7.93;
+				liste_sal.add(sal);
+				break;
+
+			case "Cadre\n" :
+				sal = Double.parseDouble(heure.get(i))*9.13;
+				liste_sal.add(sal);
+				break;
+
+			default :
+				System.out.println("Erreur");
+				break;
+			}
+			System.out.println(liste.get(i) + sal + "€/mois\n");
 
 		}
+
 		return(liste_sal);
 	}
 
@@ -184,64 +175,57 @@ public class SalaireCalculator {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	/*public static double sal_employe(String nomTable, int id) throws ClassNotFoundException, SQLException {
+	public static double sal_employe(String nomTable, int id){
 		double sal = 0;
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
-			ArrayList<String> liste;
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
+		ArrayList<String> heure;
+		ArrayList<String> statut;
+		ArrayList<String> liste;
 
 
+		// recuperer la liste de la table sélectionnée
+		String requeteSelectionnee = "select nb_heure from " + nomTable + " where id_emp="+id+";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
+
+		String reqSelectionnee = "select statut from " + nomTable + " where id_emp="+id+";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
+
+		String req = "select nom, prenom, statut from " + nomTable + " where id_emp="+id+";";
+		liste = dr.remplirChampsRequete(req);
 
 
-			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " where id_emp="+id+";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		for(int i = 0; i < heure.size(); i++)
+		{
 
-			String reqSelectionnee = "select statut from " + nomTable + " where id_emp="+id+";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
-
-			String req = "select nom, prenom, statut from " + nomTable + " where id_emp="+id+";";
-			liste = dr.remplirChampsRequete(req);
-
-
-			for(int i = 0; i < heure.size(); i++)
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
-
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-
-
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					sal = Double.parseDouble(heure.get(i))*3.75;
-					break;
-
-				case "Employe\n" :
-					sal = Double.parseDouble(heure.get(i))*7.93;
-					break;
-
-				case "Cadre\n" :
-					sal = Double.parseDouble(heure.get(i))*9.13;
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-				}
-				System.out.print(liste.get(i));
-
+				st.next();
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				sal = Double.parseDouble(heure.get(i))*3.75;
+				break;
+
+			case "Employe\n" :
+				sal = Double.parseDouble(heure.get(i))*7.93;
+				break;
+
+			case "Cadre\n" :
+				sal = Double.parseDouble(heure.get(i))*9.13;
+				break;
+
+			default :
+				System.out.println("Erreur");
+				break;
+			}
+			System.out.print(liste.get(i));
 
 		}
+
 		return (sal);
 
 	}
@@ -257,64 +241,59 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	/*public double salaire_entreprise(String nomTable, int id) throws SQLException, ClassNotFoundException {
+	public double salaire_entreprise(String nomTable, int id){
 
 		double sal = 0, sal_moy = 0;
 
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
-			DAOverification verif = new DAOverification("db_tdd", "root", "");
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		ArrayList<String> heure;
+		ArrayList<String> statut;
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 
 
-			double n = 0;
+		double n = 0;
 
-			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind="+id+";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		// recuperer la liste de la table sélectionnée
+		String requeteSelectionnee = "select nb_heure from " + nomTable + " where fk_id_ind="+id+";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable  + " where fk_id_ind="+id+";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
+		String reqSelectionnee = "select statut from " + nomTable  + " where fk_id_ind="+id+";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
-			for(int i = 0; i < heure.size(); i++)
+		// afficher les lignes de la requete selectionnee a partir de la liste
+		for(int i = 0; i < heure.size(); i++)
+		{
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
-					n+=1;
-					break;
-
-				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
-					n+=1;
-					break;
-
-				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
-					n+=1;
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-
-				}
+				st.next();
 			}
-			sal_moy = (sal/n);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				sal += Double.parseDouble(heure.get(i))*3.75;
+				n+=1;
+				break;
 
+			case "Employe\n" :
+				sal += Double.parseDouble(heure.get(i))*7.93;
+				n+=1;
+				break;
+
+			case "Cadre\n" :
+				sal += Double.parseDouble(heure.get(i))*9.13;
+				n+=1;
+				break;
+
+			default :
+				System.out.println("Erreur");
+				break;
+
+			}
 		}
+		sal_moy = (sal/n);
+
 		return(sal_moy);
 	}
 
@@ -326,64 +305,59 @@ public class SalaireCalculator {
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	/*public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id){
 
 		double sal=0, sal_moyen=0;
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
+		ArrayList<String> heure;
+		ArrayList<String> statut;
 
-			int n=0;
+		int n=0;
 
-			String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind ="+id;
+		String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind ="+id;
 
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
+		String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
-			for(int i = 0; i < heure.size(); i++)
+		for(int i = 0; i < heure.size(); i++)
+		{
+
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
+				st.next();
+			}
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				sal += Double.parseDouble(heure.get(i))*3.75;
+				n+=1;
+				break;
 
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
-					n+=1;
-					break;
+			case "Employe\n" :
+				sal += Double.parseDouble(heure.get(i))*7.93;
+				n+=1;
+				break;
 
-				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
-					n+=1;
-					break;
+			case "Cadre\n" :
+				sal += Double.parseDouble(heure.get(i))*9.13;
+				n+=1;
+				break;
 
-				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
-					n+=1;
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-
-				}
+			default :
+				System.out.println("Erreur");
+				break;
 
 			}
-			sal_moyen = (sal/n);
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 
 		}
+		sal_moyen = (sal/n);
+
+
 		return(sal_moyen);
 	}
 
@@ -393,67 +367,62 @@ public class SalaireCalculator {
 	 *@author Loic
 	 *Ecriture
 	 */
-	/*public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id){
 
 		double sal=0, sal_moyen=0;
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 
-		try {
-			ArrayList<String> heure;
-			ArrayList<String> statut;
+		ArrayList<String> heure;
+		ArrayList<String> statut;
 
-			int n=0;
+		int n=0;
 
-			String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind !="+id;
+		String choice="WHERE "+condColumnName+"='"+condColumnInput+"' AND fk_id_ind !="+id;
 
-			String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
-			heure = dr.remplirChampsRequete(requeteSelectionnee);
+		String requeteSelectionnee = "select nb_heure from " + nomTable + " "+choice+";";
+		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-			String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
-			statut = dr.remplirChampsRequete(reqSelectionnee);
+		String reqSelectionnee = "select statut from " + nomTable+ " "+choice+";";
+		statut = dr.remplirChampsRequete(reqSelectionnee);
 
 
-			for(int i = 0; i < heure.size(); i++)
+		for(int i = 0; i < heure.size(); i++)
+		{
+
+			Scanner st = new Scanner(heure.get(i));
+			while (!st.hasNextDouble())
 			{
+				st.next();
+			}
+			switch (statut.get(i)) {
+			case "Stagiaire\n" :
+				sal += Double.parseDouble(heure.get(i))*3.75;
+				n+=1;
+				break;
 
-				Scanner st = new Scanner(heure.get(i));
-				while (!st.hasNextDouble())
-				{
-					st.next();
-				}
-				switch (statut.get(i)) {
-				case "Stagiaire\n" :
-					sal += Double.parseDouble(heure.get(i))*3.75;
-					n+=1;
-					break;
+			case "Employe\n" :
+				sal += Double.parseDouble(heure.get(i))*7.93;
+				n+=1;
+				break;
 
-				case "Employe\n" :
-					sal += Double.parseDouble(heure.get(i))*7.93;
-					n+=1;
-					break;
+			case "Cadre\n" :
+				sal += Double.parseDouble(heure.get(i))*9.13;
+				n+=1;
+				break;
 
-				case "Cadre\n" :
-					sal += Double.parseDouble(heure.get(i))*9.13;
-					n+=1;
-					break;
-
-				default :
-					System.out.println("Erreur");
-					break;
-
-				}
+			default :
+				System.out.println("Erreur");
+				break;
 
 			}
-			sal_moyen = (sal/n);
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 
 		}
+		sal_moyen = (sal/n);
+
+
 		return(sal_moyen);
-	}*/
+	}
 
 
 }

@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dao.DAOconnexion;
 import dao.DAOrequester;
 import dao.DAOverification;
 import mathematical.MathematicalStatsCalculator;
@@ -25,20 +26,18 @@ public class Menu {
 	 */
 
 
-	/*private static Salaire sal = new Salaire();
+	private static Salaire sal = new Salaire();
 	private static MathematicalStatsCalculator msc = new MathematicalStatsCalculator();
-	private static DAOrequester dr = null;
-	private static DAOverification verif= null;*/
 
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		DecimalFormat df = new DecimalFormat("########.00");
 		DAOverification verif = new DAOverification();
-		//DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOrequester dr = new DAOrequester();
 		System.out.println(verif.verifValiditeID(1, "industrie"));
 
-		/*Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		int i;
 		int userChoice;
 		do {
@@ -212,36 +211,33 @@ public class Menu {
 				System.out.println("Fin de l'exécution.");
 				break;
 			}
-		}while(i<6 && i>0);*/
+		}while(i<6 && i>0);
+
+		DAOconnexion.getInstance().close();
 	}
 
 	/**
 	 * Afficher les lignes de la table sélectionnée
 	 * @throws //ClassNotFoundException
-	 *//*
+	 */
 	public static void afficherLignes(String nomTable) throws ClassNotFoundException {
 
-		try {
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			ArrayList<String> liste;
-			// recuperer la liste de la table sélectionnée
-			String requeteSelectionnee = "select * from " + nomTable + ";";
-			liste = dr.remplirChampsRequete(requeteSelectionnee);
+		DAOrequester dr = new DAOrequester();
+		ArrayList<String> liste;
+		// recuperer la liste de la table sélectionnée
+		String requeteSelectionnee = "select * from " + nomTable + ";";
+		liste = dr.remplirChampsRequete(requeteSelectionnee);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+		// afficher les lignes de la requete selectionnee a partir de la liste
 
-			String[] tab = new String[liste.size()];
-			for(int i = 0; i < liste.size(); i++)
-			{
-				tab[i] = liste.get(i);
-				//System.out.println(liste.get(i));
-				System.out.println(tab[i]);
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+		String[] tab = new String[liste.size()];
+		for(int i = 0; i < liste.size(); i++)
+		{
+			tab[i] = liste.get(i);
+			//System.out.println(liste.get(i));
+			System.out.println(tab[i]);
 
 		}
-	}*/
+
+	}
 }

@@ -20,7 +20,7 @@ import mathematical.SalaireCalculator;
  * @author Vick
  */
 public class Salaire {
-/**
+
 	//Paramètres
 	private static Menu func = new Menu();
 	private static DAOconnexion con = null;
@@ -32,8 +32,8 @@ public class Salaire {
 
 	//Fonctions
 	public void menuSalaire() throws SQLException, ClassNotFoundException{
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 
 		System.out.println("1. Retour au menu principal");
 		System.out.println("2. Calcul des primes par employé");
@@ -90,8 +90,8 @@ public class Salaire {
 
 	public void salaire_sexe() throws SQLException, ClassNotFoundException {
 
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 
 		int choix = 0, id = 0;
 		ArrayList<String> affiche;
@@ -143,7 +143,7 @@ public class Salaire {
 			break;
 		}
 
-	}*/
+	}
 
 
 
@@ -151,10 +151,10 @@ public class Salaire {
 	/**
 	 *Menu permettant de choisir le salaire pour un employe ou tous les employés
 	 */
-	/*public void salaire_employe() throws SQLException, ClassNotFoundException {
+	public void salaire_employe() throws SQLException, ClassNotFoundException {
 
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 
 		System.out.println("1. Retour au menu Salaire");
 		System.out.println("2. Salaire de tous les employés");
@@ -191,16 +191,16 @@ public class Salaire {
 				System.out.println("Salaire: " + df.format(result) + " €/mois");}
 			break;
 		}
-	}*/
+	}
 
 	/**@author Vick
 	 *
 	 * Menu permettant de choisir le salaire en fonction du statut
 	 */
-	/*public void salaire_statut() throws SQLException, ClassNotFoundException {
+	public void salaire_statut() throws SQLException, ClassNotFoundException {
 
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification();
+		DAOrequester dr = new DAOrequester();
 		int choix = 0, id = 0;
 		ArrayList<String> affiche;
 		String reque = "select * from industrie;";
@@ -263,7 +263,7 @@ public class Salaire {
 			break;
 		}
 
-	}*/
+	}
 
 
 
