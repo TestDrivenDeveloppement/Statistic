@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class DAOrequester extends DAOconnexion
 {
-	public DAOrequester(String nameDatabase, String loginDatabase, String passwordDatabase)
+	public DAOrequester(String nameDatabase,
+						String loginDatabase, String passwordDatabase)
 			throws SQLException, ClassNotFoundException
 	{
 		super(nameDatabase, loginDatabase, passwordDatabase);
@@ -91,13 +92,15 @@ public class DAOrequester extends DAOconnexion
 	}
 
 
-	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException
+	public ArrayList remplirChampsTable1(String table,
+										 String nom) throws SQLException
 	{
 		try
 		{
 			innitConn();
 			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * from " + table + "where" + nom + "= 'MAAF'");
+			rset = stmt.executeQuery("select * from " + table +
+					"where" + nom + "= 'MAAF'");
 
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();

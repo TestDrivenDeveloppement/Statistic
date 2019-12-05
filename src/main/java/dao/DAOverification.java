@@ -53,7 +53,7 @@ public class DAOverification extends DAOconnexion
 
         {
        
-            if(Integer.parseInt(rset.getString(1))==id)
+            if(Integer.parseInt(rset.getString(1)) == id)
             {
             	validity=true;
             }
@@ -91,16 +91,16 @@ public class DAOverification extends DAOconnexion
     	
     	case "industrie":
         rset = stmt.executeQuery("SELECT id_emp FROM (employe)"
-        		+ "WHERE (FK_id_ind="+id+");");
+        		+ "WHERE (FK_id_ind=" + id + ");");
         break;
         
     	case "projet":
         rset = stmt.executeQuery("SELECT fk_id_projet FROM intermediaire "
-        		+ "WHERE fk_id_projet="+id+";");
+        		+ "WHERE fk_id_projet=" + id + ";");
         break;
         
     	case "employe":
-    	rset = stmt.executeQuery("SELECT id_emp FROM employe WHERE id_emp="+id+";");
+    	rset = stmt.executeQuery("SELECT id_emp FROM employe WHERE id_emp=" + id + ";");
     	break;
         
         

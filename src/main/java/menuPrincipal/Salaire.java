@@ -19,7 +19,8 @@ import mathematical.SalaireCalculator;
  *
  * @author Vick
  */
-public class Salaire {
+public class Salaire
+{
 
 	//Paramètres
 	private static Menu func = new Menu();
@@ -31,7 +32,8 @@ public class Salaire {
 
 
 	//Fonctions
-	public void menuSalaire() throws SQLException, ClassNotFoundException{
+	public void menuSalaire() throws SQLException, ClassNotFoundException
+	{
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
@@ -46,7 +48,8 @@ public class Salaire {
 		Scanner scan = new Scanner(System.in);
 		int choix = 0;
 		choix = scan.nextInt();
-		switch(choix){
+		switch(choix)
+		{
 		case 1:
 			func.main(null);
 			break;
@@ -68,7 +71,8 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			Scanner scan1 = new Scanner(System.in);
 			int id = scan1.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
 				double result_moy = sc.salaire_entreprise("employe", id);
 				System.out.println("Le salaire mensuel moyen de l'entreprise est de: " + df.format(result_moy) + "€\n");
 			}
@@ -88,7 +92,8 @@ public class Salaire {
 		}
 	}
 
-	public void salaire_sexe() throws SQLException, ClassNotFoundException {
+	public void salaire_sexe() throws SQLException, ClassNotFoundException
+	{
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -103,7 +108,8 @@ public class Salaire {
 		Scanner scan = new Scanner(System.in);
 		choix = scan.nextInt();
 
-		switch(choix){
+		switch(choix)
+		{
 		case 1:
 			affiche = dr.remplirChampsRequete(reque);
 
@@ -116,9 +122,12 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			Scanner scan2 = new Scanner(System.in);
 			id = scan2.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
-				double result_masculin = sc.salaire_cond("employe","sexe", "M", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " + df.format(result_masculin) + "€\n");}
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
+				double result_masculin = sc.salaire_cond("employe","sexe",
+						"M", id);
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " +
+						df.format(result_masculin) + "€\n");}
 			break;
 		case 2:
 			affiche = dr.remplirChampsRequete(reque);
@@ -132,9 +141,12 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			scan2 = new Scanner(System.in);
 			id = scan2.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
-				double result_feminin = sc.salaire_cond("employe","sexe","F", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: " + df.format(result_feminin) + "€\n");}
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
+				double result_feminin = sc.salaire_cond("employe","sexe",
+						"F", id);
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: "
+						+ df.format(result_feminin) + "€\n");}
 
 			break;
 
@@ -151,7 +163,8 @@ public class Salaire {
 	/**
 	 *Menu permettant de choisir le salaire pour un employe ou tous les employés
 	 */
-	public void salaire_employe() throws SQLException, ClassNotFoundException {
+	public void salaire_employe() throws SQLException, ClassNotFoundException
+	{
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -164,7 +177,8 @@ public class Salaire {
 		Scanner scan = new Scanner(System.in);
 		int choix = 0;
 		choix = scan.nextInt();
-		switch(choix){
+		switch(choix)
+		{
 		case 1:
 			menuSalaire();
 			break;
@@ -186,7 +200,8 @@ public class Salaire {
 			System.out.print("Saisissez l'id de l'employé: ");
 			Scanner scan2 = new Scanner(System.in);
 			int id = scan2.nextInt();
-			if(verif.verifValiditeID(id, "employe")&&verif.verifDataInDB(id, "employe")) {
+			if(verif.verifValiditeID(id, "employe")&&verif.verifDataInDB(id, "employe"))
+			{
 				double result = sc.sal_employe("employe", id);
 				System.out.println("Salaire: " + df.format(result) + " €/mois");}
 			break;
@@ -197,7 +212,8 @@ public class Salaire {
 	 * 
 	 * Menu permettant de choisir le salaire en fonction du statut
 	 */
-	public void salaire_statut() throws SQLException, ClassNotFoundException {
+	public void salaire_statut() throws SQLException, ClassNotFoundException
+	{
 
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
@@ -212,7 +228,8 @@ public class Salaire {
 		Scanner scan = new Scanner(System.in);
 		choix = scan.nextInt();
 
-		switch(choix){
+		switch(choix)
+		{
 		case 1:
 			affiche = dr.remplirChampsRequete(reque);
 
@@ -225,9 +242,12 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			Scanner scan1 = new Scanner(System.in);
 			id = scan1.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
-				double result_cadre = sc.salaire_cond("employe","statut", "Cadre", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: " + df.format(result_cadre) + "€\n");}
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
+				double result_cadre = sc.salaire_cond("employe","statut",
+						"Cadre", id);
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: "
+						+ df.format(result_cadre) + "€\n");}
 			break;
 		case 2:
 			affiche = dr.remplirChampsRequete(reque);
@@ -241,9 +261,12 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			scan1 = new Scanner(System.in);
 			id = scan1.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
-				double result_emp = sc.salaire_cond("employe","statut", "Employe", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un employé est de: " + df.format(result_emp) + "€\n");}
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
+				double result_emp = sc.salaire_cond("employe","statut",
+						"Employe", id);
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un employé est de: " +
+						df.format(result_emp) + "€\n");}
 			break;
 		case 3:
 			affiche = dr.remplirChampsRequete(reque);
@@ -257,9 +280,12 @@ public class Salaire {
 			System.out.print("Saisissez l'Id de l'entreprise: ");
 			scan1 = new Scanner(System.in);
 			id = scan1.nextInt();
-			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie")) {
-				double result_stagiaire = sc.salaire_cond("employe","statut", "Stagiaire", id);
-				System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " + df.format(result_stagiaire) + "€\n");}
+			if(verif.verifValiditeID(id, "industrie")&&verif.verifDataInDB(id, "industrie"))
+			{
+				double result_stagiaire = sc.salaire_cond("employe","statut",
+						"Stagiaire", id);
+				System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: "
+						+ df.format(result_stagiaire) + "€\n");}
 			break;
 		}
 

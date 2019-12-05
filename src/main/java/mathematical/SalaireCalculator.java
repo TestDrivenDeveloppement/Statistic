@@ -339,7 +339,8 @@ public class SalaireCalculator
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException
+	public double salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id)
+			throws SQLException, ClassNotFoundException
 	{
 
 		double sal=0, sal_moyen = 0;
@@ -408,13 +409,16 @@ public class SalaireCalculator
 	 *@author Loic
 	 *Ecriture
 	 */
-	public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id) throws SQLException, ClassNotFoundException {
+	public double autre_salaire_cond(String nomTable, String condColumnName, String condColumnInput, int id)
+			throws SQLException, ClassNotFoundException
+	{
 
 		double sal=0, sal_moyen=0;
 		DAOverification verif = new DAOverification("db_tdd", "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
 
-		try {
+		try
+		{
 			ArrayList<String> heure;
 			ArrayList<String> statut;
 
@@ -437,7 +441,8 @@ public class SalaireCalculator
 				{
 					st.next();
 				}
-				switch (statut.get(i)) {
+				switch (statut.get(i))
+				{
 				case "Stagiaire\n" :
 					sal += Double.parseDouble(heure.get(i)) * 3.75;
 					n+=1;
