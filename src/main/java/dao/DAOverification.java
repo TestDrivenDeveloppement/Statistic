@@ -1,5 +1,6 @@
 package dao;
 
+import javax.naming.InitialContext;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -15,12 +16,38 @@ public class DAOverification{
 	private ResultSet rset;
 	private ResultSetMetaData rsetMeta;
 
+
+
 	public DAOverification() {
 		try {
 			stmt = DAOconnexion.getInstance().createStatement();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
+	}
+
+	public Statement getStmt() {
+		return stmt;
+	}
+
+	public void setStmt(Statement stmt) {
+		this.stmt = stmt;
+	}
+
+	public ResultSet getRset() {
+		return rset;
+	}
+
+	public void setRset(ResultSet rset) {
+		this.rset = rset;
+	}
+
+	public ResultSetMetaData getRsetMeta() {
+		return rsetMeta;
+	}
+
+	public void setRsetMeta(ResultSetMetaData rsetMeta) {
+		this.rsetMeta = rsetMeta;
 	}
 	
 	 /**

@@ -33,11 +33,13 @@ public final class DAOconnexion {
 	 */
 	private DAOconnexion(){
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
 			String urlDatabase = "jdbc:mysql://localhost/db_tdd";
 			String loginDatabase = "root";
 			String passwordDatabase = "";
 			connect = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
