@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class DAOrequester extends DAOconnexion
 {
 	public DAOrequester(String nameDatabase, String loginDatabase, String passwordDatabase)
-			throws SQLException, ClassNotFoundException {
+			throws SQLException, ClassNotFoundException
+	{
 		super(nameDatabase, loginDatabase, passwordDatabase);
 		// TODO Auto-generated constructor stub
 	}
@@ -52,7 +53,8 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public ArrayList remplirChampsTable(String table) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery("select * from " + table);
@@ -80,7 +82,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return liste;
-		} finally{ closeConn();
+		} finally
+		{
+			closeConn();
 
 
 		}
@@ -89,7 +93,8 @@ public class DAOrequester extends DAOconnexion
 
 	public ArrayList remplirChampsTable1(String table, String nom) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery("select * from " + table + "where" + nom + "= 'MAAF'");
@@ -105,7 +110,8 @@ public class DAOrequester extends DAOconnexion
 			liste = new ArrayList<>();
 			String champs = "";
 			// Ajouter tous les champs du resultat dans l'ArrayList
-			for (int i = 0; i < nbColonne; i++) {
+			for (int i = 0; i < nbColonne; i++)
+			{
 				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
 			}
 
@@ -117,7 +123,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return liste;
-		} finally{ closeConn();
+		} finally
+		{
+			closeConn();
 
 
 		}
@@ -135,7 +143,8 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public ArrayList remplirChampsRequete(String requete) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
@@ -151,12 +160,14 @@ public class DAOrequester extends DAOconnexion
 			liste = new ArrayList<String>();
 
 			// tant qu'il reste une ligne 
-			while (rset.next()) {
+			while (rset.next())
+			{
 				String champs;
 				champs = rset.getString(1); // ajouter premier champ
 
 				// Concatener les champs de la ligne separes par ,
-				for (int i = 1; i < nbColonne; i++) {
+				for (int i = 1; i < nbColonne; i++)
+				{
 					champs = champs + "," + rset.getString(i + 1);
 				}
 
@@ -169,7 +180,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return liste;}
-		finally{ //closeConn();
+		finally
+		{
+			//closeConn();
 
 
 			}
@@ -184,7 +197,8 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public String recupResultatRequete(String requete) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
@@ -202,7 +216,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return resultStatement;
-		} finally{ closeConn();
+		} finally
+		{
+			closeConn();
 
 		}
 	}
@@ -215,11 +231,13 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public int countElementInDB(String table) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			int number=0;
 			// récupération de l'ordre de la requete
-			switch(table) {
+			switch(table)
+			{
 
 			case "industrie":
 				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
@@ -251,7 +269,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return number;
-		} finally{ closeConn();
+		} finally
+		{
+			closeConn();
 
 
 		}
@@ -265,11 +285,13 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public int countElementInDBWithCond(String table) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			int number=0;
 			// récupération de l'ordre de la requete
-			switch(table) {
+			switch(table)
+			{
 
 			case "industrie":
 				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
@@ -301,7 +323,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return number;
-		} finally{ closeConn();
+		} finally
+		{
+			closeConn();
 
 
 		}
@@ -315,11 +339,13 @@ public class DAOrequester extends DAOconnexion
 	 */
 	public ArrayList<Integer> listeIdTable(String table) throws SQLException
 	{
-		try {
+		try
+		{
 			innitConn();
 			ArrayList<Integer> listeID = new ArrayList<Integer>();
 			// récupération de l'ordre de la requete
-			switch(table) {
+			switch(table)
+			{
 
 			case "industrie":
 				rset = stmt.executeQuery("SELECT id_ind FROM industrie");
@@ -340,7 +366,8 @@ public class DAOrequester extends DAOconnexion
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
-			while(rset.next()) {
+			while(rset.next())
+			{
 				listeID.add(rset.getInt(1));
 			}
 
@@ -349,7 +376,9 @@ public class DAOrequester extends DAOconnexion
 
 			// Retourner l'ArrayList
 			return listeID;
-		}  finally{ closeConn();
+		}  finally
+		{
+			closeConn();
 		}
 	}
 
@@ -366,7 +395,8 @@ public class DAOrequester extends DAOconnexion
 			innitConn();
 			String nameOfElement;
 			// récupération de l'ordre de la requete
-			switch(table) {
+			switch(table)
+			{
 
 			case "industrie":
 				rset = stmt.executeQuery("SELECT nom_ind FROM industrie WHERE id_ind="+id);
@@ -391,7 +421,8 @@ public class DAOrequester extends DAOconnexion
 
 			return nameOfElement;
 			//Close the current connection
-		} finally{ 
+		} finally
+		{
 			closeConn();		 
 		}
 	}

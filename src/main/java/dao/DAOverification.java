@@ -27,7 +27,8 @@ public class DAOverification extends DAOconnexion
     	innitConn();
     	stmt = conn.createStatement();
         // récupération de l'ordre de la requete
-    	switch(table) {
+    	switch(table)
+		{
     	
     	case "industrie":
         rset = stmt.executeQuery("SELECT id_ind FROM industrie");
@@ -65,7 +66,8 @@ public class DAOverification extends DAOconnexion
         
         // Retourner l'ArrayList
         return validity;
-    	} finally{ 
+    	} finally
+		{
     		closeConn();
     	}
     	}

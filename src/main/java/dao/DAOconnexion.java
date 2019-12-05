@@ -62,7 +62,8 @@ protected static String urlDatabase;
 protected static String loginDatabase;
 protected static String passwordDatabase;
 
-public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException
+{
 	// chargement driver "com.mysql.jdbc.Driver"
 	Class.forName("com.mysql.jdbc.Driver");
 
