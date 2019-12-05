@@ -1,0 +1,4 @@
+dao\DAOrequesterTest.class
+mathematical\MathematicalStatsCalculatorTest.class
+dao\DAOverificationTest.class
+mathematical\SalaireCalculatorTest.class
