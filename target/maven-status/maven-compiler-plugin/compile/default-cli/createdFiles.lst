@@ -1,0 +1,7 @@
+dao\DAOverification.class
+mathematical\MathematicalStatsCalculator.class
+dao\DAOrequester.class
+dao\DAOconnexion.class
+menuPrincipal\Menu.class
+menuPrincipal\Salaire.class
+mathematical\SalaireCalculator.class
