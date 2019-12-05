@@ -27,7 +27,8 @@ import java.util.ArrayList;
 public abstract class DAOconnexion
 {
 /**
- * Attributs prives : connexion JDBC, statement, ordre requete et resultat
+ * Attributs prives : connexion JDBC, statement,
+ * ordre requete et resultat
  * requete
  */
 protected Connection conn;
@@ -49,7 +50,8 @@ public ArrayList<String> requetes = new ArrayList<>();
 public ArrayList<String> requetesMaj = new ArrayList<>();
 
 /**
- * Constructeur avec 3 paramÃ¨tres : nom, login et password de la BDD locale
+ * Constructeur avec 3 paramÃ¨tres :
+ * nom, login et password de la BDD locale
  *
  * @param nameDatabase
  * @param loginDatabase
@@ -62,9 +64,10 @@ protected static String urlDatabase;
 protected static String loginDatabase;
 protected static String passwordDatabase;
 
-public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException
+public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDatabase)
+        throws SQLException, ClassNotFoundException
 {
-	// chargement driver "com.mysql.jdbc.Driver"
+	//chargement driver "com.mysql.jdbc.Driver"
 	Class.forName("com.mysql.jdbc.Driver");
 
 	// url de connexion "jdbc:mysql://localhost:3305/usernameECE"
@@ -83,7 +86,8 @@ public DAOconnexion(String nameDatabase, String loginDatabase, String passwordDa
 public void innitConn() throws SQLException
 {
 	//création d'une connexion JDBC Ã  la base
-	conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+	conn = DriverManager.getConnection(urlDatabase,
+            loginDatabase, passwordDatabase);
 
 	// création d'un ordre SQL (statement)
 	stmt = conn.createStatement();
