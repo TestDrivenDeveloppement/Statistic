@@ -39,14 +39,14 @@ public class DAOverificationTest extends DBTestCase {
         super(name);
 
         try {
-            Class.forName("cdata.jdbc.xml.XMLDriver");
-            /*System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.jdbc.Driver" );
-            System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost/db_tdd" );
-            System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root" );
-            System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "" );
-            // System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "" );*/
 
-            Connection conn = DriverManager.getConnection("jdbc:xml:DataModel=Relational;URI=C:\\db_tdd_test.xml");
+            Class.forName("org.sqlite.JDBC");
+            // db parameters
+            String url = "jdbc:sqlite:db_tdd.db";
+            // create a connection to the database
+            Connection conn = DriverManager.getConnection(url);
+
+            System.out.println("Connection to SQLite has been established.");
             verif = new DAOverification();
             verif.setStmt(conn.createStatement());
 
