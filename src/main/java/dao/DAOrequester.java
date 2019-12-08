@@ -6,15 +6,19 @@ import java.util.ArrayList;
 public class DAOrequester extends DAOconnexion
 {
 	public DAOrequester(String nameDatabase,
-						String loginDatabase, String passwordDatabase)
+						String loginDatabase,
+                        String passwordDatabase)
 			throws SQLException, ClassNotFoundException
 	{
-		super(nameDatabase, loginDatabase, passwordDatabase);
+	    super(nameDatabase,
+                loginDatabase,
+                passwordDatabase);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Méthode qui ajoute la table en parametre dans son ArrayList
+	 * Méthode qui ajoute la table en parametre
+     * dans son ArrayList
 	 *
 	 * @param table
 	 */
@@ -24,7 +28,8 @@ public class DAOrequester extends DAOconnexion
 	}
 
 	/**
-	 * Méthode qui ajoute la requete de selection en parametre dans son
+	 * Méthode qui ajoute la requete de selection
+     * en parametre dans son
 	 * ArrayList
 	 *
 	 * @param requete
@@ -35,7 +40,8 @@ public class DAOrequester extends DAOconnexion
 	}
 
 	/**
-	 * Méthode qui ajoute la requete de MAJ en parametre dans son
+	 * Méthode qui ajoute la requete de MAJ
+     * en parametre dans son
 	 * ArrayList
 	 *
 	 * @param requete
@@ -46,19 +52,22 @@ public class DAOrequester extends DAOconnexion
 	}
 
 	/**
-	 * Méthode qui retourne l'ArrayList des champs de la table en parametre
+	 * Méthode qui retourne l'ArrayList des champs
+     * de la table en parametre
 	 *
 	 * @param table
 	 * @return
 	 * @throws java.sql.SQLException
 	 */
-	public ArrayList remplirChampsTable(String table) throws SQLException
+	public ArrayList remplirChampsTable(String table)
+            throws SQLException
 	{
 		try
 		{
 			innitConn();
 			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * from " + table);
+			rset = stmt.executeQuery("select * " +
+                    "from " + table);
 
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -70,15 +79,19 @@ public class DAOrequester extends DAOconnexion
 			ArrayList<String> liste;
 			liste = new ArrayList<>();
 			String champs = "";
-			// Ajouter tous les champs du resultat dans l'ArrayList
-			for (int i = 0; i < nbColonne; i++) {
-				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
+			// Ajouter tous les champs du resultat dans
+            // l'ArrayList
+			for (int i = 0; i < nbColonne; i++)
+			{
+				champs = champs + " " +
+                        rsetMeta.getColumnLabel(i + 1);
 			}
 
 			// ajouter un "\n" Ã  la ligne des champs
 			champs = champs + "\n";
 
-			// ajouter les champs de la ligne dans l'ArrayList
+			// ajouter les champs de la ligne
+            // dans l'ArrayList
 			liste.add(champs);
 
 			// Retourner l'ArrayList
@@ -92,14 +105,16 @@ public class DAOrequester extends DAOconnexion
 	}
 
 
-	public ArrayList remplirChampsTable1(String table,
-										 String nom) throws SQLException
+	public ArrayList remplirChampsTable1
+            (String table, String nom)
+            throws SQLException
 	{
 		try
 		{
 			innitConn();
 			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * from " + table +
+			rset = stmt.executeQuery("select " +
+                    "* from " + table +
 					"where" + nom + "= 'MAAF'");
 
 			// récupération du résultat de l'ordre
@@ -112,16 +127,20 @@ public class DAOrequester extends DAOconnexion
 			ArrayList<String> liste;
 			liste = new ArrayList<>();
 			String champs = "";
-			// Ajouter tous les champs du resultat dans l'ArrayList
+			// Ajouter tous les champs du resultat dans
+            // l'ArrayList
 			for (int i = 0; i < nbColonne; i++)
 			{
-				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
+				champs = champs + " " +
+                        rsetMeta.getColumnLabel(i + 1);
 			}
 
-			// ajouter un "\n" Ã  la ligne des champs
+			// ajouter un "\n" Ã  la ligne
+            // des champs
 			champs = champs + "\n";
 
-			// ajouter les champs de la ligne dans l'ArrayList
+			// ajouter les champs de la ligne
+            // dans l'ArrayList
 			liste.add(champs);
 
 			// Retourner l'ArrayList
@@ -139,12 +158,14 @@ public class DAOrequester extends DAOconnexion
 
 
 	/**
-	 * Methode qui retourne l'ArrayList des champs de la requete en parametre
+	 * Methode qui retourne l'ArrayList des
+     * champs de la requete en parametre
 	 * @param requete
 	 * @return 
 	 * @throws java.sql.SQLException
 	 */
-	public ArrayList remplirChampsRequete(String requete) throws SQLException
+	public ArrayList remplirChampsRequete(String requete)
+            throws SQLException
 	{
 		try
 		{
@@ -166,23 +187,28 @@ public class DAOrequester extends DAOconnexion
 			while (rset.next())
 			{
 				String champs;
-				champs = rset.getString(1); // ajouter premier champ
+				champs = rset.getString(1);
+				// ajouter premier champ
 
-				// Concatener les champs de la ligne separes par ,
+				// Concatener les champs de la ligne
+                // separes par ,
 				for (int i = 1; i < nbColonne; i++)
 				{
-					champs = champs + "," + rset.getString(i + 1);
+					champs = champs + "," +
+                            rset.getString(i + 1);
 				}
 
 				// ajouter un "\n" Ã  la ligne des champs
 				champs = champs + "\n";
 
-				// ajouter les champs de la ligne dans l'ArrayList
+				// ajouter les champs de la ligne dans
+                // l'ArrayList
 				liste.add(champs);
 			}
 
 			// Retourner l'ArrayList
-			return liste;}
+			return liste;
+		}
 		finally
 		{
 			//closeConn();
@@ -198,7 +224,8 @@ public class DAOrequester extends DAOconnexion
 	 * @return
 	 * @throws SQLException
 	 */
-	public String recupResultatRequete(String requete) throws SQLException
+	public String recupResultatRequete(String requete)
+            throws SQLException
 	{
 		try
 		{
@@ -227,12 +254,14 @@ public class DAOrequester extends DAOconnexion
 	}
 
 	/**
-	 * Methode qui compte le nombre d'élèments dans une table de la BDD
+	 * Methode qui compte le nombre d'élèments dans
+     * une table de la BDD
 	 * @return 
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDB(String table) throws SQLException
+	public int countElementInDB(String table) throws
+            SQLException
 	{
 		try
 		{
@@ -243,17 +272,20 @@ public class DAOrequester extends DAOconnexion
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
+				rset = stmt.executeQuery("SELECT " +
+                        "COUNT(id_ind) FROM (industrie)");
 				System.out.println("OK");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
+				rset = stmt.executeQuery("SELECT " +
+                        "COUNT(id_projet) FROM (projet)");
 				System.out.println("OK");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
+				rset = stmt.executeQuery("SELECT" +
+                        " COUNT(id_emp )FROM employe");
 				System.out.println("OK");
 				break;
 
@@ -281,12 +313,14 @@ public class DAOrequester extends DAOconnexion
 	}
 
 	/**
-	 * Methode qui compte le nombre d'élèments dans une table de la BDD
+	 * Methode qui compte le nombre d'élèments
+     * dans une table de la BDD
 	 * @return 
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond(String table) throws SQLException
+	public int countElementInDBWithCond(String table)
+            throws SQLException
 	{
 		try
 		{
@@ -297,17 +331,20 @@ public class DAOrequester extends DAOconnexion
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT COUNT(id_ind) FROM (industrie)");
+				rset = stmt.executeQuery("SELECT " +
+                        "COUNT(id_ind) FROM (industrie)");
 				System.out.println("OK");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT COUNT(id_projet) FROM (projet)");
+				rset = stmt.executeQuery("SELECT " +
+                        "COUNT(id_projet) FROM (projet)");
 				System.out.println("OK");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT COUNT(id_emp )FROM employe");
+				rset = stmt.executeQuery("SELECT" +
+                        " COUNT(id_emp )FROM employe");
 				System.out.println("OK");
 				break;
 
@@ -340,7 +377,8 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public ArrayList<Integer> listeIdTable(String table) throws SQLException
+	public ArrayList<Integer> listeIdTable(String table)
+            throws SQLException
 	{
 		try
 		{
@@ -351,15 +389,18 @@ public class DAOrequester extends DAOconnexion
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT id_ind FROM industrie");
+				rset = stmt.executeQuery("SELECT id_ind" +
+                        " FROM industrie");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT id_projet FROM (projet)");
+				rset = stmt.executeQuery("SELECT id_projet" +
+                        " FROM (projet)");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT id_emp FROM employe");
+				rset = stmt.executeQuery("SELECT id_emp " +
+                        "FROM employe");
 				break;
 
 			default:
@@ -391,10 +432,12 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public String nameInTable(int id, String table) throws SQLException
+	public String nameInTable(int id, String table)
+            throws SQLException
 	{
 
-		try {
+		try
+        {
 			innitConn();
 			String nameOfElement;
 			// récupération de l'ordre de la requete
@@ -402,15 +445,18 @@ public class DAOrequester extends DAOconnexion
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT nom_ind FROM industrie WHERE id_ind="+id);
+				rset = stmt.executeQuery("SELECT nom_ind" +
+                        " FROM industrie WHERE id_ind="+id);
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT nom_projet FROM (projet) WHERE id_projet="+id);
+				rset = stmt.executeQuery("SELECT nom_projet " +
+                        "FROM (projet) WHERE id_projet="+id);
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT nom FROM employe where id_emp="+id);
+				rset = stmt.executeQuery("SELECT nom FROM " +
+                        "employe where id_emp="+id);
 				break;
 
 			default:
@@ -435,15 +481,18 @@ public class DAOrequester extends DAOconnexion
 	 * @param requeteMaj
 	 * @throws java.sql.SQLException
 	 */
-	public void executeUpdate(String requeteMaj) throws SQLException
+	public void executeUpdate(String requeteMaj)
+            throws SQLException
 	{
 		stmt.executeUpdate(requeteMaj);
 	}
 
 	void close()
 	{
-		throw new UnsupportedOperationException("Not supported yet.");
-		//To change body of generated methods, choose Tools | Templates.
+		throw new UnsupportedOperationException("Not " +
+                "supported yet.");
+		//To change body of generated methods, choose
+        // Tools | Templates.
 	}
 
 }
