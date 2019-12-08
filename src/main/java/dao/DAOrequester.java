@@ -68,8 +68,8 @@ public class DAOrequester extends DAOconnexion
 		{
 			innitConn();
 			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * " +
-                    "from " + table);
+			rset = stmt.executeQuery("select * "
+					+ "from " + table);
 
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
@@ -107,16 +107,16 @@ public class DAOrequester extends DAOconnexion
 	}
 
 
-	public ArrayList remplirChampsTable1
-            (String table, String nom)
+	public ArrayList remplirChampsTable1(
+			String table, String nom)
             throws SQLException
 	{
 		try
 		{
 			innitConn();
 			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select " +
-                    "* from " + table +
+			rset = stmt.executeQuery("select "
+					+ "* from " + table +
 					"where" + nom + "= 'MAAF'");
 
 			// récupération du résultat de l'ordre
@@ -133,8 +133,8 @@ public class DAOrequester extends DAOconnexion
             // l'ArrayList
 			for (int i = 0; i < nbColonne; i++)
 			{
-				champs = champs + " " +
-                        rsetMeta.getColumnLabel(i + 1);
+				champs = champs + " "
+						+ rsetMeta.getColumnLabel(i + 1);
 			}
 
 			// ajouter un "\n" Ã  la ligne
@@ -196,8 +196,8 @@ public class DAOrequester extends DAOconnexion
                 // separes par ,
 				for (int i = 1; i < nbColonne; i++)
 				{
-					champs = champs + "," +
-                            rset.getString(i + 1);
+					champs = champs + ","
+							+ rset.getString(i + 1);
 				}
 
 				// ajouter un "\n" Ã  la ligne des champs
@@ -214,9 +214,7 @@ public class DAOrequester extends DAOconnexion
 		finally
 		{
 			//closeConn();
-
-
-			}
+		}
 	}
 
 	/** Retourne le résultat de la requÃªte unique
@@ -270,24 +268,24 @@ public class DAOrequester extends DAOconnexion
 			innitConn();
 			int number = 0;
 			// récupération de l'ordre de la requete
-			switch(table)
+			switch (table)
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT " +
-                        "COUNT(id_ind) FROM (industrie)");
+				rset = stmt.executeQuery("SELECT "
+						+ "COUNT(id_ind) FROM (industrie)");
 				System.out.println("OK");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT " +
-                        "COUNT(id_projet) FROM (projet)");
+				rset = stmt.executeQuery("SELECT "
+						+ "COUNT(id_projet) FROM (projet)");
 				System.out.println("OK");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT" +
-                        " COUNT(id_emp )FROM employe");
+				rset = stmt.executeQuery("SELECT"
+						+ " COUNT(id_emp )FROM employe");
 				System.out.println("OK");
 				break;
 
@@ -321,8 +319,8 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond
-    (@org.jetbrains.annotations.NotNull String table)
+	public int countElementInDBWithCond(
+    		@org.jetbrains.annotations.NotNull String table)
             throws SQLException
 	{
 		try
@@ -330,24 +328,24 @@ public class DAOrequester extends DAOconnexion
 			innitConn();
 			int number = 0;
 			// récupération de l'ordre de la requete
-			switch(table)
+			switch (table)
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT " +
-                        "COUNT(id_ind) FROM (industrie)");
+				rset = stmt.executeQuery("SELECT "
+						+ "COUNT(id_ind) FROM (industrie)");
 				System.out.println("OK");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT " +
-                        "COUNT(id_projet) FROM (projet)");
+				rset = stmt.executeQuery("SELECT "
+						+ "COUNT(id_projet) FROM (projet)");
 				System.out.println("OK");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT" +
-                        " COUNT(id_emp )FROM employe");
+				rset = stmt.executeQuery("SELECT"
+						+ " COUNT(id_emp )FROM employe");
 				System.out.println("OK");
 				break;
 
@@ -390,22 +388,22 @@ public class DAOrequester extends DAOconnexion
 			ArrayList<Integer> listeID =
 					new ArrayList<Integer>();
 			// récupération de l'ordre de la requete
-			switch(table)
+			switch (table)
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT id_ind" +
-                        " FROM industrie");
+				rset = stmt.executeQuery("SELECT "
+						+ "id_ind" + " FROM industrie");
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT id_projet" +
-                        " FROM (projet)");
+				rset = stmt.executeQuery("SELECT "
+						+ "id_projet" + " FROM (projet)");
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT id_emp " +
-                        "FROM employe");
+				rset = stmt.executeQuery("SELECT "
+						+ "id_emp " + "FROM employe");
 				break;
 
 			default:
@@ -415,7 +413,7 @@ public class DAOrequester extends DAOconnexion
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
-			while(rset.next())
+			while (rset.next())
 			{
 				listeID.add(rset.getInt(1));
 			}
@@ -446,22 +444,22 @@ public class DAOrequester extends DAOconnexion
 			innitConn();
 			String nameOfElement;
 			// récupération de l'ordre de la requete
-			switch(table)
+			switch (table)
 			{
 
 			case "industrie":
-				rset = stmt.executeQuery("SELECT nom_ind" +
-                        " FROM industrie WHERE id_ind=" + id);
+				rset = stmt.executeQuery("SELECT nom_ind"
+						+ " FROM industrie WHERE id_ind=" + id);
 				break;
 
 			case "projet":
-				rset = stmt.executeQuery("SELECT nom_projet " +
-                        "FROM (projet) WHERE id_projet=" + id);
+				rset = stmt.executeQuery("SELECT nom_projet "
+						+ "FROM (projet) WHERE id_projet=" + id);
 				break;
 
 			case "employe":
-				rset = stmt.executeQuery("SELECT nom FROM " +
-                        "employe where id_emp=" + id);
+				rset = stmt.executeQuery("SELECT nom FROM "
+						+ "employe where id_emp=" + id);
 				break;
 
 			default:
@@ -494,8 +492,8 @@ public class DAOrequester extends DAOconnexion
 
 	void close()
 	{
-		throw new UnsupportedOperationException("Not " +
-                "supported yet.");
+		throw new UnsupportedOperationException("Not "
+				+ "supported yet.");
 		//To change body of generated methods, choose
         // Tools | Templates.
 	}
