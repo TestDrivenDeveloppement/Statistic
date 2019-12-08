@@ -69,7 +69,6 @@ public DAOconnexion(String nameDatabase, String
         loginDatabase, String passwordDatabase)
         throws SQLException, ClassNotFoundException
 {
-	//chargement driver "com.mysql.jdbc.Driver"
 	// Class.forName("com.mysql.jdbc.Driver");
 
 	// url de connexion "jdbc:mysql://localhost:3305/
