@@ -18,19 +18,30 @@ public class MathematicalStatsCalculator
 	 * @return
 	 * @throws ClassNotFoundException 
 	 */
-	public static String getSommeHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException
+	public static String
+    getSommeHeureEmployeEntreprise(int idEntreprise)
+            throws ClassNotFoundException
 	{
 
 		String resultStatement = null;
 		try
 		{
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table selectionnee
-			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM employe " +
-					"INNER JOIN industrie ON id_ind='" + idEntreprise + "'";
-			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
+			// recuperer la liste de la
+            // table selectionnee
+			String requeteSelectionnee = "SELECT "
+                    + "SUM(nb_heure) AS somme FROM"
+                    + " employe "
+                    + "INNER JOIN industrie ON id_ind='"
+                    + idEntreprise + "'";
+			resultStatement = dr.recupResultatRequete(
+			        requeteSelectionnee);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+			// afficher les lignes de la requete
+            // selectionnee a partir de la liste
 
 
 
@@ -43,27 +54,36 @@ public class MathematicalStatsCalculator
 	}
 
 
-	/**Retourne le nombre d'heures passes par tous les employes sur un même projet
+	/**Retourne le nombre d'heures passes par
+     * tous les employes sur un même projet
 	 * 
 	 * @author Loic
 	 * @return
 	 * @throws ClassNotFoundException 
 	 */
-	public static String getSommeHeureEmployeProjet(int idProj) throws ClassNotFoundException
+	public static String getSommeHeureEmployeProjet(
+	        int idProj) throws ClassNotFoundException
 	{
 
 		String resultStatement = null;
 		try
 		{
 
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
 			// recuperer la liste de la table selectionnee
-			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM projet " +
-					"INNER JOIN intermediaire ON fk_id_projet='" + idProj + "' INNER JOIN " +
-					"employe ON fk_id_emp = id_emp";
-			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
+			String requeteSelectionnee = "SELECT"
+                    + " SUM(nb_heure) AS somme FROM projet "
+                    + "INNER JOIN intermediaire ON fk_id_projet='"
+                    + idProj + "' INNER JOIN "
+                    + "employe ON fk_id_emp = id_emp";
+			resultStatement = dr.recupResultatRequete(
+			        requeteSelectionnee);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+			// afficher les lignes de la requete
+            // selectionnee a partir de la liste
 
 
 
@@ -75,26 +95,36 @@ public class MathematicalStatsCalculator
 		return resultStatement;
 	}
 
-	/**Retourne la moyenne d'heures travaill�e par l'ensemble des employ�s dans une industrei
+	/**Retourne la moyenne d'heures travaill�e
+     * par l'ensemble des employ�s dans une industrei
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
 	 * @return
 	 * @throws ClassNotFoundException 
 	 */
-	public static String getMoyenneHeureEmployeEntreprise(int idEntreprise) throws ClassNotFoundException
+	public static String getMoyenneHeureEmployeEntreprise
+    (int idEntreprise) throws ClassNotFoundException
 	{
 
 		String resultStatement = null;
 		try {
 
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
 			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM employe " +
-					"INNER JOIN industrie ON id_ind='" + idEntreprise +  "'";
-			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
+			String requeteSelectionnee =
+                    "SELECT AVG(nb_heure) AS"
+                            + " somme FROM employe " +
+					"INNER JOIN industrie ON id_ind='"
+                            + idEntreprise +  "'";
+			resultStatement = dr.recupResultatRequete(
+			        requeteSelectionnee);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+			// afficher les lignes de la requete
+            // selectionnee a partir de la liste
 
 
 
@@ -106,27 +136,43 @@ public class MathematicalStatsCalculator
 		return resultStatement;
 	}
 
-	/**Retourne la moyenne d'heures pass�s par tous les employ�s sur un même projet
+	/**Retourne la moyenne d'heures pass�s par
+     *  tous les employ�s sur un même projet
 	 * 
 	 * @author Loic
 	 * @return
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static String getMoyenneHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException
+	public static String getMoyenneHeureEmployeProjet(
+	        int idProj) throws ClassNotFoundException,
+            SQLException
 	{
 
 
 		String resultStatement = null;
 		try {
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM projet " +
-					"INNER JOIN intermediaire ON fk_id_projet='" + idProj + "' INNER JOIN employe" +
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
+			// recuperer la liste de la
+            // table s�lectionn�e
+			String requeteSelectionnee =
+                    "SELECT AVG(nb_heure) "
+                            + "AS somme"
+                            + " FROM projet "
+                            + "INNER JOIN "
+                            + "intermediaire "
+                            + "ON fk_id_projet='"
+                            + idProj + "' INNER "
+                            + "JOIN employe" +
 					"  ON fk_id_emp = id_emp";
-			resultStatement = dr.recupResultatRequete(requeteSelectionnee);
+			resultStatement = dr.recupResultatRequete(
+			        requeteSelectionnee);
 
-			// afficher les lignes de la requete selectionnee a partir de la liste
+			// afficher les lignes de la requet
+            //e selectionnee a partir de la liste
 
 
 
@@ -138,7 +184,8 @@ public class MathematicalStatsCalculator
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
+	/**Retourne la variance d'heures travaill
+     * �es par l'ensemble des employ�s dans une industrie
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -146,30 +193,47 @@ public class MathematicalStatsCalculator
 	 * @throws ClassNotFoundException 
 	 * @throws NumberFormatException 
 	 */
-	public static String getVarianceHeureEmployeEntreprise(int idEntreprise)
-			throws NumberFormatException, ClassNotFoundException
+	public static String
+    getVarianceHeureEmployeEntreprise(
+            int idEntreprise)
+			throws NumberFormatException,
+            ClassNotFoundException
 	{
 
 		String resultStatement = null;
 		try {
 
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
 			ArrayList<String> listeHeure;
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT nb_heure FROM employe INNER JOIN industrie" +
-					" ON id_ind='" + idEntreprise + "'";
+			// recuperer la liste de la table
+            // s�lectionn�e
+			String requeteSelectionnee = "SELECT"
+                    + " nb_heure FROM employe INNER JOIN "
+                    + "industrie" +
+					" ON id_ind='" + idEntreprise +
+                    "'";
 
-			listeHeure = dr.remplirChampsRequete(requeteSelectionnee);
+			listeHeure = dr.remplirChampsRequete(
+			        requeteSelectionnee);
 			double somme=0;
-			double moyenneHeure = Double.parseDouble(getMoyenneHeureEmployeEntreprise(idEntreprise));
-			// afficher les lignes de la requete selectionnee a partir de la liste
+			double moyenneHeure = Double.parseDouble(
+			        getMoyenneHeureEmployeEntreprise(
+			                idEntreprise));
+			// afficher les lignes de la requete
+            // selectionnee a partir de la liste
 
-			for(int i = 0; i < listeHeure.size(); i++)
+			for(int i = 0; i < listeHeure.size();
+                i++)
 			{
-				somme = Math.pow((Double.parseDouble(listeHeure.get(i)) - moyenneHeure), 2) + somme;
+				somme = Math.pow((Double.parseDouble(
+				        listeHeure.get(i)) - moyenneHeure), 2) + somme;
 			}
 
-			resultStatement=Double.toString(somme/listeHeure.size());
+			resultStatement=Double.toString(
+			        somme/listeHeure.size());
 
 		} catch (SQLException e)
 		{
@@ -179,25 +243,36 @@ public class MathematicalStatsCalculator
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s sur un projet
+	/**Retourne la variance d'heures travaill�es
+     * par l'ensemble des employ�s sur un projet
 	 * 
 	 * @author Loic
 	 * @return
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static String getVarianceHeureEmployeProjet(int idProj) throws ClassNotFoundException, SQLException
+	public static String getVarianceHeureEmployeProjet(
+	        int idProj) throws ClassNotFoundException,
+            SQLException
 	{
 
 		String resultStatement = null;
 
 
 		try {
-			DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+			DAOrequester dr = new DAOrequester(
+			        "db_tdd",
+                    "root",
+                    "");
 			ArrayList<String> listeHeure;
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT nb_heure FROM projet INNER JOIN intermediaire " +
-					"ON fk_id_projet='" + idProj + "' INNER JOIN employe ON fk_id_emp = id_emp";
+			// recuperer la liste de la table
+            // s�lectionn�e
+			String requeteSelectionnee =
+                    "SELECT nb_heure FROM projet"
+                            + " INNER JOIN intermediaire "
+                            + "ON fk_id_projet='" + idProj
+                            + "' INNER JOIN employe ON"
+                            + " fk_id_emp = id_emp";
 
 			listeHeure = dr.remplirChampsRequete(requeteSelectionnee);
 			double somme=0;
@@ -219,7 +294,8 @@ public class MathematicalStatsCalculator
 		return resultStatement;
 	}
 
-	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
+	/**Retourne l'ecart type d'heures travaillees par
+     *  l'ensemble des employes dans une industrie
 	 * 
 	 * @author Loic
 	 * @param idEntreprise
@@ -227,16 +303,19 @@ public class MathematicalStatsCalculator
 	 * @throws ClassNotFoundException 
 	 * @throws NumberFormatException 
 	 */
-	public static String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException,
+	public static String getEcartTypeHeureEmployeEntreprise(
+	        int idEntreprise) throws NumberFormatException,
 			ClassNotFoundException
 	{
 
 		String resultStatement = null;
-		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeEntreprise(idEntreprise))));
+		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(
+		        getVarianceHeureEmployeEntreprise(idEntreprise))));
 		return resultStatement;
 	}
 
-	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
+	/**Retourne l'ecart type d'heures travaillees par l'ensemble
+     *  des employes sur un projet
 	 * 
 	 * @author Loic
 	 * @return
@@ -244,12 +323,14 @@ public class MathematicalStatsCalculator
 	 * @throws ClassNotFoundException 
 	 * @throws NumberFormatException 
 	 */
-	public static String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException,
+	public static String getEcartTypeHeureEmployeProjet(
+	        int idProjet) throws NumberFormatException,
 			ClassNotFoundException, SQLException
 	{
 
 		String resultStatement = null;
-		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeProjet(idProjet))));
+		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(
+		        getVarianceHeureEmployeProjet(idProjet))));
 		return resultStatement;
 	}
 
