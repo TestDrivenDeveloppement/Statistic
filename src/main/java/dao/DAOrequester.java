@@ -1,5 +1,7 @@
 package dao;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -233,13 +235,13 @@ public class DAOrequester extends DAOconnexion
 			// récupération de l'ordre de la requete
 			rset = stmt.executeQuery(requete);
 
-			String resultStatement=null;
+			String resultStatement = null;
 
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
-			resultStatement=rset.getString(1);
+			resultStatement = rset.getString(1);
 
 			// tant qu'il reste une ligne 
 
@@ -266,7 +268,7 @@ public class DAOrequester extends DAOconnexion
 		try
 		{
 			innitConn();
-			int number=0;
+			int number = 0;
 			// récupération de l'ordre de la requete
 			switch(table)
 			{
@@ -297,7 +299,7 @@ public class DAOrequester extends DAOconnexion
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
-			number= rset.getInt(1);
+			number = rset.getInt(1);
 
 			// tant qu'il reste une ligne 
 
@@ -319,13 +321,14 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond(String table)
+	public int countElementInDBWithCond
+    (@org.jetbrains.annotations.NotNull String table)
             throws SQLException
 	{
 		try
 		{
 			innitConn();
-			int number=0;
+			int number = 0;
 			// récupération de l'ordre de la requete
 			switch(table)
 			{
@@ -356,7 +359,7 @@ public class DAOrequester extends DAOconnexion
 			rsetMeta = rset.getMetaData();
 
 			rset.next();
-			number= rset.getInt(1);
+			number = rset.getInt(1);
 
 			// tant qu'il reste une ligne 
 
@@ -377,13 +380,15 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public ArrayList<Integer> listeIdTable(String table)
+	public ArrayList<Integer>
+	listeIdTable(@NotNull String table)
             throws SQLException
 	{
 		try
 		{
 			innitConn();
-			ArrayList<Integer> listeID = new ArrayList<Integer>();
+			ArrayList<Integer> listeID =
+					new ArrayList<Integer>();
 			// récupération de l'ordre de la requete
 			switch(table)
 			{
@@ -446,17 +451,17 @@ public class DAOrequester extends DAOconnexion
 
 			case "industrie":
 				rset = stmt.executeQuery("SELECT nom_ind" +
-                        " FROM industrie WHERE id_ind="+id);
+                        " FROM industrie WHERE id_ind=" + id);
 				break;
 
 			case "projet":
 				rset = stmt.executeQuery("SELECT nom_projet " +
-                        "FROM (projet) WHERE id_projet="+id);
+                        "FROM (projet) WHERE id_projet=" + id);
 				break;
 
 			case "employe":
 				rset = stmt.executeQuery("SELECT nom FROM " +
-                        "employe where id_emp="+id);
+                        "employe where id_emp=" + id);
 				break;
 
 			default:
@@ -466,7 +471,7 @@ public class DAOrequester extends DAOconnexion
 			// récupération du résultat de l'ordre
 			rsetMeta = rset.getMetaData();
 			rset.next();
-			nameOfElement=rset.getString(1);
+			nameOfElement = rset.getString(1);
 
 			return nameOfElement;
 			//Close the current connection
