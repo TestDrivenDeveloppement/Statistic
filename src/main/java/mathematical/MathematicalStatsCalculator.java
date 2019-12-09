@@ -341,66 +341,111 @@ public class MathematicalStatsCalculator
 	 * @throws SQLException
 	 * @author Loic
 	 */
-	public static void superStatInd(int idInd) throws ClassNotFoundException, SQLException
+	public static void superStatInd(int idInd) throws ClassNotFoundException,
+            SQLException
 	{
-		DAOverification verif = new DAOverification("db_tdd", "root", "");
-		DAOrequester dr = new DAOrequester("db_tdd", "root", "");
+		DAOverification verif = new DAOverification("db_tdd",
+                "root", "");
+		DAOrequester dr = new DAOrequester("db_tdd",
+                "root", "");
 		DecimalFormat df = new DecimalFormat("########.00");
 		SalaireCalculator sal = new SalaireCalculator();
-		int nbreEmploye=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe " +
-				"INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE id_ind=" + idInd));
-		int nbreEmployeM=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe " +
-				"INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE (sexe='M') AND id_ind=" + idInd));
-		int nbreEmployeF=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe " +
-				"INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE (sexe='F')AND id_ind=" + idInd));
+		int nbreEmploye=Integer.parseInt(dr.recupResultatRequete(
+		        "SELECT COUNT(id_emp) FROM employe "
+                        + "INNER JOIN industrie ON (fk_id_ind=id_ind) "
+                        + "WHERE id_ind=" + idInd));
+		int nbreEmployeM=Integer.parseInt(dr.recupResultatRequete(
+		        "SELECT COUNT(id_emp) FROM employe "
+                        + "INNER JOIN industrie ON (fk_id_ind=id_ind) "
+                        + "WHERE (sexe='M') AND id_ind=" + idInd));
+		int nbreEmployeF=Integer.parseInt(dr.recupResultatRequete(
+		        "SELECT COUNT(id_emp) FROM employe "
+                        + "INNER JOIN industrie ON (fk_id_ind=id_ind)"
+                        + " WHERE (sexe='F')AND id_ind=" + idInd));
 
-		System.out.println("Votre entreprise compte : " + nbreEmploye + " employes");
-		System.out.println("Parmis ces employes, vous comptez " + nbreEmployeM + " hommes" +
-				" (" + df.format((((float)nbreEmployeM/(float)nbreEmploye) * 100)) + "%) " +
-				"et " + nbreEmployeF + " femmes (" + df.format((((float)nbreEmployeF / (float)nbreEmploye)
+		System.out.println("Votre entreprise compte : "
+                + nbreEmploye + " employes");
+		System.out.println("Parmis ces employes, vous comptez "
+                + nbreEmployeM + " hommes" +
+				" (" + df.format((((float)nbreEmployeM
+                / (float)nbreEmploye) * 100)) + "%) " +
+				"et " + nbreEmployeF + " femmes ("
+                + df.format((((float)nbreEmployeF
+                / (float)nbreEmploye)
 				* 100)) + "%)");
 
 		System.out.println("\t ........................... \t");
-		System.out.println("Salaire moyen au sein de l'entreprise :" + df.format(sal.salaire_entreprise(
+		System.out.println("Salaire moyen au sein de l'entreprise :"
+                + df.format(sal.salaire_entreprise(
 				"employe", idInd)));
 		System.out.println("Salaire par statut : "
-				+ "\n 1. Stagiaire : " + df.format(sal.salaire_cond("employe", "statut",
+				+ "\n 1. Stagiaire : " + df.format(sal.salaire_cond(
+				        "employe", "statut",
 				"stagiaire", idInd))
-				+ " \n \t => Un stagiaire touche en moyenne " + df.format(((float) +
-				sal.salaire_cond("employe", "statut",
-						"stagiaire", idInd)/(float)sal.autre_salaire_cond(
-								"employe", "statut", "stagiaire",
+				+ " \n \t => Un stagiaire touche en moyenne "
+                + df.format(((float) +
+				sal.salaire_cond("employe",
+                        "statut",
+						"stagiaire",
+                        idInd) / (float)sal.autre_salaire_cond(
+								"employe",
+                "statut",
+                "stagiaire",
 				idInd)) * 100) + "% que dans une autre entreprise"
-				+ " \n 2. Employe :" + df.format(sal.salaire_cond("employe", "statut",
+				+ " \n 2. Employe :" + df.format(sal.salaire_cond(
+				        "employe", "statut",
 				"employe", idInd )) + " euros"
-				+ " \n \t => Un employe touche en moyenne " + df.format(((float) + sal.salaire_cond(
-						"employe", "statut", "employe", idInd) /
-				(float)sal.autre_salaire_cond("employe", "statut",
-						"employe", idInd)) * 100) + "% que dans une autre entreprise"
-				+ " \n 3. Cadre : " + df.format(sal.salaire_cond("employe", "statut",
+				+ " \n \t => Un employe touche en moyenne "
+                + df.format(((float) + sal.salaire_cond(
+						"employe", "statut",
+                "employe", idInd) /
+				(float)sal.autre_salaire_cond("employe",
+                        "statut",
+						"employe", idInd)) * 100)
+                + "% que dans une autre entreprise"
+				+ " \n 3. Cadre : " + df.format(sal.salaire_cond(
+				        "employe", "statut",
 				"cadre", idInd)) + " euros"
-				+ " \n \t => Un cadre touche en moyenne " + df.format(((float) + sal.salaire_cond(
-						"employe", "statut", "cadre", idInd) /
-				(float)sal.autre_salaire_cond("employe", "statut",
-						"cadre", idInd)) * 100) + "% que dans une autre entreprise");
+				+ " \n \t => Un cadre touche en moyenne " + df.format(
+				        ((float) + sal.salaire_cond(
+						"employe", "statut",
+                                "cadre", idInd)
+                                / (float)sal.autre_salaire_cond(
+                                        "employe",
+                                "statut",
+						"cadre", idInd)) * 100)
+                + "% que dans une autre entreprise");
 
 		System.out.println("\t ........................... \t");	
-		System.out.println("Un homme touche en moyenne " + df.format(sal.salaire_cond("employe",
-				"sexe", "M", idInd)) + " euros au sein de votre entreprise"
-				+ " \n \t => Une difference de " + df.format(((float)sal.salaire_cond("employe",
-				"sexe", "M", idInd) / (float)sal.autre_salaire_cond(
-						"employe", "sexe", "M", idInd)) * 100) +
-				"% que dans une autre entreprise"
-				+ "\nUne femme touche en moyenne " + df.format(sal.salaire_cond("employe",
-				"sexe", "F", idInd)) + "  euros au sein de votre entreprise"
-				+ " \n \t => Une difference de " + df.format(((float)sal.salaire_cond("employe",
-				"sexe", "F", idInd) / (float)sal.autre_salaire_cond(
-						"employe", "sexe", "F", idInd)) * 100) +
-				"% que dans une autre entreprise"
-				+ "\nIl ya une difference de " + df.format(((float)sal.salaire_cond("employe",
-				"sexe", "M", idInd) / (float)sal.salaire_cond("employe",
-				"sexe", "F", idInd)) * 100) + "% entre le salaire d'un homme" +
-				" et d'une femme dans votre entreprise");
+		System.out.println("Un homme touche en moyenne "
+                + df.format(sal.salaire_cond("employe",
+				"sexe", "M", idInd))
+                + " euros au sein de votre entreprise"
+				+ " \n \t => Une difference de " + df.format(
+				        ((float)sal.salaire_cond("employe",
+				"sexe", "M", idInd)
+                                / (float)sal.autre_salaire_cond(
+						"employe", "sexe"
+                                , "M", idInd)) * 100)
+                + "% que dans une autre entreprise"
+				+ "\nUne femme touche en moyenne "
+                + df.format(sal.salaire_cond("employe",
+				"sexe", "F", idInd))
+                + "  euros au sein de votre entreprise"
+				+ " \n \t => Une difference de " + df.format(
+				        ((float)sal.salaire_cond("employe",
+				"sexe", "F", idInd)
+                                / (float)sal.autre_salaire_cond(
+						"employe", "sexe",
+                                "F", idInd)) * 100)
+                + "% que dans une autre entreprise"
+				+ "\nIl ya une difference de " + df.format(
+				        ((float)sal.salaire_cond("employe",
+				"sexe", "M", idInd)
+                                / (float)sal.salaire_cond("employe",
+				"sexe", "F", idInd))
+                                * 100) + "% entre le salaire d'un homme"
+                + " et d'une femme dans votre entreprise");
 	}
 
 }
