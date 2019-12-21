@@ -203,7 +203,7 @@ public class SalaireCalculator
 			e.printStackTrace();
 
 		}
-		return(liste_sal);
+		return liste_sal;
 	}
 
 
@@ -292,7 +292,7 @@ public class SalaireCalculator
 			e.printStackTrace();
 
 		}
-		return (sal);
+		return sal;
 
 	}
 
@@ -378,7 +378,7 @@ public class SalaireCalculator
 			e.printStackTrace();
 
 		}
-		return(sal_moy);
+		return sal_moy;
 	}
 
 	/**
@@ -465,7 +465,7 @@ public class SalaireCalculator
 			e.printStackTrace();
 
 		}
-		return(sal_moyen);
+		return sal_moyen;
 	}
 
 	/**
@@ -554,7 +554,7 @@ public class SalaireCalculator
 			e.printStackTrace();
 
 		}
-		return(sal_moyen);
+		return sal_moyen;
 	}
 
 
