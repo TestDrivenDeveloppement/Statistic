@@ -344,8 +344,6 @@ public class MathematicalStatsCalculator
 	public static void superStatInd(int idInd) throws ClassNotFoundException,
             SQLException
 	{
-		DAOverification verif = new DAOverification("db_tdd",
-                "root", "");
 		DAOrequester dr = new DAOrequester("db_tdd",
                 "root", "");
 		DecimalFormat df = new DecimalFormat("########.00");

@@ -213,7 +213,6 @@ public class DAOrequester extends DAOconnexion
 		}
 		finally
 		{
-			//closeConn();
 		}
 	}
 
@@ -319,8 +318,7 @@ public class DAOrequester extends DAOconnexion
 	 * @throws java.sql.SQLException
 	 * @author Loic
 	 */
-	public int countElementInDBWithCond(
-    		@org.jetbrains.annotations.NotNull String table)
+	public int countElementInDBWithCond(String table)
             throws SQLException
 	{
 		try
