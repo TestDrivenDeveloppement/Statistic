@@ -33,12 +33,11 @@ public final class DAOconnexion {
 	 */
 	private DAOconnexion(){
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			String urlDatabase = "jdbc:mysql://localhost/db_tdd";
-			String loginDatabase = "root";
-			String passwordDatabase = "";
-			connect = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
+			Class.forName("org.sqlite.JDBC");
+			// db parameters
+			String url = "jdbc:sqlite:db_tdd.db";
+			// create a connection to the database
+			connect = DriverManager.getConnection(url);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

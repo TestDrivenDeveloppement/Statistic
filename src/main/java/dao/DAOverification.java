@@ -25,30 +25,6 @@ public class DAOverification{
 			e.printStackTrace();
 		}
 	}
-
-	public Statement getStmt() {
-		return stmt;
-	}
-
-	public void setStmt(Statement stmt) {
-		this.stmt = stmt;
-	}
-
-	public ResultSet getRset() {
-		return rset;
-	}
-
-	public void setRset(ResultSet rset) {
-		this.rset = rset;
-	}
-
-	public ResultSetMetaData getRsetMeta() {
-		return rsetMeta;
-	}
-
-	public void setRsetMeta(ResultSetMetaData rsetMeta) {
-		this.rsetMeta = rsetMeta;
-	}
 	
 	 /**
      * Methode qui verifie l'integrité de l'id en entrée pour la table donnée
@@ -60,23 +36,7 @@ public class DAOverification{
     	
     	try {
 			// récupération de l'ordre de la requete
-			switch(table) {
-
-				case "industrie":
-				rset = stmt.executeQuery("SELECT id_ind FROM industrie");
-				break;
-
-				case "projet":
-				rset = stmt.executeQuery("SELECT id_projet FROM projet");
-				break;
-
-				case "employe":
-				rset = stmt.executeQuery("SELECT id_emp FROM employe");
-				break;
-			}
-			// récupération du résultat de l'ordre
-			rsetMeta = rset.getMetaData();
-
+			rset = stmt.executeQuery("SELECT id_ind FROM " + table);
 
 			// tant qu'il reste une ligne
 			while (rset.next()) {
@@ -99,10 +59,10 @@ public class DAOverification{
 		// Retourner l'ArrayList
 		return validity;
 	}
-	
+
 	/**
      * Methode qui verifie l'integrité de l'id en entrée pour la table donnée
-     * @return 
+     * @return
      * @throws java.sql.SQLException
      * @author Loic
      */
@@ -128,9 +88,6 @@ public class DAOverification{
 				break;
 
 			}
-			// récupération du résultat de l'ordre
-			rsetMeta = rset.getMetaData();
-
 
 			// tant qu'il reste une ligne
 			if(rset.next()) {

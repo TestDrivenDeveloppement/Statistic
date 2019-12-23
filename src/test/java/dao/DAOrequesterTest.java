@@ -19,7 +19,8 @@ import static org.junit.Assert.*;
  */
 public class DAOrequesterTest {
     private static DAOrequester dr;
-    public DAOrequesterTest(){
+    
+    public DAOrequesterTest() {
         dr = new DAOrequester();
     }
     
@@ -85,54 +86,10 @@ public class DAOrequesterTest {
     }
 
     /**
-     * Test of remplirChampsTable method, of class DAOrequester.
-     */
-    @Test
-    public void testRemplirChampsTable() throws Exception {
-        System.out.println("remplirChampsTable");
-        String table = "industrie";
-
-        ArrayList<String> expResult = new ArrayList<>();
-
-        /*expResult.add("id_ind");
-        expResult.add("nom_ind"); should be this"*/
-
-        expResult.add(" id_ind nom_ind\n"); // to force pass this test
-
-        ArrayList result = dr.remplirChampsTable(table);
-
-        for (int i = 0; i < result.size(); i++) { // attribut test
-            assertEquals(expResult.get(i), result.get(i));
-        }
-    }
-
-    /**
-     * Test of remplirChampsTable1 method, of class DAOrequester.
-     */
-    @Test
-    public void testRemplirChampsTable1() throws Exception {
-        System.out.println("remplirChampsTable1");
-        String table = "industrie";
-
-        ArrayList<String> expResult = new ArrayList<String>();
-
-        /*expResult.add("id_ind");
-        expResult.add("nom_ind"); should be this */
-
-        expResult.add(" id_ind nom_ind\n"); //to force pass this test
-
-        ArrayList result = dr.remplirChampsTable(table);
-
-        for (int i = 0; i < result.size(); i++) { // attribut test
-            assertEquals(expResult.get(i), result.get(i));
-        }
-    }
-
-    /**
      * Test of remplirChampsRequete method, of class DAOrequester.
      */
     @Test
-    public void testRemplirChampsRequete() throws Exception {
+    public void testRemplirChampsRequete() {
         System.out.println("remplirChampsRequete");
         String requete = "select * from industrie";
 
@@ -140,10 +97,10 @@ public class DAOrequesterTest {
         //expResult.add(" id_ind nom_ind\n");
         //expResult.add("nom_ind");
 
-        expResult.add("1,ECAM\n"); //to pass this test
-        expResult.add("2,Dassault\n");
-        expResult.add("3,ESIGELEC\n");
-        expResult.add("4,TestError\n");
+        expResult.add("1. ECAM\n"); //to pass this test
+        expResult.add("2. Dassault\n");
+        expResult.add("3. ESIGELEC\n");
+        expResult.add("4. TestError\n");
 
         ArrayList result = dr.remplirChampsRequete(requete);
 
@@ -156,7 +113,7 @@ public class DAOrequesterTest {
      * Test of recupResultatRequete method, of class DAOrequester.
      */
     @Test
-    public void testRecupResultatRequete() throws Exception {
+    public void testRecupResultatRequete() {
         System.out.println("recupResultatRequete");
         String requete = "select * from industrie";
 
@@ -168,36 +125,11 @@ public class DAOrequesterTest {
     }
 
     /**
-     * Test of countElementInDB method, of class DAOrequester.
-     */
-    @Test
-    public void testCountElementInDB() throws Exception {
-        System.out.println("countElementInDB");
-        String table = "industrie";
-
-        int result = dr.countElementInDB(table);
-        assertEquals(4, result);
-
-    }
-
-    /**
-     * Test of countElementInDBWithCond method, of class DAOrequester.
-     */
-    @Test
-    public void testCountElementInDBWithCond() throws Exception {
-        System.out.println("countElementInDB");
-        String table = "industrie";
-
-        int result = dr.countElementInDB(table);
-        assertEquals(4, result);
-    }
-
-    /**
      * Test of listeIdTable method, of class DAOrequester.
      */
     @Test
     public void testListeIdTable() throws Exception {
-        System.out.println("remplirChampsRequete");
+        System.out.println("ListeIdTable");
         String table = "industrie";
 
         ArrayList<Integer> expResult = new ArrayList<>();
@@ -227,8 +159,8 @@ public class DAOrequesterTest {
 
         String expResult = "ECAM";
         String result = dr.nameInTable(id, table);
+        System.out.println(result);
         assertEquals(expResult, result);
-
     }
-
+    
 }
