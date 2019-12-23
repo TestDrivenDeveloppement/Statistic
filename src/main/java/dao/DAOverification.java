@@ -14,7 +14,6 @@ public class DAOverification{
 	 */
 	private Statement stmt;
 	private ResultSet rset;
-	private ResultSetMetaData rsetMeta;
 
 
 
@@ -75,16 +74,16 @@ public class DAOverification{
 			switch(table) {
 				case "industrie":
 				rset = stmt.executeQuery("SELECT id_emp FROM (employe)"
-						+ "WHERE (FK_id_ind="+id+");");
+						+ "WHERE FK_id_ind="+id);
 				break;
 
 				case "projet":
 				rset = stmt.executeQuery("SELECT fk_id_projet FROM intermediaire "
-						+ "WHERE fk_id_projet="+id+";");
+						+ "WHERE fk_id_projet="+id);
 				break;
 
 				case "employe":
-				rset = stmt.executeQuery("SELECT id_emp FROM employe WHERE id_emp="+id+";");
+				rset = stmt.executeQuery("SELECT id_emp FROM employe WHERE id_emp="+id);
 				break;
 
 			}

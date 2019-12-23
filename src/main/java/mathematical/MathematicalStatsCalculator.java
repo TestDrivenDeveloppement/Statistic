@@ -9,6 +9,8 @@ import dao.DAOverification;
 
 public class MathematicalStatsCalculator {
 
+	private DAOrequester dr = new DAOrequester();
+
 	/**Retourne la somme d'heures travaille par l'ensemble des employs dans une industrei
 	 *
 	 * @author Loic
@@ -98,19 +100,16 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
-	 *
+	/**
 	 * @author Loic
 	 * @param idEntreprise
-	 * @return
-	 * @throws ClassNotFoundException
+	 * @return la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
 	 * @throws NumberFormatException
 	 */
-	public static String getVarianceHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
+	public String getVarianceHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException{
 
 		String resultStatement = null;
 
-		DAOrequester dr = new DAOrequester();
 		ArrayList<String> listeHeure;
 		// recuperer la liste de la table s�lectionn�e
 		String requeteSelectionnee = "SELECT nb_heure FROM employe INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
@@ -120,9 +119,8 @@ public class MathematicalStatsCalculator {
 		double moyenneHeure = Double.parseDouble(getMoyenneHeureEmployeEntreprise(idEntreprise));
 		// afficher les lignes de la requete selectionnee a partir de la liste
 
-		for(int i = 0; i < listeHeure.size(); i++)
-		{
-			somme = Math.pow((Double.parseDouble(listeHeure.get(i))-moyenneHeure),2)+somme;
+		for (String s : listeHeure) {
+			somme = Math.pow((Double.parseDouble(s) - moyenneHeure), 2) + somme;
 		}
 
 		resultStatement=Double.toString(somme/listeHeure.size());
@@ -130,32 +128,27 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne la variance d'heures travaill�es par l'ensemble des employ�s sur un projet
-	 *
+	/**
 	 * @author Loic
 	 * @param idProj
-	 * @return
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
+	 * @return la variance d'heures travaill�es par l'ensemble des employ�s sur un projet
 	 */
-	public static String getVarianceHeureEmployeProjet(int idProj){
+	public String getVarianceHeureEmployeProjet(int idProj){
 
 		String resultStatement = null;
 
-
-		DAOrequester dr = new DAOrequester();
 		ArrayList<String> listeHeure;
 		// recuperer la liste de la table s�lectionn�e
-		String requeteSelectionnee = "SELECT nb_heure FROM projet INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
+		String requeteSelectionnee = "SELECT nb_heure FROM projet " +
+				"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
 
 		listeHeure = dr.remplirChampsRequete(requeteSelectionnee);
 		double somme=0;
 		double moyenneHeure = Double.parseDouble(getMoyenneHeureEmployeProjet(idProj));
 		// afficher les lignes de la requete selectionnee a partir de la liste
 
-		for(int i = 0; i < listeHeure.size(); i++)
-		{
-			somme = Math.pow((Double.parseDouble(listeHeure.get(i))-moyenneHeure),2)+somme;
+		for (String s : listeHeure) {
+			somme = Math.pow((Double.parseDouble(s) - moyenneHeure), 2) + somme;
 		}
 
 		resultStatement=Double.toString(somme/listeHeure.size());
@@ -163,31 +156,27 @@ public class MathematicalStatsCalculator {
 		return resultStatement;
 	}
 
-	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
-	 *
+	/**
 	 * @author Loic
 	 * @param idEntreprise
-	 * @return
-	 * @throws ClassNotFoundException
+	 * @return l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
 	 * @throws NumberFormatException
 	 */
-	public static String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException, ClassNotFoundException {
+	public String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException{
 
 		String resultStatement = null;
-		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeEntreprise(idEntreprise))));
+		resultStatement=Double.toString(Math.sqrt(
+				Double.parseDouble(getVarianceHeureEmployeEntreprise(idEntreprise))));
 		return resultStatement;
 	}
 
-	/**Retourne l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
-	 *
+	/**
 	 * @author Loic
 	 * @param idProjet
-	 * @return
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
+	 * @return l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
 	 * @throws NumberFormatException
 	 */
-	public static String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException, ClassNotFoundException, SQLException {
+	public String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException{
 
 		String resultStatement = null;
 		resultStatement=Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeProjet(idProjet))));
@@ -195,15 +184,10 @@ public class MathematicalStatsCalculator {
 	}
 
 	/**Affiche les statistiques avancees pour une entreprise
-	 *
 	 * @param idInd
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
 	 * @author Loic
 	 */
-	public static void superStatInd(int idInd) throws ClassNotFoundException, SQLException {
-		DAOverification verif = new DAOverification();
-		DAOrequester dr = new DAOrequester();
+	public void superStatInd(int idInd){
 		DecimalFormat df = new DecimalFormat("########.00");
 		SalaireCalculator sal = new SalaireCalculator();
 		int nbreEmploye=Integer.parseInt(dr.recupResultatRequete("SELECT COUNT(id_emp) FROM employe INNER JOIN industrie ON (fk_id_ind=id_ind) WHERE id_ind="+idInd));

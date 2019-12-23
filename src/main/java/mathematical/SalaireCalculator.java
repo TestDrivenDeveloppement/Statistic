@@ -8,7 +8,7 @@ import dao.DAOrequester;
 import dao.DAOverification;
 
 public class SalaireCalculator {
-
+	private DAOrequester dr = new DAOrequester();
 
 	public SalaireCalculator() {
 
@@ -24,9 +24,6 @@ public class SalaireCalculator {
 	 * Modification
 	 */
 	public void calcul_prime(String nomTable){
-
-		DAOverification verif = new DAOverification();
-		DAOrequester dr = new DAOrequester();
 		ArrayList<String> heure;
 		ArrayList<String> statut;
 		ArrayList<String> liste;
@@ -34,13 +31,13 @@ public class SalaireCalculator {
 
 
 		// recuperer la liste de la table sélectionnée
-		String requeteSelectionnee = "select nb_heure from " + nomTable + ";";
+		String requeteSelectionnee = "select nb_heure from " + nomTable;
 		heure = dr.remplirChampsRequete(requeteSelectionnee);
 
-		String reqSelectionnee = "select statut from " + nomTable + ";";
+		String reqSelectionnee = "select statut from " + nomTable;
 		statut = dr.remplirChampsRequete(reqSelectionnee);
 
-		String req = "select nom, prenom, statut from " + nomTable + ";";
+		String req = "select nom, prenom, statut from " + nomTable;
 		liste = dr.remplirChampsRequete(req);
 
 		// afficher les lignes de la requete selectionnee a partir de la liste
