@@ -41,51 +41,6 @@ public class DAOrequesterTest {
     }
 
     /**
-     * Test of ajouterTable method, of class DAOrequester.
-     */
-    @Test
-    public void testAjouterTable() {
-        System.out.println("ajouterTable");
-        String table = "entreprise";
-        int expSize = dr.tables.size();
-        dr.ajouterTable(table);
-        for (int i = 0; i < dr.tables.size(); i++) { // attribut test
-            assertEquals(table, dr.tables.get(i));
-        }
-        assertEquals(expSize + 1, dr.tables.size());
-    }
-
-    /**
-     * Test of ajouterRequete method, of class DAOrequester.
-     */
-    @Test
-    public void testAjouterRequete() {
-        System.out.println("ajouterRequete");
-        String requete = "SELECT * FROM industrie";
-        int expSize = dr.requetes.size();
-        dr.ajouterRequete(requete);
-        for (int i = 0; i < dr.requetes.size(); i++) { // attribut test
-            assertEquals(requete, dr.requetes.get(i));
-        }
-        assertEquals(expSize + 1, dr.requetes.size());
-    }
-
-    /**
-     * Test of ajouterRequeteMaj method, of class DAOrequester.
-     */
-    @Test
-    public void testAjouterRequeteMaj() {
-        System.out.println("ajouterRequeteMaj");
-        String requete = "SELECT * FROM industrie";
-        int expSize = dr.requetesMaj.size();
-        dr.ajouterRequeteMaj(requete);
-        for (int i = 0; i < dr.requetesMaj.size(); i++) { // attribut test
-            assertEquals(requete, dr.requetesMaj.get(i));
-        }
-        assertEquals(expSize + 1, dr.requetesMaj.size());
-    }
-
-    /**
      * Test of remplirChampsRequete method, of class DAOrequester.
      */
     @Test

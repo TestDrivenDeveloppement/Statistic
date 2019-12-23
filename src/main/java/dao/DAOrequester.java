@@ -9,19 +9,6 @@ import java.util.ArrayList;
 public class DAOrequester{
 
 	/**
-	 * ArrayList public pour les tables
-	 */
-	public ArrayList<String> tables = new ArrayList<>();
-	/**
-	 * ArrayList public pour les requètes de sélection
-	 */
-	public ArrayList<String> requetes = new ArrayList<>();
-	/**
-	 * ArrayList public pour les requÃªtes de MAJ
-	 */
-	public ArrayList<String> requetesMaj = new ArrayList<>();
-
-	/**
 	 * Attributs prives : connexion JDBC, statement, ordre requete et resultat
 	 * requete
 	 */
@@ -38,84 +25,10 @@ public class DAOrequester{
 	}
 
 	/**
-	 * Méthode qui ajoute la table en parametre dans son ArrayList
-	 *
-	 * @param table
-	 */
-	public void ajouterTable(String table) {
-		tables.add(table);
-	}
-
-	/**
-	 * Méthode qui ajoute la requete de selection en parametre dans son
-	 * ArrayList
-	 *
 	 * @param requete
+	 * @return ArrayList des champs de la requete en parametre
 	 */
-	public void ajouterRequete(String requete) {
-		requetes.add(requete);
-	}
-
-	/**
-	 * Méthode qui ajoute la requete de MAJ en parametre dans son
-	 * ArrayList
-	 *
-	 * @param requete
-	 */
-	public void ajouterRequeteMaj(String requete) {
-		requetesMaj.add(requete);
-	}
-
-	/**
-	 * Méthode qui retourne l'ArrayList des champs de la table en parametre
-	 *
-	 * @param table
-	 * @return
-	 */
-	/*public ArrayList remplirChampsTable(String table){
-		// creation d'une ArrayList de String
-		ArrayList<String> liste;
-		liste = new ArrayList<>();
-
-		try {
-			// récupération de l'ordre de la requete
-			rset = stmt.executeQuery("select * from " + table);
-
-			// récupération du résultat de l'ordre
-			rsetMeta = rset.getMetaData();
-
-			// calcul du nombre de colonnes du resultat
-			int nbColonne = rsetMeta.getColumnCount();
-
-
-			String champs = "";
-			// Ajouter tous les champs du resultat dans l'ArrayList
-			for (int i = 0; i < nbColonne; i++) {
-				champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
-			}
-
-			// ajouter un "\n" Ã  la ligne des champs
-			champs = champs + "\n";
-
-			// ajouter les champs de la ligne dans l'ArrayList
-			liste.add(champs);
-
-			rset.close();
-
-		}catch (SQLException e){
-			e.printStackTrace();
-		}
-
-		// Retourner l'ArrayList
-		return liste;
-	} NEST JAMAIS UTILISE DONC DOIT ETRE SUPPRIMEE*/
-
-	/**
-	 * Methode qui retourne l'ArrayList des champs de la requete en parametre
-	 * @param requete
-	 * @return
-	 */
-	public ArrayList remplirChampsRequete(String requete){
+	public ArrayList<String> remplirChampsRequete(String requete){
 		// creation d'une ArrayList de String
 		ArrayList<String> liste;
 		liste = new ArrayList<String>();
@@ -132,19 +45,19 @@ public class DAOrequester{
 
 			// tant qu'il reste une ligne 
 			while (rset.next()) {
-				String champs;
-				champs = rset.getString(1); // ajouter premier champ
+				StringBuilder champs;
+				champs = new StringBuilder(rset.getString(1)); // ajouter premier champ
 
 				// Concatener les champs de la ligne separes par ,
 				for (int i = 1; i < nbColonne; i++) {
-					champs = champs + ". " + rset.getString(i + 1);
+					champs.append(". ").append(rset.getString(i + 1));
 				}
 
 				// ajouter un "\n" Ã  la ligne des champs
-				champs = champs + "\n";
+				champs.append("\n");
 
 				// ajouter les champs de la ligne dans l'ArrayList
-				liste.add(champs);
+				liste.add(champs.toString());
 			}
 
 			rset.close();
@@ -156,13 +69,10 @@ public class DAOrequester{
 		return liste;
 	}
 
-	/** Retourne le résultat de la requÃªte unique
-	 * PLUTOT METHODE QUI RETOURNE LA VALEUR D'UNE COLONNE
-	 * 
+	/**
 	 * @author Loic
 	 * @param requete
-	 * @return
-	 * @throws SQLException
+	 * @return LA VALEUR D'UNE COLONNE
 	 */
 	public String recupResultatRequete(String requete){
 		String resultStatement=null;
@@ -191,12 +101,10 @@ public class DAOrequester{
 	}
 
 	/**
-	 * Renvoi la liste des ID d'une table
-	 * @return 
-	 * @throws java.sql.SQLException
+	 * @return la liste des ID d'une table
 	 * @author Loic
 	 */
-	public ArrayList<Integer> listeIdTable(String table) throws SQLException {
+	public ArrayList<Integer> listeIdTable(String table){
 		ArrayList<Integer> listeID = new ArrayList<Integer>();
 
 		try {
@@ -222,12 +130,10 @@ public class DAOrequester{
 	}
 
 	/**
-	 * Renvoi le nom en fonction de l'ID d'une table
-	 * @return 
-	 * @throws java.sql.SQLException
+	 * @return le nom en fonction de l'ID d'une table
 	 * @author Loic
 	 */
-	public String nameInTable(int id, String table) throws SQLException {
+	public String nameInTable(int id, String table){
 		String nameOfElement = null;
 
 		try {
@@ -248,12 +154,57 @@ public class DAOrequester{
 	}
 
 	/**
-	 * Méthode qui execute une requete de MAJ en parametre
-	 * @param requeteMaj
-	 * @throws java.sql.SQLException
+	 * @author Loic
+	 * @param idEntreprise
+	 * @return la somme d'heures de travail de l'ensemble des employés dans une meme industrie
 	 */
-	/*public void executeUpdate(String requeteMaj) throws SQLException {
-		stmt.executeUpdate(requeteMaj);
-	} NEST JAMAIS UTILISE DONC DOIT ETRE SUPPRIMEE*/
+	public String getSommeHeureEmployeEntreprise(int idEntreprise){
 
+		// recuperer la liste de la table selectionnee
+		String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM employe " +
+				"INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
+
+		return recupResultatRequete(requeteSelectionnee);
+	}
+
+
+	/**
+	 * @author Loic
+	 * @param idProj
+	 * @return le nombre d'heures passé par tous les employés sur un même projet
+	 */
+	public String getSommeHeureEmployeProjet(int idProj){
+
+		String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM projet " +
+				"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
+
+		return recupResultatRequete(requeteSelectionnee);
+	}
+
+	/**
+	 * @author Loic
+	 * @param idEntreprise
+	 * @return la moyenne d'heures travaillée par l'ensemble des employés dans une meme industrie
+	 */
+	public String getMoyenneHeureEmployeEntreprise(int idEntreprise){
+
+		String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM employe " +
+				"INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
+
+		return recupResultatRequete(requeteSelectionnee);
+	}
+
+	/**
+	 * @author Loic
+	 * @param idProj
+	 * @return la moyenne d'heures pass�s par tous les employ�s sur un même projet
+	 */
+	public String getMoyenneHeureEmployeProjet(int idProj){
+
+		// recuperer la liste de la table s�lectionn�e
+		String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM projet " +
+				"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' INNER JOIN employe ON fk_id_emp = id_emp";
+
+		return recupResultatRequete(requeteSelectionnee);
+	}
 }
