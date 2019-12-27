@@ -243,7 +243,7 @@ public class StatFacade
         switch(emp)
         {
             case 1:
-                sc.salaireAllEmp(employeList);
+                System.out.println(sc.salaireAllEmp(employeList));
                 break;
 
             case 2:
