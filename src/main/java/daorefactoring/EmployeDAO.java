@@ -6,21 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmployeDAO extends Dao<Employe>{
+public class EmployeDAO extends Dao<Employe>
+{
 
-    public EmployeDAO(Connection conn) {
+    public EmployeDAO(Connection conn)
+    {
         super(conn);
     }
 
-    public Employe find(int id) {
+    public Employe find(int id)
+    {
         Employe employe = new Employe();
 
-        try {
+        try{
             ResultSet result = this.connect.createStatement()
                     .executeQuery("SELECT * FROM employe WHERE id_emp = "+ id
                             );
 
-            if (result.next()){
+            if (result.next())
+            {
                 IndustrieDAO industrie = new IndustrieDAO(this.connect);
                 employe = new Employe(id, result.getString("nom"),
                         result.getString("prenom"), result.getString("statut"),
@@ -28,13 +32,15 @@ public class EmployeDAO extends Dao<Employe>{
                         result.getString("sexe")
                 );
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return employe;
     }
 
-    public ArrayList<Employe> findAll(){
+    public ArrayList<Employe> findAll()
+    {
         Employe employe;
         ArrayList<Employe> empList = new ArrayList<Employe>();
 
@@ -43,7 +49,8 @@ public class EmployeDAO extends Dao<Employe>{
                     .executeQuery("SELECT * FROM employe"
                     );
 
-            while (result.next()){
+            while (result.next())
+            {
                 IndustrieDAO industrie = new IndustrieDAO(this.connect);
                 employe = new Employe(result.getInt("id_emp"), result.getString("nom"),
                         result.getString("prenom"), result.getString("statut"),
@@ -52,7 +59,8 @@ public class EmployeDAO extends Dao<Employe>{
                 );
                 empList.add(employe);
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return empList;

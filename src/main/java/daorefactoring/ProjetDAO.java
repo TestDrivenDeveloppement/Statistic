@@ -6,13 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProjetDAO extends Dao<Projet> {
+public class ProjetDAO extends Dao<Projet>
+{
 
-    public ProjetDAO(Connection conn) {
+    public ProjetDAO(Connection conn)
+    {
         super(conn);
     }
 
-    public Projet find(int id) {
+    public Projet find(int id)
+    {
         Projet projet = new Projet();
 
         try {
@@ -20,7 +23,8 @@ public class ProjetDAO extends Dao<Projet> {
                     .executeQuery("SELECT * FROM projet WHERE id_projet = "+ id
                     );
 
-            if (result.next()){
+            if (result.next())
+            {
                 IndustrieDAO industrie = new IndustrieDAO(this.connect);
                 projet = new Projet(id, result.getString("nom_projet"),
                         industrie.find(result.getInt("FK_id_ind"))
@@ -32,7 +36,8 @@ public class ProjetDAO extends Dao<Projet> {
         return projet;
     }
 
-    public ArrayList<Projet> findAll(){
+    public ArrayList<Projet> findAll()
+    {
         Projet projet;
         ArrayList<Projet> proList = new ArrayList<Projet>();
 
@@ -41,7 +46,8 @@ public class ProjetDAO extends Dao<Projet> {
                     .executeQuery("SELECT * FROM projet"
                     );
 
-            while (result.next()){
+            while (result.next())
+            {
                 IndustrieDAO industrie = new IndustrieDAO(this.connect);
                 projet = new Projet(result.getInt("id_projet"),
                         result.getString("nom_projet"),
@@ -49,7 +55,8 @@ public class ProjetDAO extends Dao<Projet> {
                 );
                 proList.add(projet);
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return proList;

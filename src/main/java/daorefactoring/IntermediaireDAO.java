@@ -6,13 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IntermediaireDAO extends Dao<Intermediaire> {
+public class IntermediaireDAO extends Dao<Intermediaire>
+{
 
-    public IntermediaireDAO(Connection conn) {
+    public IntermediaireDAO(Connection conn)
+    {
         super(conn);
     }
 
-    public Intermediaire find(int id) {
+    public Intermediaire find(int id)
+    {
         Intermediaire intermediaire = new Intermediaire();
 
         try {
@@ -20,7 +23,8 @@ public class IntermediaireDAO extends Dao<Intermediaire> {
                     .executeQuery("SELECT * FROM intermediaire WHERE id = "+ id
                     );
 
-            if (result.next()){
+            if (result.next())
+            {
                 ProjetDAO projet = new ProjetDAO(this.connect);
                 EmployeDAO employe = new EmployeDAO(this.connect);
 
@@ -28,13 +32,15 @@ public class IntermediaireDAO extends Dao<Intermediaire> {
                         projet.find(result.getInt("FK_id_projet"))
                 );
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return intermediaire;
     }
 
-    public ArrayList<Intermediaire> findAll(){
+    public ArrayList<Intermediaire> findAll()
+    {
         Intermediaire intermediaire;
         ArrayList<Intermediaire> interList = new ArrayList<Intermediaire>();
 
@@ -43,7 +49,8 @@ public class IntermediaireDAO extends Dao<Intermediaire> {
                     .executeQuery("SELECT * FROM intermediaire"
                     );
 
-            while (result.next()){
+            while (result.next())
+            {
                 ProjetDAO projet = new ProjetDAO(this.connect);
                 EmployeDAO employe = new EmployeDAO(this.connect);
 
@@ -53,7 +60,8 @@ public class IntermediaireDAO extends Dao<Intermediaire> {
                 );
                 interList.add(intermediaire);
             }
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             e.printStackTrace();
         }
         return interList;

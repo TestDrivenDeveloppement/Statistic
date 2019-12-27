@@ -7,11 +7,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public abstract class Dao<T> {
+public abstract class Dao<T>
+{
 
     protected Connection connect = null;
 
-    public Dao(Connection conn){
+    public Dao(Connection conn)
+    {
         this.connect = conn;
     }
 
@@ -31,7 +33,8 @@ public abstract class Dao<T> {
     /**
      * Afficher les lignes de la table sélectionnée
      */
-    public static void afficheTable(String table){
+    public static void afficheTable(String table)
+    {
 
         // creation d'une ArrayList de String
         ArrayList<String> champList;
@@ -49,12 +52,14 @@ public abstract class Dao<T> {
             int nbColonne = rsetMeta.getColumnCount();
 
             // tant qu'il reste une ligne
-            while (rset.next()) {
+            while (rset.next())
+            {
                 StringBuilder champs;
                 champs = new StringBuilder(rset.getString(1)); // ajouter premier champ
 
                 // Concatener les champs de la ligne separes par .
-                for (int i = 1; i < nbColonne; i++) {
+                for (int i = 1; i < nbColonne; i++)
+                {
                     champs.append(". ").append(rset.getString(i + 1));
                 }
 
@@ -63,12 +68,14 @@ public abstract class Dao<T> {
             }
             rset.close();
 
-        }catch (SQLException e){
+        }catch (SQLException e)
+        {
             e.printStackTrace();
         }
 
         // afficher les lignes de la requete selectionnee a partir de la liste
-        for (String champ : champList) {
+        for (String champ : champList)
+        {
             System.out.println(champ);
         }
     }

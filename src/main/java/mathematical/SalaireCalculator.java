@@ -1,13 +1,10 @@
 package mathematical;
 
 import java.util.ArrayList;
-
-import dao.DAOconnexion;
-import daorefactoring.Dao;
-import daorefactoring.EmployeDAO;
 import model.Employe;
 
-public class SalaireCalculator {
+public class SalaireCalculator
+{
 
 	/**
 	 * Permet de calculer les primes en fonction du nombre d'heures travaillées et du statut
@@ -16,19 +13,23 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public String primeEmp(ArrayList<Employe> employeList){
+	public String primeEmp(ArrayList<Employe> employeList)
+	{
 
 		String result = "";
 
-		for (Employe employe : employeList) {
+		for (Employe employe : employeList)
+		{
 			double prime = 0;
 			int surplusHoraire = 0;
 
-			switch (employe.getStatut()) {
+			switch (employe.getStatut())
+			{
 				case "Stagiaire":
 					surplusHoraire = employe.getNb_heure() - 175;
 
-					if (surplusHoraire > 0) {
+					if (surplusHoraire > 0)
+					{
 						prime = surplusHoraire * (3.75 * 1.25);
 					}
 
@@ -37,7 +38,8 @@ public class SalaireCalculator {
 				case "Employe":
 					surplusHoraire = employe.getNb_heure() - 200;
 
-					if (surplusHoraire > 0) {
+					if (surplusHoraire > 0)
+					{
 						prime = surplusHoraire * (7.93 * 1.25);
 					}
 
@@ -46,7 +48,8 @@ public class SalaireCalculator {
 				case "Cadre":
 					surplusHoraire = employe.getNb_heure() - 225;
 
-					if (surplusHoraire > 0) {
+					if (surplusHoraire > 0)
+					{
 						prime = surplusHoraire * (9.13 * 1.25);
 					}
 
@@ -77,8 +80,10 @@ public class SalaireCalculator {
 
 		String result = "";
 
-		for (Employe employe : employeList){
-			switch (employe.getStatut()) {
+		for (Employe employe : employeList)
+		{
+			switch (employe.getStatut())
+			{
 				case "Stagiaire" :
 					salaire = employe.getNb_heure() * 3.75;
 					break;
@@ -110,7 +115,8 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaireOneEmp(Employe employe){
+	public double salaireOneEmp(Employe employe)
+	{
 		double salaire = 0;
 
 		switch (employe.getStatut()) {
@@ -143,12 +149,15 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaireMoyInd(int idIndustrie, ArrayList<Employe> employeList){
+	public double salaireMoyInd(int idIndustrie, ArrayList<Employe> employeList)
+	{
 		double salaireMoy = 0;
 		int total = 0;
 
-		for (Employe employe : employeList){
-			if (employe.getIndustrie().getId_ind() == idIndustrie){
+		for (Employe employe : employeList)
+		{
+			if (employe.getIndustrie().getId_ind() == idIndustrie)
+			{
 				switch (employe.getStatut()) {
 					case "Stagiaire" :
 						salaireMoy += employe.getNb_heure() * 3.75;
@@ -185,23 +194,28 @@ public class SalaireCalculator {
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	public double salaireMoyIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList){
+	public double salaireMoyIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList)
+	{
 
 		double salaireMoy = 0;
 		int total = 0;
 
-		for (Employe employe : employeList){
+		for (Employe employe : employeList)
+		{
 			// selon le statut
 			if (employe.getIndustrie().getId_ind() == idIndustrie &&
-					employe.getStatut().equals(condition)){
+					employe.getStatut().equals(condition))
+			{
 				salaireMoy += employe.getNb_heure() * 3.75;
 				total++;
 			}
 
 			// selon le genre
 			else if (employe.getIndustrie().getId_ind() == idIndustrie &&
-					employe.getSexe().equals(condition)){
-				switch (employe.getStatut()){
+					employe.getSexe().equals(condition))
+			{
+				switch (employe.getStatut())
+				{
 					case "Stagiaire" :
 						salaireMoy += employe.getNb_heure() * 3.75;
 						total++;
@@ -231,28 +245,34 @@ public class SalaireCalculator {
 	}
 
 	/**
-	 * Permet d'afficher le salaire moyen selon le genre ou le statut dans les autres entreprises que celle sélectionée
+	 * Permet d'afficher le salaire moyen selon le genre
+	 * ou le statut dans les autres entreprises que celle sélectionée
 	 *
 	 *@author Loic
 	 *Ecriture
 	 */
-	public double salaireMoyAutreIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList){
+	public double salaireMoyAutreIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList)
+	{
 
 		double salaireMoy = 0;
 		int total = 0;
 
-		for (Employe employe : employeList){
+		for (Employe employe : employeList)
+		{
 			// selon le statut
 			if (employe.getIndustrie().getId_ind() != idIndustrie &&
-					employe.getStatut().equals(condition)){
+					employe.getStatut().equals(condition))
+			{
 				salaireMoy += employe.getNb_heure() * 3.75;
 				total++;
 			}
 
 			// selon le genre
 			else if (employe.getIndustrie().getId_ind() != idIndustrie &&
-					employe.getSexe().equals(condition)){
-				switch (employe.getStatut()){
+					employe.getSexe().equals(condition))
+			{
+				switch (employe.getStatut())
+				{
 					case "Stagiaire" :
 						salaireMoy += employe.getNb_heure() * 3.75;
 						total++;
@@ -286,7 +306,8 @@ public class SalaireCalculator {
 	 * @param idIndustrie
 	 * @author Kolawole
 	 */
-	public String superSatInd(int idIndustrie, ArrayList<Employe> employeList){
+	public String superSatInd(int idIndustrie, ArrayList<Employe> employeList)
+	{
 
 		String result = "";
 		double nbreEmploye = nombreEmpGenreInd(idIndustrie, "", employeList);
@@ -328,15 +349,19 @@ public class SalaireCalculator {
 
 	}
 
-	public int nombreEmpGenreInd(int inIndustrie, String genre, ArrayList<Employe> employeList){
+	public int nombreEmpGenreInd(int inIndustrie, String genre, ArrayList<Employe> employeList)
+	{
 
 		int nombreEmp = 0;
 
-		for (Employe employe : employeList){
-			if (employe.getIndustrie().getId_ind() == inIndustrie && employe.getSexe().equals(genre)){
+		for (Employe employe : employeList)
+		{
+			if (employe.getIndustrie().getId_ind() == inIndustrie && employe.getSexe().equals(genre))
+			{
 				nombreEmp++;
 			}
-			else if (employe.getIndustrie().getId_ind() == inIndustrie && genre.equals("")){
+			else if (employe.getIndustrie().getId_ind() == inIndustrie && genre.equals(""))
+			{
 				nombreEmp++;
 			}
 		}
