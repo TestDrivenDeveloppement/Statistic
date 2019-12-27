@@ -1,162 +1,158 @@
 package mathematical;
 
-import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import dao.DAOrequester;
-import dao.DAOverification;
+import dao.DAOconnexion;
+import daorefactoring.Dao;
+import daorefactoring.EmployeDAO;
+import daorefactoring.IntermediaireDAO;
+import model.Employe;
+import model.Intermediaire;
 
-public class MathematicalStatsCalculator extends DAOrequester{
+public class MathematicalStatsCalculator {
 
 	/**
-	 * @author Loic
-	 * @param idEntreprise
+	 * @author Kolawole
+	 * @param idIndustrie
 	 * @return la somme d'heures travaille par l'ensemble des employs dans une industrie
 	 */
-	public String getSommeHeureEmployeEntreprise(int idEntreprise){
+	public int getSomHeureEmpInd(int idIndustrie, ArrayList<Employe> employeList){
 
-		try{
-			// recuperer la liste de la table selectionnee
-			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM employe " +
-					"INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
-			return recupResultatRequete(requeteSelectionnee);
-		}catch (Exception e){return e.getMessage();}
+		int somme = 0;
+		for (Employe employe: employeList){
+			if (employe.getIndustrie().getId_ind() == idIndustrie){
+				somme += employe.getNb_heure();
+			}
+		}
 
+		return somme;
 	}
 
 
 	/**
-	 * @author Loic
-	 * @param idProj
+	 * @author Kolawole
+	 * @param idProjet
 	 * @return le nombre d'heures passes par tous les employes sur un même projet
 	 */
-	public String getSommeHeureEmployeProjet(int idProj){
+	public int getSomHeureEmpPro(int idProjet, ArrayList<Intermediaire> intermediaireList){
+		int somme = 0;
 
-		try{
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT SUM(nb_heure) AS somme FROM projet " +
-					"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' " +
-					"INNER JOIN employe ON fk_id_emp = id_emp";
-			return recupResultatRequete(requeteSelectionnee);
-		}catch (Exception e){return e.getMessage();}
+		for (Intermediaire intermediaire : intermediaireList){
+			if (intermediaire.getProjet().getId_projet() == idProjet){
+				somme += intermediaire.getEmploye().getNb_heure();
+			}
+		}
 
+		return somme;
 	}
 
 	/**
-	 * @author Loic
-	 * @param idEntreprise
+	 * @author Kolawole
+	 * @param id
 	 * @return la moyenne d'heures travaill�e par l'ensemble des employ�s dans une industrie
 	 */
-	public String getMoyenneHeureEmployeEntreprise(int idEntreprise){
+	public double getMoyHeureEmpInd(int id, ArrayList<Employe> employeList){
 
-		try{
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM employe " +
-					"INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
-			return recupResultatRequete(requeteSelectionnee);
-		}catch (Exception e){return e.getMessage();}
+		int total = 0;
+		double moyenne = 0;
+		for (Employe employe: employeList){
+			if (employe.getIndustrie().getId_ind() == id){
+				moyenne += employe.getNb_heure();
+				total ++;
+			}
+		}
+
+		moyenne = moyenne/total;
+
+		return moyenne;
 	}
 
 	/**
-	 * @author Loic
-	 * @param idProj
+	 * @author Kolawole
+	 * @param idProjet
 	 * @return la moyenne d'heures pass�s par tous les employ�s sur un même projet
 	 */
-	public String getMoyenneHeureEmployeProjet(int idProj){
+	public double getMoyHeureEmpPro(int idProjet, ArrayList<Intermediaire> intermediaireList){
 
-		try{
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT AVG(nb_heure) AS somme FROM projet " +
-					"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' " +
-					"INNER JOIN employe ON fk_id_emp = id_emp";
-			return recupResultatRequete(requeteSelectionnee);
-		}catch (Exception e){return e.getMessage();}
-	}
-
-	/**
-	 * @author Loic
-	 * @param idEntreprise
-	 * @return la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
-	 * @throws NumberFormatException
-	 */
-	public String getVarianceHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException{
-
-		try{
-			ArrayList<String> listeHeure;
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT nb_heure FROM employe " +
-					"INNER JOIN industrie ON id_ind='"+idEntreprise+"'";
-
-			listeHeure = remplirChampsRequete(requeteSelectionnee);
-			double somme=0;
-			double moyenneHeure = Double.parseDouble(getMoyenneHeureEmployeEntreprise(idEntreprise));
-			// afficher les lignes de la requete selectionnee a partir de la liste
-
-			for (String s : listeHeure) {
-				somme = Math.pow((Double.parseDouble(s) - moyenneHeure), 2) + somme;
+		int total = 0;
+		double moyenne = 0;
+		for (Intermediaire intermediaire : intermediaireList){
+			if (intermediaire.getProjet().getId_projet() == idProjet){
+				moyenne += intermediaire.getEmploye().getNb_heure();
+				total++;
 			}
+		}
 
-			return Double.toString(somme/listeHeure.size());
-		}catch (Exception e){return e.getMessage();}
+		moyenne = moyenne/total;
 
+		return moyenne;
 	}
 
 	/**
-	 * @author Loic
-	 * @param idProj
+	 * @author Kolawole
+	 * @param idIndustrie
+	 * @return la variance d'heures travaill�es par l'ensemble des employ�s dans une industrie
+	 */
+	public double getVarianceHeureEmpInd(int idIndustrie, ArrayList<Employe> employeList){
+		double variance = 0;
+		int total = 0;
+		for (Employe employe: employeList){
+			if (employe.getIndustrie().getId_ind() == idIndustrie){
+				variance += Math.pow(employe.getNb_heure() - getMoyHeureEmpInd(idIndustrie, employeList), 2);
+				total++;
+			}
+		}
+		variance = variance / total;
+
+		return variance;
+	}
+
+
+	/**
+	 * @author Kolawole
+	 * @param idProjet
 	 * @return la variance d'heures travaill�es par l'ensemble des employ�s sur un projet
 	 */
-	public String getVarianceHeureEmployeProjet(int idProj){
+	public double getVarianceHeureEmpPro(int idProjet, ArrayList<Intermediaire> intermediaireList){
 
-		try{
-			ArrayList<String> listeHeure;
-			// recuperer la liste de la table s�lectionn�e
-			String requeteSelectionnee = "SELECT nb_heure FROM projet " +
-					"INNER JOIN intermediaire ON fk_id_projet='"+idProj+"' " +
-					"INNER JOIN employe ON fk_id_emp = id_emp";
-
-			listeHeure = remplirChampsRequete(requeteSelectionnee);
-			double somme=0;
-			double moyenneHeure = Double.parseDouble(getMoyenneHeureEmployeProjet(idProj));
-			// afficher les lignes de la requete selectionnee a partir de la liste
-
-			for (String s : listeHeure) {
-				somme = Math.pow((Double.parseDouble(s) - moyenneHeure), 2) + somme;
+		int total = 0;
+		double variance = 0;
+		for (Intermediaire intermediaire : intermediaireList){
+			if (intermediaire.getProjet().getId_projet() == idProjet){
+				variance += Math.pow(intermediaire.getEmploye().getNb_heure() -
+						getMoyHeureEmpPro(idProjet, intermediaireList), 2);
+				total++;
 			}
+		}
 
-			return Double.toString(somme/listeHeure.size());
-		}catch (Exception e){return e.getMessage();}
+		variance = variance / total;
 
+		return variance;
 	}
 
 	/**
-	 * @author Loic
-	 * @param idEntreprise
+	 * @author Kolawole
+	 * @param idIndustrie
 	 * @return l'ecart type d'heures travaillees par l'ensemble des employes dans une industrie
-	 * @throws NumberFormatException
 	 */
-	public String getEcartTypeHeureEmployeEntreprise(int idEntreprise) throws NumberFormatException{
+	public double getEcartTypeHeureEmpInd(int idIndustrie, ArrayList<Employe> employeList){
+		double ecarType = 0;
 
-		try{
-			return Double.toString(Math.sqrt(
-					Double.parseDouble(getVarianceHeureEmployeEntreprise(idEntreprise))));
-		}catch (Exception e){return e.getMessage();}
+		ecarType = Math.sqrt(getVarianceHeureEmpInd(idIndustrie, employeList));
 
+		return ecarType;
 	}
 
 	/**
-	 * @author Loic
-	 * @param idProjet
+	 * @author Kolawole
+	 * @param inProjet
 	 * @return l'ecart type d'heures travaillees par l'ensemble des employes sur un projet
-	 * @throws NumberFormatException
 	 */
-	public String getEcartTypeHeureEmployeProjet(int idProjet) throws NumberFormatException{
+	public double getEcartTypeHeureEmpPro(int inProjet, ArrayList<Intermediaire> intermediaireList){
+		double ecarType = 0;
 
+		ecarType = Math.sqrt(getVarianceHeureEmpPro(inProjet, intermediaireList));
 
-		try{
-			return Double.toString(Math.sqrt(Double.parseDouble(getVarianceHeureEmployeProjet(idProjet))));
-		}catch (Exception e){return e.getMessage();}
+		return ecarType;
 	}
-
 }

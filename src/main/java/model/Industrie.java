@@ -2,8 +2,8 @@ package model;
 
 public class Industrie {
 
-  private int id_ind = 0;
-  private String nom_ind ="";
+  private int id_ind;
+  private String nom_ind;
 
   public Industrie(int id_ind, String nom_ind) {
     this.id_ind = id_ind;

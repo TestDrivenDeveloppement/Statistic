@@ -1,6 +1,15 @@
 package menuPrincipal;
 
 import dao.DAOconnexion;
+import daorefactoring.*;
+import mathematical.MathematicalStatsCalculator;
+import mathematical.SalaireCalculator;
+import model.Employe;
+import model.Industrie;
+import model.Intermediaire;
+import model.Projet;
+
+import java.util.ArrayList;
 
 public class Statistic {
 
@@ -107,6 +116,21 @@ public class Statistic {
         }
         System.out.println("\t Merci et a bientot");
         DAOconnexion.closeConnection();
+
+        /*IndustrieDAO indDao = new IndustrieDAO(DAOconnexion.getInstance());
+
+        Industrie ind = indDao.find(1);
+
+        /*for (Industrie industrie: ind){
+            System.out.println(industrie.getNom_ind());
+        }*/
+        //System.out.println(ind.getNom_ind());
+        //System.out.println(ind);
+
+        /*SalaireCalculator sc = new SalaireCalculator();
+        //System.out.println(sc.nombreEmpGenreInd(1, "M"));
+        sc.superSatInd(1);
+        DAOconnexion.closeConnection();*/
 
     }
 }

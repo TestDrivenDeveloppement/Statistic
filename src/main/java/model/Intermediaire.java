@@ -2,25 +2,27 @@ package model;
 
 public class Intermediaire {
 
-  private int id = 0;
-  private int FK_id_emp = 0;
-  private int FK_id_projet = 0;
+  private int id;
+  private Employe employe;
+  private Projet projet;
 
-  public Intermediaire(int id, int FK_id_emp, int FK_id_projet) {
+  public Intermediaire(int id, Employe employe, Projet projet) {
     this.id = id;
-    this.FK_id_emp = FK_id_emp;
-    this.FK_id_projet = FK_id_projet;
+    this.employe = employe;
+    this.projet = projet;
   }
+
+  public Intermediaire(){}
 
   public int getId() {
     return id;
   }
 
-  public int getFK_id_emp() {
-    return FK_id_emp;
+  public Employe getEmploye() {
+    return employe;
   }
 
-  public int getFK_id_projet() {
-    return FK_id_projet;
+  public Projet getProjet() {
+    return projet;
   }
 }

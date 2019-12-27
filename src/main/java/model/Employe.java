@@ -2,21 +2,25 @@ package model;
 
 public class Employe {
 
-  private int id_emp = 0;
-  private String nom = "";
-  private String statut = "";
-  private int nb_heure = 0;
-  private int FK_id_ind = 0;
-  private String sexe = "";
+  private int id_emp;
+  private String nom;
+  private String prenom;
+  private String statut;
+  private int nb_heure;
+  private Industrie industrie;
+  private String sexe;
 
-  public Employe(int id_emp, String nom, String statut, int nb_heure, int FK_id_ind, String sexe) {
+  public Employe(int id_emp, String nom, String prenom, String statut, int nb_heure, Industrie industrie, String sexe) {
     this.id_emp = id_emp;
     this.nom = nom;
+    this.prenom = prenom;
     this.statut = statut;
     this.nb_heure = nb_heure;
-    this.FK_id_ind = FK_id_ind;
+    this.industrie = industrie;
     this.sexe = sexe;
   }
+
+  public Employe(){}
 
   public int getId_emp() {
     return id_emp;
@@ -24,6 +28,10 @@ public class Employe {
 
   public String getNom() {
     return nom;
+  }
+
+  public String getPrenom() {
+    return prenom;
   }
 
   public String getStatut() {
@@ -34,8 +42,8 @@ public class Employe {
     return nb_heure;
   }
 
-  public int getFK_id_ind() {
-    return FK_id_ind;
+  public Industrie getIndustrie() {
+    return industrie;
   }
 
   public String getSexe() {

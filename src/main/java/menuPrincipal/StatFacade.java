@@ -1,9 +1,15 @@
 package menuPrincipal;
 
-import dao.DAOrequester;
-import dao.DAOverification;
+import dao.DAOconnexion;
+import daorefactoring.Dao;
+import daorefactoring.EmployeDAO;
+import daorefactoring.IndustrieDAO;
+import daorefactoring.IntermediaireDAO;
 import mathematical.MathematicalStatsCalculator;
 import mathematical.SalaireCalculator;
+import model.Employe;
+import model.Industrie;
+import model.Intermediaire;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,11 +19,12 @@ public class StatFacade {
     private Scanner scan;
     private MathematicalStatsCalculator msc;
     private SalaireCalculator sc;
-    private DAOverification verif;
+
+    private Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
+    private Dao<Intermediaire> intermediaireDao = new IntermediaireDAO(DAOconnexion.getInstance());
 
     public StatFacade(){
         this.msc = new MathematicalStatsCalculator();
-        this.verif = new DAOverification();
         this.sc = new SalaireCalculator();
         this.scan = new Scanner(System.in);
     }
@@ -40,51 +47,44 @@ public class StatFacade {
     public void menuDataEmpInd(){
         System.out.println("Sélectionnez l'entreprise souhaitée (entrez l'id):\n");
 
-        DAOrequester.afficherLignes("Industrie");//Afficher la liste des industries
+        Dao.afficheTable("Industrie");//Afficher la liste des industries
 
         int indChoice = scan.nextInt();
 
-        //On vérifie que l'ID est bien présent dans la table
-        if (verif.verifValiditeID(indChoice, "industrie") && verif.verifDataInDB(indChoice, "industrie")){
+        System.out.println("\n Moyenne d'heure des employés pour l'entreprise :"
+                + msc.getMoyHeureEmpInd(indChoice, employeDao.findAll()));
 
-            System.out.println("\n Moyenne d'heure des employés pour l'entreprise :"
-                    + msc.getMoyenneHeureEmployeEntreprise(indChoice));
+        System.out.println("\n Somme d'heure des employés pour l'entreprise : "+
+                msc.getSomHeureEmpInd(indChoice, employeDao.findAll()));
 
-            System.out.println("\n Somme d'heure des employés pour l'entreprise : "+
-                    msc.getSommeHeureEmployeEntreprise(indChoice));
+        System.out.println("\n Variance d'heure des employés pour l'entreprise :"+
+                msc.getVarianceHeureEmpInd(indChoice, employeDao.findAll()));
 
-            System.out.println("\n Variance d'heure des employés pour l'entreprise :"+
-                    msc.getVarianceHeureEmployeEntreprise(indChoice));
-
-            System.out.println("\n Ecart-Type d'heure des employés pour l'entreprise : "+
-                    msc.getEcartTypeHeureEmployeEntreprise(indChoice));
-        }
+        System.out.println("\n Ecart-Type d'heure des employés pour l'entreprise : "+
+                msc.getEcartTypeHeureEmpInd(indChoice, employeDao.findAll()));
 
     }
 
     public void menuDataEmpPro(){
         System.out.println("Séléctionnez le projet souhaité (entrez l'id) ");
 
-        DAOrequester.afficherLignes("Projet"); //Afficher la liste des projets
+        Dao.afficheTable("Projet"); //Afficher la liste des projets
 
         int proChoice = scan.nextInt();
 
-        //On vérifie que l'ID est bien présent dans la table
-        if (verif.verifValiditeID(proChoice, "projet") && verif.verifDataInDB(proChoice, "projet")){
+        System.out.println("\n Moyenne d'heure des employés pour le projet :"+
+                msc.getMoyHeureEmpPro(proChoice, intermediaireDao.findAll()));
 
-            System.out.println("\n Moyenne d'heure des employés pour le projet :"+
-                    msc.getMoyenneHeureEmployeProjet(proChoice));
+        System.out.println("\n Somme d'heure des employés pour le projet : "+
+                msc.getSomHeureEmpPro(proChoice, intermediaireDao.findAll()));
 
-            System.out.println("\n Somme d'heure des employés pour le projet : "+
-                    msc.getSommeHeureEmployeProjet(proChoice));
+        System.out.println("\n Variance d'heure des employés pour le projet :"+
+                msc.getVarianceHeureEmpPro(proChoice, intermediaireDao.findAll()));
 
-            System.out.println("\n Variance d'heure des employés pour le projet :"+
-                    msc.getVarianceHeureEmployeProjet(proChoice));
+        System.out.println("\n Ecart-Type d'heure des employés pour le projet : "+
+                msc.getEcartTypeHeureEmpPro(proChoice, intermediaireDao.findAll()));
 
-            System.out.println("\n Ecart-Type d'heure des employés pour le projet : "+
-                    msc.getEcartTypeHeureEmployeProjet(proChoice));
 
-        }
 
     }
 
@@ -104,19 +104,17 @@ public class StatFacade {
     }
 
     public void primeEmp(){
-        sc.calcul_prime();
+        sc.primeEmp();
     }
 
     public void salaireMenInd(){
-        DAOrequester.afficherLignes("industrie");
+        Dao.afficheTable("industrie");
 
         System.out.print("Saisissez l'Id de l'entreprise: ");
         int indChoice = scan.nextInt();
 
-        if(verif.verifValiditeID(indChoice, "industrie") && verif.verifDataInDB(indChoice, "industrie")) {
-            double result_moy = sc.salaire_entreprise(indChoice);
-            System.out.println("\nLe salaire mensuel moyen de l'entreprise est de: " + result_moy + "€\n");
-        }
+        double result_moy = sc.salaireMoyInd(indChoice);
+        System.out.println("\nLe salaire mensuel moyen de l'entreprise est de: " + result_moy + "€\n");
 
     }
 
@@ -134,29 +132,23 @@ public class StatFacade {
 
     public void salaireSexeInd(int sexe){
 
-        DAOrequester.afficherLignes("industrie");
+        Dao.afficheTable("industrie");
         System.out.print("Saisissez l'Id de l'entreprise: ");
 
         int indChoice = scan.nextInt();
 
         switch(sexe){
             case 1:
-                if(verif.verifValiditeID(indChoice, "industrie") &&
-                        verif.verifDataInDB(indChoice, "industrie")) {
+                double result_masculin = sc.salaireMoyIndGenre(indChoice, "M");
 
-                    double result_masculin = sc.salaire_cond("sexe", "M", indChoice);
-
-                    System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " +
-                            result_masculin + "€\n");}
+                System.out.println("Le salaire mensuel moyen de l'entreprise pour un homme est de: " +
+                        result_masculin + "€\n");
                 break;
             case 2:
-                if(verif.verifValiditeID(indChoice, "industrie") &&
-                        verif.verifDataInDB(indChoice, "industrie")) {
+                double result_feminin = sc.salaireMoyIndGenre(indChoice, "F");
 
-                    double result_feminin = sc.salaire_cond("sexe","F", indChoice);
-
-                    System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: " +
-                            result_feminin + "€\n");}
+                System.out.println("Le salaire mensuel moyen de l'entreprise pour une femme est de: " +
+                            result_feminin + "€\n");
                 break;
 
             default :
@@ -180,40 +172,29 @@ public class StatFacade {
 
     public void salaireStatusInd(int status){
 
-        DAOrequester.afficherLignes("industrie");
+        Dao.afficheTable("industrie");
         System.out.print("Saisissez l'Id de l'entreprise: ");
 
         int indChoice = scan.nextInt();
 
         switch(status){
             case 1:
-                if(verif.verifValiditeID(indChoice, "industrie") &&
-                        verif.verifDataInDB(indChoice, "industrie")) {
+                double result_cadre = sc.salaireMoyIndGenre(indChoice, "Cadre");
 
-                    double result_cadre = sc.salaire_cond("statut", "Cadre", indChoice);
-
-                    System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: " +
-                            result_cadre + "€\n");}
+                System.out.println("Le salaire mensuel moyen de l'entreprise pour un cadre est de: " +
+                        result_cadre + "€\n");
                 break;
             case 2:
-                if(verif.verifValiditeID(indChoice, "industrie") &&
-                        verif.verifDataInDB(indChoice, "industrie")) {
+                double result_emp = sc.salaireMoyIndGenre(indChoice, "Employe");
 
-                    double result_emp = sc.salaire_cond("statut", "Employe", indChoice);
-
-                    System.out.println("Le salaire mensuel moyen de l'entreprise pour un employé est de: " +
-                            result_emp + "€\n");}
+                System.out.println("Le salaire mensuel moyen de l'entreprise pour un employé est de: " +
+                        result_emp + "€\n");
                 break;
             case 3:
+                double result_stagiaire = sc.salaireMoyIndGenre(indChoice, "Stagiaire");
 
-                if(verif.verifValiditeID(indChoice, "industrie") &&
-                        verif.verifDataInDB(indChoice, "industrie")) {
-
-                    double result_stagiaire = sc.salaire_cond("statut",
-                            "Stagiaire", indChoice);
-
-                    System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " +
-                            result_stagiaire + "€\n");}
+                System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " +
+                        result_stagiaire + "€\n");
                 break;
         }
     }
@@ -234,19 +215,18 @@ public class StatFacade {
 
         switch(emp){
             case 1:
-                sc.sal_employes();
+                sc.salaireAllEmp();
                 break;
 
             case 2:
-                DAOrequester.afficherLignes("employe");
+                Dao.afficheTable("employe");
 
                 System.out.print("\nSaisissez l'id de l'employé: ");
 
                 int idEmp = scan.nextInt(); // choix employe
 
-                if(verif.verifValiditeID(idEmp, "employe")&&verif.verifDataInDB(idEmp, "employe")) {
-                    double result = sc.sal_employe(idEmp);
-                    System.out.println("Salaire: " + result + " €/mois");}
+                double result = sc.salaireOneEmp(idEmp);
+                System.out.println("Salaire: " + result + " €/mois");
                 break;
         }
     }
@@ -273,32 +253,33 @@ public class StatFacade {
 
         System.out.println("Comparaison des salaires selon le statut :");
 
-        ArrayList<Integer> listOfId= DAOrequester.listeIdTable("industrie");
+        Dao<Industrie> industrieDao = new IndustrieDAO(DAOconnexion.getInstance());
+
+        ArrayList<Industrie> industrieList = industrieDao.findAll();
 
         switch(new Scanner(System.in).nextInt()) {
 
             case 1:
-
-                for (Integer integer : listOfId) {
-                    System.out.println("L'entreprise : " + DAOrequester.nameInTable(integer,
-                            "industrie") + " offre comme salaire moyen a ses stagiaires : " +
-                            sc.salaire_cond("statut", "stagiaire", integer) + " euros");
+                for (Industrie industrie : industrieList) {
+                    System.out.println("L'entreprise : " + industrie.getNom_ind() +
+                            " offre comme salaire moyen a ses stagiaires : " +
+                            sc.salaireMoyIndGenre(industrie.getId_ind(), "Stagiaire") + " euros");
                 }
                 break;
 
             case 2:
-                for (Integer value : listOfId) {
-                    System.out.println("L'entreprise : " + DAOrequester.nameInTable(value,
-                            "industrie") + " offre comme salaire moyen a ses employes : " +
-                            sc.salaire_cond("statut", "employe", value) + " euros");
+                for (Industrie industrie : industrieList) {
+                    System.out.println("L'entreprise : " + industrie.getNom_ind() +
+                            " offre comme salaire moyen a ses employes : " +
+                            sc.salaireMoyIndGenre(industrie.getId_ind(), "Employe") + " euros");
                 }
                 break;
 
             case 3:
-                for (Integer integer : listOfId) {
-                    System.out.println("L'entreprise : " + DAOrequester.nameInTable(integer,
-                            "industrie") + " offre comme salaire moyen a ses cadres : " +
-                            sc.salaire_cond("statut", "cadre", integer) + " euros");
+                for (Industrie industrie : industrieList) {
+                    System.out.println("L'entreprise : " + industrie.getNom_ind() +
+                            " offre comme salaire moyen a ses cadres : " +
+                            sc.salaireMoyIndGenre(industrie.getId_ind(), "Cadre") + " euros");
                 }
                 break;
 
@@ -315,23 +296,25 @@ public class StatFacade {
 
         System.out.println("Comparaison des salaires selon le genre :");
 
-        ArrayList<Integer> listOfId = DAOrequester.listeIdTable("industrie");
+        Dao<Industrie> industrieDao = new IndustrieDAO(DAOconnexion.getInstance());
+
+        ArrayList<Industrie> industrieList = industrieDao.findAll();
         switch(new Scanner(System.in).nextInt()) {
 
             case 1:
 
-                for (Integer integer : listOfId) {
-                    System.out.println("L'entreprise : " + DAOrequester.nameInTable(integer,
-                            "industrie") + " offre comme salaire moyen a ses hommes : " +
-                            sc.salaire_cond("sexe", "M", integer) + " euros");
+                for (Industrie industrie : industrieList) {
+                    System.out.println("L'entreprise : " + industrie.getNom_ind() +
+                            " offre comme salaire moyen a ses hommes : " +
+                            sc.salaireMoyIndGenre(industrie.getId_ind(), "M") + " euros");
                 }
                 break;
 
             case 2:
-                for (Integer integer : listOfId) {
-                    System.out.println("L'entreprise : " + DAOrequester.nameInTable(integer,
-                            "industrie") + " offre comme salaire moyen a ses femmes : " +
-                            sc.salaire_cond("sexe", "F", integer) + " euros");
+                for (Industrie industrie : industrieList) {
+                    System.out.println("L'entreprise : " + industrie.getNom_ind() +
+                            " offre comme salaire moyen a ses femmes : " +
+                            sc.salaireMoyIndGenre(industrie.getId_ind(), "F") + " euros");
                 }
                 break;
 
@@ -348,13 +331,12 @@ public class StatFacade {
         switch(new Scanner(System.in).nextInt()) {
 
             case 1:
-                ArrayList<Integer> listOfId = DAOrequester.listeIdTable("industrie");
-                System.out.println("Veuillez sélectionnez votre entreprise :");
-                for (Integer integer : listOfId) {
-                    System.out.println(integer + ". " + DAOrequester.nameInTable(integer, "industrie"));
-                }
 
-                sc.superStatInd(new Scanner(System.in).nextInt());
+                System.out.println("Veuillez sélectionnez votre entreprise :");
+
+                Dao.afficheTable("industrie");
+
+                sc.superSatInd(new Scanner(System.in).nextInt());
 
                 break;
 

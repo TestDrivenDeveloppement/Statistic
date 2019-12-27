@@ -5,6 +5,7 @@ import model.Industrie;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class IndustrieDAO extends Dao<Industrie>{
 
@@ -16,16 +17,34 @@ public class IndustrieDAO extends Dao<Industrie>{
         Industrie industrie = new Industrie();
 
         try {
-            ResultSet result = this.connect.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM industrie WHERE id_ind = " + id);
-            if(result.first())
-                industrie = new Industrie(
-                        id,
-                        result.getString("nom_ind"));
+            ResultSet result = this.connect.createStatement()
+                    .executeQuery("SELECT * FROM industrie WHERE id_ind = " + id);
+
+            if(result.next()){
+                industrie = new Industrie(id, result.getString("nom_ind"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return industrie;
+    }
+
+    public ArrayList<Industrie> findAll(){
+        Industrie industrie;
+        ArrayList<Industrie> indList = new ArrayList<Industrie>();
+
+        try {
+            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM industrie");
+            while (result.next()){ // tant que y a des elements
+                industrie = new Industrie(
+                        result.getInt("id_ind"),
+                        result.getString("nom_ind"));
+                indList.add(industrie);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return indList;
     }
 }

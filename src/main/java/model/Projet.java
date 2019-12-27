@@ -2,15 +2,17 @@ package model;
 
 public class Projet {
 
-  private int id_projet = 0;
-  private String nom_projet = "";
-  private int FK_id_ind = 0;
+  private int id_projet;
+  private String nom_projet;
+  private Industrie industrie;
 
-  public Projet(int id_projet, String nom_projet, int FK_id_ind) {
+  public Projet(int id_projet, String nom_projet, Industrie industrie) {
     this.id_projet = id_projet;
     this.nom_projet = nom_projet;
-    this.FK_id_ind = FK_id_ind;
+    this.industrie = industrie;
   }
+
+  public Projet(){}
 
   public int getId_projet() {
     return id_projet;
@@ -20,7 +22,7 @@ public class Projet {
     return nom_projet;
   }
 
-  public int getFK_id_ind() {
-    return FK_id_ind;
+  public Industrie getIndustrie() {
+    return industrie;
   }
 }
