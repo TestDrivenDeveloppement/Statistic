@@ -11,11 +11,8 @@ package dao;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 
 /**
  * 
@@ -23,7 +20,8 @@ import java.util.ArrayList;
  * 
  * @author segado
  */
-public final class DAOconnexion {
+public final class DAOconnexion
+{
 
 	//Objet Connection
 	private static Connection connect;
@@ -31,14 +29,17 @@ public final class DAOconnexion {
 	/**
 	 * private constructor
 	 */
-	private DAOconnexion(){
-		try {
+	private DAOconnexion()
+	{
+		try
+		{
 			Class.forName("org.sqlite.JDBC");
 			// db parameters
 			String url = "jdbc:sqlite:db_tdd.db";
 			// create a connection to the database
 			connect = DriverManager.getConnection(url);
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -47,8 +48,10 @@ public final class DAOconnexion {
 	/**Initiate only one connection to the DB
 	 *
 	 */
-	public synchronized static Connection getInstance(){
-		if(connect == null){
+	public synchronized static Connection getInstance()
+	{
+		if(connect == null)
+		{
 			new DAOconnexion();
 		}
 		return connect;
@@ -57,10 +60,13 @@ public final class DAOconnexion {
 	/**Close the connection to the DB
 	 *
 	 */
-	public static void closeConnection(){
-		try {
+	public static void closeConnection()
+	{
+		try
+		{
 			connect.close();
-		} catch (SQLException e) {
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}

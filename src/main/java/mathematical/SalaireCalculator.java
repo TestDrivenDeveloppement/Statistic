@@ -16,10 +16,9 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public void primeEmp(){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
+	public String primeEmp(ArrayList<Employe> employeList){
 
-		ArrayList<Employe> employeList = employeDao.findAll();
+		String result = "";
 
 		for (Employe employe : employeList) {
 			double prime = 0;
@@ -57,10 +56,12 @@ public class SalaireCalculator {
 					System.out.println("Erreur ");
 					break;
 			}
-			System.out.println(employe.getNom() + " " + employe.getPrenom() +
-					" ---> Prime: " + prime + "€/mois\n");
+
+			result += employe.getNom() + " " + employe.getPrenom() +
+					" ---> Prime: " + prime + "€/mois\n";
 
 		}
+		return result;
 	}
 
 	/**
@@ -70,12 +71,11 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modifications
 	 */
-	public void salaireAllEmp(){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		ArrayList<Employe> employeList = employeDao.findAll();
+	public String salaireAllEmp(ArrayList<Employe> employeList){
 
 		double salaire = 0;
+
+		String result = "";
 
 		for (Employe employe : employeList){
 			switch (employe.getStatut()) {
@@ -95,9 +95,11 @@ public class SalaireCalculator {
 					System.out.println("Erreur ");
 					break;
 			}
-			System.out.println(employe.getNom() + " " + employe.getPrenom() +
-					" ---> Salaire: " + salaire + "€/mois\n");
+			result += employe.getNom() + " " + employe.getPrenom() +
+					" ---> Salaire: " + salaire + "€/mois\n";
 		}
+
+		return result;
 	}
 
 
@@ -108,11 +110,7 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaireOneEmp(int idEmp){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		Employe employe = employeDao.find(idEmp);
-
+	public double salaireOneEmp(Employe employe){
 		double salaire = 0;
 
 		switch (employe.getStatut()) {
@@ -145,11 +143,7 @@ public class SalaireCalculator {
 	 * @author Loic
 	 * Modification
 	 */
-	public double salaireMoyInd(int idIndustrie){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		ArrayList<Employe> employeList = employeDao.findAll();
-
+	public double salaireMoyInd(int idIndustrie, ArrayList<Employe> employeList){
 		double salaireMoy = 0;
 		int total = 0;
 
@@ -191,10 +185,7 @@ public class SalaireCalculator {
 	 *@author Loic
 	 *Ré-ecriture
 	 */
-	public double salaireMoyIndGenre(int idIndustrie, String condition){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		ArrayList<Employe> employeList = employeDao.findAll();
+	public double salaireMoyIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList){
 
 		double salaireMoy = 0;
 		int total = 0;
@@ -245,10 +236,7 @@ public class SalaireCalculator {
 	 *@author Loic
 	 *Ecriture
 	 */
-	public double salaireMoyAutreIndGenre(int idIndustrie, String condition){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		ArrayList<Employe> employeList = employeDao.findAll();
+	public double salaireMoyAutreIndGenre(int idIndustrie, String condition, ArrayList<Employe> employeList){
 
 		double salaireMoy = 0;
 		int total = 0;
@@ -298,30 +286,31 @@ public class SalaireCalculator {
 	 * @param idIndustrie
 	 * @author Kolawole
 	 */
-	public void superSatInd(int idIndustrie){
+	public String superSatInd(int idIndustrie, ArrayList<Employe> employeList){
 
-		double nbreEmploye = nombreEmpGenreInd(idIndustrie, "");
-		double nbreEmployeM = nombreEmpGenreInd(idIndustrie, "M");
-		double nbreEmployeF = nombreEmpGenreInd(idIndustrie, "F");
+		String result = "";
+		double nbreEmploye = nombreEmpGenreInd(idIndustrie, "", employeList);
+		double nbreEmployeM = nombreEmpGenreInd(idIndustrie, "M", employeList);
+		double nbreEmployeF = nombreEmpGenreInd(idIndustrie, "F", employeList);
 
-		double salaireMoyStagiaire = salaireMoyIndGenre(idIndustrie, "Stagiaire");
-		double salaireMoyEmploye = salaireMoyIndGenre(idIndustrie, "Employe");
-		double salaireMoyCadre = salaireMoyIndGenre(idIndustrie, "Cadre");
+		double salaireMoyStagiaire = salaireMoyIndGenre(idIndustrie, "Stagiaire", employeList);
+		double salaireMoyEmploye = salaireMoyIndGenre(idIndustrie, "Employe", employeList);
+		double salaireMoyCadre = salaireMoyIndGenre(idIndustrie, "Cadre", employeList);
 
-		double salaireMoyAutreStagiaire = salaireMoyAutreIndGenre(idIndustrie, "Stagiaire");
-		double salaireMoyAutreEmploye = salaireMoyAutreIndGenre(idIndustrie, "Employe");
-		double salaireMoyAutreCadre = salaireMoyAutreIndGenre(idIndustrie, "Cadre");
+		double salaireMoyAutreStagiaire = salaireMoyAutreIndGenre(idIndustrie, "Stagiaire", employeList);
+		double salaireMoyAutreEmploye = salaireMoyAutreIndGenre(idIndustrie, "Employe", employeList);
+		double salaireMoyAutreCadre = salaireMoyAutreIndGenre(idIndustrie, "Cadre", employeList);
 
-		System.out.println("Votre entreprise compte : " + nbreEmploye + " employes");
+		result += "Votre entreprise compte : " + nbreEmploye + " employes\n";
 
-		System.out.println("Parmis ces employes, vous comptez " + nbreEmployeM + " hommes ("
+		result += "Parmis ces employes, vous comptez " + nbreEmployeM + " hommes ("
 				+ ((nbreEmployeM/nbreEmploye)*100) + "%) et "+nbreEmployeF
-				+ " femmes (" + (((float)nbreEmployeF/(float)nbreEmploye)*100)+"%)");
+				+ " femmes (" + (((float)nbreEmployeF/(float)nbreEmploye)*100)+"%)\n";
 
-		System.out.println("\t ........................... \t");
-		System.out.println("Salaire moyen au sein de l'entreprise :"+ salaireMoyInd(idIndustrie));
+		result += "\t ........................... \t\n";
+		result += "Salaire moyen au sein de l'entreprise :"+ salaireMoyInd(idIndustrie, employeList) + "\n";
 
-		System.out.println("Salaire par statut : " +
+		result += "Salaire par statut : " +
 				"\n 1. Stagiaire : " + salaireMoyStagiaire + " euros" +
 				" \n \t => Un stagiaire touche en moyenne " +
 				((float) salaireMoyStagiaire / (float)salaireMoyAutreStagiaire) * 100 +
@@ -333,15 +322,13 @@ public class SalaireCalculator {
 				" \n 3. Cadre : " + salaireMoyCadre + " euros" +
 				" \n \t => Un cadre touche en moyenne " +
 				((float) salaireMoyCadre / (float)salaireMoyAutreCadre)*100 +
-				"% que dans une autre entreprise"
-		);
+				"% que dans une autre entreprise\n";
+
+		return result;
 
 	}
 
-	public int nombreEmpGenreInd(int inIndustrie, String genre){
-		Dao<Employe> employeDao = new EmployeDAO(DAOconnexion.getInstance());
-
-		ArrayList<Employe> employeList = employeDao.findAll();
+	public int nombreEmpGenreInd(int inIndustrie, String genre, ArrayList<Employe> employeList){
 
 		int nombreEmp = 0;
 

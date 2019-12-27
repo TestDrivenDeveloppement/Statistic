@@ -1,8 +1,6 @@
 package daorefactoring;
 
 import model.Employe;
-import model.Industrie;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

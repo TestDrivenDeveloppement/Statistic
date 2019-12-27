@@ -28,6 +28,8 @@ public class MathematicalStatsCalculatorTest {
     private static MathematicalStatsCalculator msctest;
     private static Dao<Employe> empDaotest =  new EmployeDAOMock(null);
     private static Dao<Intermediaire> intermediaireDaotest = new IntermediaireDaoMock(null);
+    private static ArrayList<Employe> employeListest;
+    private static ArrayList<Intermediaire> intermediaireListest;
 
     public MathematicalStatsCalculatorTest() {
         msctest = new MathematicalStatsCalculator();
@@ -35,13 +37,14 @@ public class MathematicalStatsCalculatorTest {
     
     @BeforeClass
     public static void setUpClass() {
-        msctest = new MathematicalStatsCalculator();
+        intermediaireListest  = intermediaireDaotest.findAll();
+        employeListest = empDaotest.findAll();
     }
     
     @AfterClass
     public static void tearDownClass() {
-        empDaotest.findAll().clear();
-        intermediaireDaotest.findAll().clear();
+        employeListest.clear();
+        intermediaireListest.clear();
     }
     
     @Before
@@ -60,7 +63,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getSomHeureEmpInd");
         int idIndustrie = 1;
         int expResult = 550;
-        int result = msctest.getSomHeureEmpInd(idIndustrie, empDaotest.findAll());
+        int result = msctest.getSomHeureEmpInd(idIndustrie, employeListest);
         assertEquals(expResult, result);
     }
 
@@ -72,7 +75,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getSomHeureEmpPro");
         int idIndustrie = 1;
         int expResult = 610;
-        int result = msctest.getSomHeureEmpPro(idIndustrie, intermediaireDaotest.findAll());
+        int result = msctest.getSomHeureEmpPro(idIndustrie, intermediaireListest);
         assertEquals(expResult, result);
     }
 
@@ -84,7 +87,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getMoyHeureEmpInd");
         int idIndustrie = 1;
         int expResult = 275;
-        int result = (int)msctest.getMoyHeureEmpInd(idIndustrie, empDaotest.findAll());
+        int result = (int)msctest.getMoyHeureEmpInd(idIndustrie, employeListest);
         assertEquals(expResult, result);
     }
 
@@ -96,7 +99,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getMoyHeureEmpPro");
         int idIndustrie = 1;
         int expResult = 305;
-        int result = (int)msctest.getMoyHeureEmpPro(idIndustrie, intermediaireDaotest.findAll());
+        int result = (int)msctest.getMoyHeureEmpPro(idIndustrie, intermediaireListest);
         assertEquals(expResult, result);
     }
 
@@ -108,7 +111,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getVarianceHeureEmpInd");
         int idIndustrie = 1;
         int expResult = 625;
-        int result = (int)msctest.getVarianceHeureEmpInd(idIndustrie, empDaotest.findAll());
+        int result = (int)msctest.getVarianceHeureEmpInd(idIndustrie, employeListest);
         assertEquals(expResult, result);
     }
 
@@ -120,7 +123,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getVarianceHeureEmpPro");
         int idIndustrie = 1;
         int expResult = 2500;
-        int result = (int)msctest.getVarianceHeureEmpPro(idIndustrie, intermediaireDaotest.findAll());
+        int result = (int)msctest.getVarianceHeureEmpPro(idIndustrie, intermediaireListest);
         assertEquals(expResult, result);
     }
 
@@ -132,7 +135,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getEcartTypeHeureEmpInd");
         int idIndustrie = 1;
         int expResult = 25;
-        int result = (int)msctest.getEcartTypeHeureEmpInd(idIndustrie, empDaotest.findAll());
+        int result = (int)msctest.getEcartTypeHeureEmpInd(idIndustrie, employeListest);
         assertEquals(expResult, result);
     }
 
@@ -144,7 +147,7 @@ public class MathematicalStatsCalculatorTest {
         System.out.println("getEcartTypeHeureEmpPro");
         int idIndustrie = 1;
         int expResult = 50;
-        int result = (int)msctest.getEcartTypeHeureEmpPro(idIndustrie, intermediaireDaotest.findAll());
+        int result = (int)msctest.getEcartTypeHeureEmpPro(idIndustrie, intermediaireListest);
         assertEquals(expResult, result);
     }
     

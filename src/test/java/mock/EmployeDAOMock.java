@@ -34,7 +34,7 @@ public class EmployeDAOMock extends Dao<Employe> {
 
     @Override
     public Employe find(int id){
-        return employe1;
+        return employe2;
     }
 
     @Override

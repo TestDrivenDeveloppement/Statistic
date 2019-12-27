@@ -1,11 +1,6 @@
 package mathematical;
 
 import java.util.ArrayList;
-
-import dao.DAOconnexion;
-import daorefactoring.Dao;
-import daorefactoring.EmployeDAO;
-import daorefactoring.IntermediaireDAO;
 import model.Employe;
 import model.Intermediaire;
 
