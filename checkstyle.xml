@@ -123,7 +123,7 @@
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <!-- <module name="FileLength"/> -->
         <module name="LineLength">
-         <property name="max" value="200"/>
+         <property name="max" value="120"/>
          </module>
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
@@ -139,7 +139,7 @@
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="NoWhitespaceAfter">
-            <property name="allowLineBreaks" value="true"/>
+            <property name="allowLineBreaks" value="false"/>
         </module>
         <module name="WhitespaceAround"/>
 
@@ -156,7 +156,7 @@
         <module name="EmptyBlock"/>
         <module name="LeftCurly">    <property name="option" value="nl"/> </module>
         <module name="NeedBraces">
-            <property name="allowSingleLineStatement" value="true"/>
+            <property name="allowSingleLineStatement" value="false"/>
         </module>
         <module name="RightCurly"/>
 
