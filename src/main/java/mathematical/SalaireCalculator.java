@@ -5,8 +5,7 @@ import model.Employe;
 
 public class SalaireCalculator
 {
-
-	/**
+    /**
 	 * Permet de calculer les primes en fonction du nombre d'heures travaillées et du statut
 	 * @author Vick
 	 * Ecriture de la fonction

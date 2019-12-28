@@ -6,8 +6,7 @@ import model.Intermediaire;
 
 public class MathematicalStatsCalculator
 {
-
-	/**
+    /**
 	 * @author Kolawole
 	 * @param idIndustrie
 	 * @return la somme d'heures travaille par l'ensemble des employs dans une industrie
@@ -63,7 +62,7 @@ public class MathematicalStatsCalculator
 			if (employe.getIndustrie().getId_ind() == id)
 			{
 				moyenne += employe.getNb_heure();
-				total ++;
+				total++;
 			}
 		}
 
