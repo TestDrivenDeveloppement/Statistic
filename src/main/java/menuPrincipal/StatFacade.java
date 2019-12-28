@@ -221,6 +221,8 @@ public class StatFacade
                 System.out.println("Le salaire mensuel moyen de l'entreprise pour un stagiaire est de: " +
                         result_stagiaire + "€\n");
                 break;
+            default:
+                break;
         }
     }
 
@@ -255,6 +257,8 @@ public class StatFacade
 
                 double result = sc.salaireOneEmp(employeDao.find(idEmp));
                 System.out.println("Salaire: " + result + " €/mois");
+                break;
+            default:
                 break;
         }
     }
