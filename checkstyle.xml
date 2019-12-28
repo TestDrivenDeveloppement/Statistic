@@ -65,7 +65,7 @@
     <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
-    <module name="FileTabCharacter"/>
+    <!--<module name="FileTabCharacter"/>-->
 
     <module name="TreeWalker">
 
@@ -146,7 +146,7 @@
 
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
-        <module name="ModifierOrder"/>
+        <!--<module name="ModifierOrder"/>-->
         <module name="RedundantModifier"/>
 
 
@@ -177,7 +177,7 @@
         <!-- See http://checkstyle.sf.net/config_design.html -->
         <!-- <module name="DesignForExtension"/> -->
         <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
+        <!--<module name="HideUtilityClassConstructor"/>-->
         <module name="InterfaceIsType"/>
         <!-- module name="VisibilityModifier" >  <property name="allowPublicFinalFields" value="true" /> </module -->
 
