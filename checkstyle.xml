@@ -193,7 +193,7 @@
         <module name="UpperEll"/>
 
      <module name="CyclomaticComplexity">
-       <property name="max" value="26"/>
+       <property name="max" value="30"/>
      </module>
     </module>
 
