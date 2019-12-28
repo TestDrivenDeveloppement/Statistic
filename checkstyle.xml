@@ -141,7 +141,7 @@
         <module name="NoWhitespaceAfter">
             <property name="allowLineBreaks" value="true"/>
         </module>
-        <module name="WhitespaceAround"/>
+      <!--  <module name="WhitespaceAround"/> -->
 
 
         <!-- Modifier Checks                                    -->
