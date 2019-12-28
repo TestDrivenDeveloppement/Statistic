@@ -82,7 +82,7 @@
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
-        <module name="ConstantName"/>
+        <!--<module name="ConstantName"/>-->
         <!-- <module name="LocalFinalVariableName"/> -->
         <!-- <module name="LocalVariableName"/>-->
         <!--<module name="MemberName"/>-->
@@ -114,7 +114,7 @@
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <!--<module name="AvoidStarImport"/>-->
-        <!--<module name="IllegalImport"/>--> <!-- defaults to sun.* packages -->
+        <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
@@ -193,7 +193,7 @@
         <module name="UpperEll"/>
 
      <module name="CyclomaticComplexity">
-       <property name="max" value="10"/>
+       <property name="max" value="26"/>
      </module>
     </module>
 
