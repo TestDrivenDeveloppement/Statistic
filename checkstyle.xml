@@ -84,11 +84,11 @@
         <!-- See http://checkstyle.sf.net/config_naming.html -->
         <module name="ConstantName"/>
         <!-- <module name="LocalFinalVariableName"/> -->
-        <module name="LocalVariableName"/>
-        <module name="MemberName"/>
-        <module name="MethodName"/>
-        <module name="PackageName"/>
-        <module name="ParameterName"/>
+        <!-- <module name="LocalVariableName"/>-->
+        <!--<module name="MemberName"/>-->
+        <!--<module name="MethodName"/>-->
+        <!--<module name="PackageName"/>-->
+        <!--<module name="ParameterName"/>-->
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
 
@@ -193,7 +193,7 @@
         <module name="UpperEll"/>
 
      <module name="CyclomaticComplexity">
-       <property name="max" value="5"/>
+       <property name="max" value="10"/>
      </module>
     </module>
 
