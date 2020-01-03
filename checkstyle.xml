@@ -65,6 +65,12 @@
     <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
+ 
+ 
+     <module name="NewlineAtEndOfFile">
+        <property name="severity" value="ignore" />
+    </module>
+ 
     <!--<module name="FileTabCharacter"/>-->
 
     <module name="TreeWalker">
