@@ -22,7 +22,7 @@
       <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z0-9]+)*$"/>
     </module>
     <module name="TypeName">
-      <property name="format" value="^[a-zA-Z]*[a-z]+([A-Z][a-z]+)*$"/>
+      <property name="format" value="^[a-zA-Z]*[a-zA-Z]*+([A-Z][a-z]+)*$"/>
     </module>
     <module name="LocalFinalVariableName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z0-9]+)*$"/>
