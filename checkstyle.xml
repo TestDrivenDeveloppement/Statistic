@@ -19,7 +19,7 @@
       <property name="ignoreModifier" value="true"/>
     </module>
     <module name="MethodName">
-      <property name="format" value="^[a-z]+([A-Z][a-z]+)*$"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z0-9]+)*$"/>
     </module>
     <module name="TypeName">
       <property name="format" value="^[A-Z][a-z]+([A-Z][a-z]+)*$"/>
