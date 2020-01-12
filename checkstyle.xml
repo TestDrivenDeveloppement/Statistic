@@ -15,7 +15,7 @@
       <property name="max" value="200"/>
     </module>
     <module name="AbstractClassName">
-      <property name="format" value="^[A-Z][a-z]+([A-Z][a-z]+)*$"/>
+      <property name="format" value="^[A-Z]*[a-z]+([A-Z][a-z]+)*$"/>
       <property name="ignoreModifier" value="true"/>
     </module>
     <module name="MethodName">
