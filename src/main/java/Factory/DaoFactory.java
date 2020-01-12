@@ -11,29 +11,29 @@ import java.sql.Connection;
 
 public class DaoFactory extends AbstractDAOFactory
 {
-    protected static final Connection conn = DAOconnexion.getInstance();
+    protected static final Connection CONN = DAOconnexion.getInstance();
 
     //Retourne un objet Industrie interagissant avec la BDD
     public Dao<Industrie> getIndustrieDao()
     {
-        return new IndustrieDAO(conn);
+        return new IndustrieDAO(CONN);
     }
 
     //Retourne un objet Employe interagissant avec la BDD
     public Dao<Employe> getEmployeDao()
     {
-        return new EmployeDAO(conn);
+        return new EmployeDAO(CONN);
     }
 
     //Retourne un objet Intermediaire interagissant avec la BDD
     public Dao<Intermediaire> getIntermediaireDao()
     {
-        return  new IntermediaireDAO(conn);
+        return  new IntermediaireDAO(CONN);
     }
 
     //Retourne un objet Projet interagissant avec la BDD
     public Dao<Projet> getProjetDao()
     {
-        return new ProjetDAO(conn);
+        return new ProjetDAO(CONN);
     }
 }
