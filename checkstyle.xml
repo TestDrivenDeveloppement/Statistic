@@ -29,10 +29,10 @@
       <property name="format" value="^[A-Z][a-z]+([A-Z][a-z]+)*$"/>
     </module>
     <module name="LocalFinalVariableName">
-      <property name="format" value="^[a-z][a-z0-9]*(_[a-z0-9]+)*$"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z0-9]+)*$"/>
     </module>
     <module name="LocalVariableName">
-      <property name="format" value="^[a-z][a-z0-9]*(_[a-z0-9]+)*$"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*(_[a-z0-9]+)*$"/>
     </module>
     <module name="MemberName">
       <property name="format" value="^[a-z][a-z0-9]*(_[a-z0-9]+)*$"/>
