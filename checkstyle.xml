@@ -17,9 +17,7 @@
     <module name="RightCurly">
       <property name="tokens" value="LITERAL_TRY,LITERAL_CATCH,LITERAL_FINALLY,LITERAL_IF,LITERAL_ELSE,LITERAL_DO"/>
     </module>
-    <module name="LeftCurly">
-      <property name="severity" value="warning"/>
-    </module>
+
     <module name="AbstractClassName">
       <property name="format" value="^[A-Z][a-z]+([A-Z][a-z]+)*$"/>
       <property name="ignoreModifier" value="true"/>
